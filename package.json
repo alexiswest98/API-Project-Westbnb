@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/alexiswest98/API-Project/issues"
   },
-  "homepage": "https://github.com/alexiswest98/API-Project#readme"
+  "homepage": "https://github.com/alexiswest98/API-Project#readme",
+  "dependencies": {
+    "pg": "^8.8.0"
+  }
 }
