@@ -11,6 +11,18 @@ module.exports = (sequelize, DataTypes) => {
     }
     static associate(models) {
       // define association here
+      User.hasMany(models.Spot, {
+        foreignKey: 'id',
+        onDelete: 'CASCADE'
+      }),
+      User.hasMany(models.Booking, {
+        foreignKey: 'id',
+        onDelete: 'CASCADE'
+      }),
+      User.hasMany(models.Review, {
+        foreignKey: 'id',
+        onDelete: 'CASCADE'
+      })
     }
     validatePassword(password) {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
