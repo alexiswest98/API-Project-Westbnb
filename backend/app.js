@@ -6,11 +6,15 @@ const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+
 const routes = require('./routes');
+
+const { ValidationError } = require('sequelize');
+
 const { environment } = require('./config');
-const app = express();
 const isProduction = environment === 'production';
 
+const app = express();
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -53,8 +57,6 @@ app.use((_req, _res, next) => {
 
 
 // Process sequelize errors
-const { ValidationError } = require('sequelize');
-
 app.use((err, _req, _res, next) => {
   // check if error is a Sequelize error:
   if (err instanceof ValidationError) {
