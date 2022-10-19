@@ -12,7 +12,7 @@ module.exports = {
       spotId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Spot', //ref table name
+          model: 'Spots', //ref table name
           key: 'id'
         }
       },
