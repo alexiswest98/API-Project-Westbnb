@@ -83,6 +83,9 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     await queryInterface.bulkInsert('Reviews')
+     const Op = Sequelize.Op;
+     await queryInterface.bulkDelete('Reviews', {
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
+    }, {});
   }
 };

@@ -88,12 +88,12 @@ module.exports = {
       },
       {
         ownerId: 7,
-        address: '1110 Green St',
+        address: '1685 Dolores St',
         city: 'San Francisco',
         state: 'California',
         country: 'USA',
-        lat: 37.798628,
-        lng: -122.417710,
+        lat: 37.742463,
+        lng: -122.423981,
         name: 'Downtown Views and New Construction SF Home',
         description: '6 Bed 8 Bath in a quiet corner of Noe Valley',
         price: 620
