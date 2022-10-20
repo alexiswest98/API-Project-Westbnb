@@ -16,7 +16,7 @@ module.exports = {
     await queryInterface.bulkInsert('Spots', [
       {
         ownerId: 1,
-        address: '1110 Green St' ,
+        address: '1110 Green St',
         city: 'San Francisco',
         state: 'California',
         country: 'USA',
@@ -64,19 +64,19 @@ module.exports = {
       },
       {
         ownerId: 5,
-        address: '251 Summit Way' ,
+        address: '251 Summit Way',
         city: 'San Francisco',
         state: 'California',
         country: 'USA',
         lat: 37.715320,
         lng: -122.477120,
-        name: 'Golf clubs & beautiful Lake Merced Home' ,
+        name: 'Golf clubs & beautiful Lake Merced Home',
         description: 'Updated with custom upgrades throughout, 4 Bed 4 Bath floor plan',
         price: 480
       },
       {
         ownerId: 6,
-        address: '118 Middlefield Dr' ,
+        address: '118 Middlefield Dr',
         city: 'San Francisco',
         state: 'California',
         country: 'USA',
@@ -88,7 +88,7 @@ module.exports = {
       },
       {
         ownerId: 7,
-        address: '1110 Green St' ,
+        address: '1110 Green St',
         city: 'San Francisco',
         state: 'California',
         country: 'USA',
@@ -100,7 +100,7 @@ module.exports = {
       },
       {
         ownerId: 8,
-        address: '2085 Ocean Ave' ,
+        address: '2085 Ocean Ave',
         city: 'San Francisco',
         state: 'California',
         country: 'USA',
@@ -112,7 +112,7 @@ module.exports = {
       },
       {
         ownerId: 9,
-        address: '65 Keystone Way' ,
+        address: '65 Keystone Way',
         city: 'San Francisco',
         state: 'California',
         country: 'USA',
@@ -124,14 +124,14 @@ module.exports = {
       },
       {
         ownerId: 10,
-        address: '527 Oak Park Dr' ,
+        address: '527 Oak Park Dr',
         city: 'San Francisco',
         state: 'California',
         country: 'USA',
         lat: 37.755679,
         lng: -122.460715,
         name: 'SF Panoramic Western Views',
-        description: 'Newly rebuilt to-the-studs in 2015 w/extensive seismic upgrades 4 bed 3 Bath ',
+        description: 'Newly rebuilt to-the-studs in 2015 w/extensive seismic upgrades 4 bed 3 Bath',
         price: 490
       }
     ])
