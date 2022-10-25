@@ -22,7 +22,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 attributes: []
             }
         ],
-        attributes: [ 'id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
             [
                 sequelize.fn('AVG', sequelize.col('Reviews.stars')),
                 'avgRating'
@@ -105,7 +105,50 @@ router.get('/', async (req, res, next) => {
 
     const { user } = req;
 
+    let { page, size } = req.query
+
+    //default page and size
+    if (!page) page = 1;
+    if (!size) size = 20;
+
+    page = parseInt(page);
+    size = parseInt(size);
+
+    //error handling
+    if ((Number.isNaN(page) && Number.isNaN(size)) ||
+        ((page < 1 || page > 10) &&
+            size < 1 || size > 20)) {
+        res.status(400);
+        res.json({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+                "page": "Page must be greater than or equal to 1",
+                "size": "Size must be greater than or equal to 1"
+            }
+        })
+    } else if (Number.isNaN(page) || page < 1 || page > 10) {
+        res.status(400);
+        res.json({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+                "page": "Page must be greater than or equal to 1"
+            }
+        })
+    } else if (Number.isNaN(size) || size < 1 || size > 20) {
+        res.status(400);
+        res.json({
+            "message": "Validation Error",
+            "statusCode": 400,
+            "errors": {
+                "size": "Size must be greater than or equal to 1"
+            }
+        })
+    }
+
     let spotsRes = await Spot.findAll({
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
         include: [
             {
                 model: Review,
@@ -116,18 +159,27 @@ router.get('/', async (req, res, next) => {
                 attributes: []
             }
         ],
-        attributes: [ 'id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
-            [
-                sequelize.fn('AVG', sequelize.col('Reviews.stars')),
-                'avgRating'
-            ],
-            [sequelize.col('SpotImages.url'), 'previewImage']
-        ],
+        attributes: {
+            include: [
+                [
+                    sequelize.fn('AVG', sequelize.col('Reviews.stars')),
+                    'avgRating'
+                ],
+                [sequelize.col('SpotImages.url'), 'previewImage']
+            ]
+        },
         group: ['Spot.id']
     });
 
+    const base = (page * size) - size;
+    const base2 = (page * size)
+
+    const Spots = spotsRes.slice(base, base2)
+
     let result = {
-        Spots: spotsRes
+        Spots,
+        page,
+        size
     }
 
     res.status(200);
