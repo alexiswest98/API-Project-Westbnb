@@ -37,13 +37,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     endDate: {
       type: DataTypes.DATEONLY
-      // validate: {
-      //   endB4Start(endDate){
-      //     if(endDate < this.startDate){
-      //         throw new Error('End date must be after start date')
-      //     }
-      //   }
-      // }
     }
   }, {
     sequelize,
