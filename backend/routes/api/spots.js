@@ -166,7 +166,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 
 });
 
-// //Delete a Spot
+//Delete a Spot
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
     const spotId = req.params.spotId;
     // const { user } = req;
@@ -222,7 +222,42 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     res.json(newImage)
 });
 
+//Get all Reviews by a Spot's id
+router.get('/:spotId/reviews', async (req, res, next) => {
+    const { spotId } = req.params;
 
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        res.status(404);
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    };
+
+    const Reviews = await Review.findAll({
+        where: {
+            spotId
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: ReviewImage,
+                attibutes: ['id', 'url']
+            }
+        ]
+    });
+
+    res.status(200);
+    res.json({
+        Reviews
+    })
+
+});
 
 //Create a Review for a Spot based on the Spot's id
 router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
@@ -246,13 +281,6 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         })
     };
 
-    if (userReview) {
-        res.status(403);
-        res.json({
-            "message": "User already has a review for this spot",
-            "statusCode": 403
-        })
-    };
 
     if (!review) {
         res.status(400);
@@ -276,15 +304,23 @@ router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
         })
     };
 
-    const newPost = await Review.create({
-        spotId: spotid,
-        userId: req.user.id,
-        review,
-        stars
-    })
+    if (userReview) {
+        res.status(403);
+        res.json({
+            "message": "User already has a review for this spot",
+            "statusCode": 403
+        })
+    } else {
+        const newPost = await Review.create({
+            spotId: spotid,
+            userId: req.user.id,
+            review,
+            stars
+        })
 
-    res.status(201);
-    res.json(newPost)
+        res.status(201);
+        res.json(newPost);
+    }
 });
 
 //Get all Bookings for a Spot based on the Spot's id
@@ -369,6 +405,17 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
         }
     });
 
+    if (endDate < startDate) {
+        res.status(400)
+        res.json({
+            "message": "Validation error",
+            "statusCode": 400,
+            "errors": {
+                "endDate": "endDate cannot be on or before startDate"
+            }
+        })
+    };
+
     if (existingBooking) {
         res.status(403);
         res.json({
@@ -379,28 +426,18 @@ router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
                 "endDate": "End date conflicts with an existing booking"
             }
         })
+    } else {
+        const newBooking = await Booking.create({
+            spotId,
+            userId: user.id,
+            startDate,
+            endDate
+        })
+
+        res.status(200);
+        res.json(newBooking);
     };
 
-    if (endDate < startDate) {
-        res.status(400)
-        res.json({
-            "message": "Validation error",
-            "statusCode": 400,
-            "errors": {
-                "endDate": "endDate cannot be on or before startDate"
-            }
-        })
-    }
-
-    const newBooking = await Booking.create({
-        spotId,
-        userId: user.id,
-        startDate,
-        endDate
-    })
-
-    res.status(200);
-    res.json(newBooking);
 
 });
 
