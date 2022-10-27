@@ -58,8 +58,11 @@ router.get('/:spotId', async (req, res, next) => {
     const id = req.params.spotId;
 
     let spot = await Spot.findOne({
+        attributes: {
+            exclude: ['previewImage']
+        },
         where: {
-            id: id
+            id
         },
         include: [
             { model: Review, attributes: [] },

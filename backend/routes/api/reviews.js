@@ -20,7 +20,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             {
                 model: Spot,
                 attributes: ['id', 'ownerId', 'address', 'city', 'state',
-                    'country', 'lat', 'lng', 'name', 'price'],
+                    'country', 'lat', 'lng', 'name', 'price', 'previewImage'],
             },
             {
                 model: ReviewImage,
@@ -29,12 +29,21 @@ router.get('/current', requireAuth, async (req, res, next) => {
         ]
     });
 
+    //add image url to previewImage if one
+    for (let i = 0; i < Reviews.length; i++) {
+        let reviewSpot = Reviews[i];
 
-    for(let i = 0; i < Reviews.length; i++){
-        let review = Reviews[i]
+        const image = await SpotImage.findOne({
+            where: {
+                spotId: reviewSpot.Spot.id
+            }
+        });
 
-
+        if (image) {
+            reviewSpot.Spot.previewImage = image.url;
+        }
     }
+
 
     res.status(200);
     res.json({ 
