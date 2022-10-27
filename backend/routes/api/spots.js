@@ -75,7 +75,7 @@ router.get('/:spotId', async (req, res, next) => {
                 attibutes: ["id", "firstName", "lastName"]
             },
         ],
-        group: ['Spot.id', 'SpotImages.id'],
+        group: ['Spot.id', 'SpotImages.id', 'Owner.id'],
         order: [
             [SpotImage, 'id']
         ]
@@ -199,7 +199,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 
 //Delete a Spot
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
-    const spotId = req.params.spotId;
+    const { spotId } = req.params;
 
     const spot = await Spot.findByPk(spotId);
 
@@ -600,7 +600,7 @@ router.get('/', async (req, res, next) => {
             ]
         },
         group: ['Spot.id', 'SpotImages.id'],
-        order: [Spot, 'id']
+        order: ['id']
     });
 
     //add image url to previewImage if one
