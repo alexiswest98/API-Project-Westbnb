@@ -43,9 +43,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
             spot.previewImage = image.url;
         };
 
-        if (!spot.avgRating) {
-            spot.avgRating = '0.00'
+        //default for avgRating
+        if (spot.dataValues.avgRating === null) {
+            spot.dataValues.avgRating = '0.00'
         }
+
     }
 
     res.status(200);
@@ -109,9 +111,10 @@ router.get('/:spotId', async (req, res, next) => {
     });
 
     //default for avgRating
-    if (!spot.avgStarRating) {
-        spot.avgStarRating = '0.00'
+    if (spot.dataValues.avgStarRating === null) {
+        spot.dataValues.avgStarRating = '0.00'
     }
+
 
     spot = spot.toJSON();
     avgStarRating = avgStarRating.toJSON();
@@ -604,8 +607,6 @@ router.get('/', async (req, res, next) => {
     for (let i = 0; i < spotsRes.length; i++) {
         let spot = spotsRes[i];
 
-        console.log(spot)
-
         const image = await SpotImage.findOne({
             where: {
                 spotId: spot.id
@@ -616,13 +617,13 @@ router.get('/', async (req, res, next) => {
             spot.previewImage = image.url;
         }
 
-        console.log(spot.avgRating)
+
         //default for avgRating
-        if (spot.avgRating === null) {
-            spot.avgRating = '0.00'
+        if (spot.dataValues.avgRating === null) {
+            spot.dataValues.avgRating = '0.00'
         }
 
-        
+
     }
 
     const base = (page * size) - size;
