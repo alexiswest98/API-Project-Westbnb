@@ -17,11 +17,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 model: User,
                 attributes: ['id', 'firstName', 'lastName']
             },
-            {
-                model: Spot,
-                attributes: ['id', 'ownerId', 'address', 'city', 'state',
-                    'country', 'lat', 'lng', 'name', 'price'],
-            },
+            // {
+            //     model: Spot,
+            //     attributes: ['id', 'ownerId', 'address', 'city', 'state',
+            //         'country', 'lat', 'lng', 'name', 'price'],
+            // },
             {
                 model: ReviewImage,
                 attributes: ['id', 'url']
@@ -29,8 +29,17 @@ router.get('/current', requireAuth, async (req, res, next) => {
         ]
     });
 
+
+    for(let i = 0; i < Reviews.length; i++){
+        let review = Reviews[i]
+
+
+    }
+
     res.status(200);
-    res.json({ Reviews });
+    res.json({ 
+        Reviews
+    });
 
 });
 
