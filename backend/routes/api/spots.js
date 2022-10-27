@@ -615,7 +615,7 @@ router.get('/', async (req, res, next) => {
         }
 
         //default for avgRating
-        if (!spot.avgRating) {
+        if (spot.avgRating === null) {
             spot.avgRating = '0.00'
         }
     }
