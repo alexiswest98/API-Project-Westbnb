@@ -71,6 +71,7 @@ router.get('/:spotId', async (req, res, next) => {
                 attibutes: ["id", "firstName", "lastName"]
             },
         ],
+        group: ['Spot.id'],
         order: [
             [SpotImage, 'id']
         ]
