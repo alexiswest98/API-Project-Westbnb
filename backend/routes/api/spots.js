@@ -66,12 +66,18 @@ router.get('/:spotId', async (req, res, next) => {
         },
         include: [
             { model: Review, attributes: [] },
-            { model: SpotImage, attributes: ["id", "url", "preview"] },
+            {
+                model: SpotImage,
+                attributes: ["id", "url", "preview"]
+            },
             {
                 model: User, as: "Owner",
                 attibutes: ["id", "firstName", "lastName"]
             },
         ],
+        order: [
+            [SpotImage, 'id']
+        ]
     });
 
     if (!spot) {
@@ -191,7 +197,6 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 //Delete a Spot
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
     const spotId = req.params.spotId;
-    // const { user } = req;
 
     const spot = await Spot.findByPk(spotId);
 
@@ -222,9 +227,11 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
 //Add an Image to a Spot based on the Spot's id
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
-
-    const spot = await Spot.findByPk(req.params.spotId);
     const { url, preview } = req.body
+    const { spotId } = req.params;
+
+    const spot = await Spot.findByPk(spotId);
+
 
     if (!spot) {
         res.status(404);
@@ -235,13 +242,17 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     };
 
     const newImage = await SpotImage.create({
-        spotId: req.params.spotId,
+        spotId,
         url,
         preview
     });
 
     res.status(200);
-    res.json(newImage)
+    res.json({
+        id: newImage.id,
+        url: newImage.url,
+        preview: newImage.preview
+    });
 });
 
 //Get all Reviews by a Spot's id
@@ -269,7 +280,10 @@ router.get('/:spotId/reviews', async (req, res, next) => {
             },
             {
                 model: ReviewImage,
-                attibutes: ['id', 'url']
+                attibutes: ['id', 'url'],
+                attributes: {
+                    exclude: ['reviewId', 'createdAt', 'updatedAt']
+                }
             }
         ]
     });

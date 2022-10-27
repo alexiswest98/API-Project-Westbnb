@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     preview: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'SpotImage',
+    modelName: 'SpotImage'
   });
   return SpotImage;
 };
