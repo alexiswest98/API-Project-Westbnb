@@ -9,7 +9,7 @@ const { Spot, Review, SpotImage, User, ReviewImage, Booking, sequelize } = requi
 router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;
 
-    let spotsRes = await Spot.findAll({
+    let Spots = await Spot.findAll({
         where: {
             ownerId: user.id
         },
@@ -27,18 +27,29 @@ router.get('/current', requireAuth, async (req, res, next) => {
             [
                 sequelize.fn('AVG', sequelize.col('Reviews.stars')),
                 'avgRating'
-            ],
-            [sequelize.col('SpotImages.url'), 'previewImage']
+            ], 'previewImage'
         ],
         group: ['Spot.id']
     });
 
-    let result = {
-        Spots: spotsRes
+
+    //add image url to previewImage if one
+    for (let i = 0; i < Spots.length; i++) {
+        let spot = Spots[i];
+
+        const image = await SpotImage.findOne({
+            where: {
+                spotId: spot.id
+            }
+        });
+
+        if (image) {
+            spot.previewImage = image.url;
+        }
     }
 
     res.status(200);
-    res.json(result);
+    res.json({ Spots });
 });
 
 
@@ -535,7 +546,7 @@ router.get('/', async (req, res, next) => {
     }
 
     let spotsRes = await Spot.findAll({
-        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt', 'previewImage'],
         include: [
             {
                 model: Review,
@@ -551,12 +562,26 @@ router.get('/', async (req, res, next) => {
                 [
                     sequelize.fn('AVG', sequelize.col('Reviews.stars')),
                     'avgRating'
-                ],
-                [sequelize.col('SpotImages.url'), 'previewImage']
+                ]
             ]
         },
         group: ['Spot.id']
     });
+
+    //add image url to previewImage if one
+    for (let i = 0; i < spotsRes.length; i++) {
+        let spot = spotsRes[i];
+
+        const image = await SpotImage.findOne({
+            where: {
+                spotId: spot.id
+            }
+        });
+
+        if (image) {
+            spot.previewImage = image.url;
+        }
+    }
 
     const base = (page * size) - size;
     const base2 = (page * size)
@@ -572,8 +597,6 @@ router.get('/', async (req, res, next) => {
     res.status(200);
     res.json(result);
 });
-
-
 
 
 
