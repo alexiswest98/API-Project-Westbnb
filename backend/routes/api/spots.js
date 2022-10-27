@@ -120,7 +120,14 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     const { user } = req;
     const { spotId } = req.params;
 
-    const spot = await Spot.findByPk(spotId);
+    const spot = await Spot.findOne({
+        where: {
+            id: spotId
+        },
+        attributes: {
+            exclude: ['previewImage']
+        }
+    });
 
 
     if (!spot) {
@@ -150,6 +157,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
             description,
             price
         });
+
 
         res.status(201);
         res.json(spot)
