@@ -216,7 +216,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
     const spot = await Spot.findOne({
         where: {
-            id: currSpot.spotId
+            id: spotId
         }
     });
 
@@ -228,7 +228,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
         })
     }
 
-    await currSpot.destroy();
+    await spot.destroy();
     res.status(200);
     res.json({
         message: "Successfully deleted",
