@@ -604,6 +604,8 @@ router.get('/', async (req, res, next) => {
     for (let i = 0; i < spotsRes.length; i++) {
         let spot = spotsRes[i];
 
+        console.log(spot)
+
         const image = await SpotImage.findOne({
             where: {
                 spotId: spot.id
@@ -614,10 +616,13 @@ router.get('/', async (req, res, next) => {
             spot.previewImage = image.url;
         }
 
+        console.log(spot.avgRating)
         //default for avgRating
         if (spot.avgRating === null) {
             spot.avgRating = '0.00'
         }
+
+        
     }
 
     const base = (page * size) - size;
