@@ -24,7 +24,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 ]
             }
         ],
-        order: [[Booking, 'id']]
+        order: ['id']
     });
 
     //add image url to previewImage if one
