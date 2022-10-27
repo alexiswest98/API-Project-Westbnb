@@ -109,14 +109,14 @@ router.get('/:spotId', async (req, res, next) => {
                 "numReviews"
 
             ]
-        ]
+        ],
+        group: ['Spot.id']
     });
 
     //default for avgRating
     if (spot.dataValues.avgStarRating === null) {
         spot.dataValues.avgStarRating = '0.00'
     }
-
 
     spot = spot.toJSON();
     avgStarRating = avgStarRating.toJSON();
