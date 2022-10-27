@@ -4,53 +4,49 @@ const { Spot, Review, SpotImage, User, ReviewImage, Booking, sequelize } = requi
 const { requireAuth } = require('../../utils/auth');
 
 //Get all of the Current User's Bookings
-// router.get('/current', requireAuth, async (req, res, next) => {
-//     const { user } = req;
+router.get('/current', requireAuth, async (req, res, next) => {
+    const { user } = req;
 
-//     let allBookings = await Booking.findAll({
-//         where: {
-//             userId: user.id
-//         },
-//         include: [
-//             {
-//                 model: Spot,
-//                 attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat',
-//                             'lng', 'name', 'price'],
-//                 include: [
-//                     {
-//                         model: SpotImage,
-//                         attributes: []
-//                     }
-//                 ]
-//             }
-//         ]
-//     });
+    let Bookings = await Booking.findAll({
+        where: {
+            userId: user.id
+        },
+        include: [
+            {
+                model: Spot,
+                attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat',
+                    'lng', 'name', 'price', 'previewImage'],
+                include: [
+                    {
+                        model: SpotImage,
+                        attributes: []
+                    }
+                ]
+            }
+        ]
+    });
 
-//     const Bookings = [];
-//     for(let i = 0; i < allBookings.length; i++){
-//         let book = allBookings[i];
+    //add image url to previewImage if one
+    for (let i = 0; i < Bookings.length; i++) {
+        let book = Bookings[i];
 
-//         let spotImage = 'no image available'
+        const image = await SpotImage.findOne({
+            where: {
+                spotId: book.Spot.id
+            }
+        });
 
-//         const image = await SpotImage.findOne({
-//             where: {
-//                 spotId: book.Spot.id
-//             }
-//         });
+        if (image) {
+            book.Spot.previewImage = image.url;
+        }
+    }
 
-//         if(image){
-//             spotImage = image.url;
-//         }
+    res.status(200);
+    res.json({
+        Bookings
+    })
 
-//         book.Spot.previewImage = spotImage;
-//     }
-
-//     res.status(200);
-//     res.json({
-//         Bookings
-//     })
-
-// })
+})
 
 //Edit a Booking
 router.put('/:bookingId', requireAuth, async (req, res, next) => {
@@ -126,18 +122,18 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 });
 
 //Delete a Booking
-router.delete('/:bookingId', requireAuth, async(req, res, next)=> {
+router.delete('/:bookingId', requireAuth, async (req, res, next) => {
     const { bookingId } = req.params;
     const { user } = req;
 
     const booking = await Booking.findByPk(bookingId);
 
-    if(!booking){
+    if (!booking) {
         res.status(404);
         res.json({
             "message": "Booking couldn't be found",
             "statusCode": 404
-          })
+        })
     }
 
     if (booking.userId !== user.id) {
@@ -148,19 +144,19 @@ router.delete('/:bookingId', requireAuth, async(req, res, next)=> {
         })
     };
 
-    if(booking.startDate < new Date()){
+    if (booking.startDate < new Date()) {
         res.status(403);
         res.json({
             "message": "Bookings that have been started can't be deleted",
             "statusCode": 403
-          })
+        })
     } else {
         await booking.destroy();
         res.status(200);
         res.json({
             "message": "Successfully deleted",
             "statusCode": 200
-          })
+        })
     }
 
 })
