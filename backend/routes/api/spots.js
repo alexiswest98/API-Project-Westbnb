@@ -211,22 +211,21 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
-    };
-
-    if (spot.ownerId !== req.user.id) {
+    } else if (spot.ownerId !== req.user.id) {
         res.status(403);
         res.json({
             "message": "Forbidden",
             "statusCode": 403
         })
+    } else {
+        await spot.destroy();
+        res.status(200);
+        res.json({
+            message: "Successfully deleted",
+            statusCode: 200
+        })
     };
 
-    await spot.destroy();
-    res.status(200);
-    res.json({
-        message: "Successfully deleted",
-        statusCode: 200
-    })
 
 });
 
