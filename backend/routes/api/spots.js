@@ -70,14 +70,16 @@ router.get('/:spotId', async (req, res, next) => {
             { model: Review, attributes: [] },
             {
                 model: SpotImage,
-                attributes: ["id", "url", "preview"]
+                attributes: ["id", "url", "preview"],
+                required: false
             },
             {
                 model: User, as: "Owner",
-                attibutes: ["id", "firstName", "lastName"]
+                attibutes: ["id", "firstName", "lastName"],
+                required: false
             },
         ],
-        group: ["Spot.id", "SpotImages.id", "Owner.id"]
+        group: ["SpotImages.id","Spot.id", "Owner.id"]
     });
 
     if (!spot) {
