@@ -24,11 +24,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             }
         ],
         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
-            [
-                sequelize.fn('AVG', sequelize.col('Reviews.stars')),
-                'avgRating'
-            ], 'previewImage'
-        ],
+                    [sequelize.fn('ROUND',sequelize.fn('AVG', sequelize.col('Reviews.stars')),2), 'avgRating'], 'previewImage'],
         group: ['Spot.id']
     });
 
@@ -100,10 +96,7 @@ router.get('/:spotId', async (req, res, next) => {
             }
         ],
         attributes: [
-            [
-                sequelize.fn('AVG', sequelize.col('Reviews.stars')),
-                'avgStarRating'
-            ],
+            [sequelize.fn('ROUND',sequelize.fn('AVG', sequelize.col('Reviews.stars')),2),'avgStarRating'],
             [
 
                 sequelize.fn("COUNT", sequelize.col("Reviews.id")),
@@ -498,8 +491,17 @@ router.post('/', requireAuth, async (req, res, next) => {
             price
         });
 
+        const spot = await Spot.findOne({
+            where: {
+                id: newSpot.id
+            },
+            attributes: {
+                exclude: ['previewImage']
+            }
+        });
+
         res.status(201);
-        res.json(newSpot);
+        res.json(spot);
 
     } catch (e) {
         res.status(400);
@@ -584,10 +586,7 @@ router.get('/', async (req, res, next) => {
         ],
         attributes: {
             include: [
-                [
-                    sequelize.fn('AVG', sequelize.col('Reviews.stars')),
-                    'avgRating'
-                ]
+                [sequelize.fn('ROUND',sequelize.fn('AVG', sequelize.col('Reviews.stars')),2), 'avgRating']
             ]
         },
         group: ['Spot.id']
