@@ -116,7 +116,7 @@ router.get('/:spotId', async (req, res, next) => {
     //default for avgRating
     if (avgStarRating.dataValues.avgStarRating === null) {
         avgStarRating.dataValues.avgStarRating = '0.00'
-    }
+    };
 
     spot = spot.toJSON();
     avgStarRating = avgStarRating.toJSON();
