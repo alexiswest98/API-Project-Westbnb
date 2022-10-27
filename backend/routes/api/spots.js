@@ -24,7 +24,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             }
         ],
         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
-                    [sequelize.fn('ROUND',sequelize.fn('AVG', sequelize.col('Reviews.stars')),2), 'avgRating'], 'previewImage'],
+            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating'], 'previewImage'],
         group: ['Spot.id']
     });
 
@@ -41,6 +41,10 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         if (image) {
             spot.previewImage = image.url;
+        };
+
+        if (!spot.avgRating) {
+            spot.avgRating = '0.00'
         }
     }
 
@@ -71,7 +75,7 @@ router.get('/:spotId', async (req, res, next) => {
                 attibutes: ["id", "firstName", "lastName"]
             },
         ],
-        group: ['Spot.id'],
+        group: ['Spot.id', 'SpotImages.id'],
         order: [
             [SpotImage, 'id']
         ]
@@ -97,7 +101,7 @@ router.get('/:spotId', async (req, res, next) => {
             }
         ],
         attributes: [
-            [sequelize.fn('ROUND',sequelize.fn('AVG', sequelize.col('Reviews.stars')),2),'avgStarRating'],
+            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgStarRating'],
             [
 
                 sequelize.fn("COUNT", sequelize.col("Reviews.id")),
@@ -106,6 +110,11 @@ router.get('/:spotId', async (req, res, next) => {
             ]
         ]
     });
+
+    //default for avgRating
+    if (!spot.avgStarRating) {
+        spot.avgStarRating = '0.00'
+    }
 
     spot = spot.toJSON();
     avgStarRating = avgStarRating.toJSON();
@@ -587,10 +596,11 @@ router.get('/', async (req, res, next) => {
         ],
         attributes: {
             include: [
-                [sequelize.fn('ROUND',sequelize.fn('AVG', sequelize.col('Reviews.stars')),2), 'avgRating']
+                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating']
             ]
         },
-        group: ['Spot.id']
+        group: ['Spot.id', 'SpotImages.id'],
+        order: [Spot, 'id']
     });
 
     //add image url to previewImage if one
@@ -605,6 +615,11 @@ router.get('/', async (req, res, next) => {
 
         if (image) {
             spot.previewImage = image.url;
+        }
+
+        //default for avgRating
+        if (!spot.avgRating) {
+            spot.avgRating = '0.00'
         }
     }
 
