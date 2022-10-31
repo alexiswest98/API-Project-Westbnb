@@ -5,7 +5,6 @@ const router = require('express').Router();
 const { Spot, Review, SpotImage, User, ReviewImage, Booking, sequelize } = require('../../db/models');
 // const Booking = require('../../db/models/Booking');
 
-
 //Get all Spots owned by the Current User
 router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;
@@ -25,17 +24,14 @@ router.get('/current', requireAuth, async (req, res, next) => {
             }
         ],
         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
-            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating']],
+            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating'], 'previewImage'],
         group: ['Spot.id']
     });
 
-    let resSpots = [];
 
     //add image url to previewImage if one
     for (let i = 0; i < Spots.length; i++) {
         let spot = Spots[i];
-
-        spot.previewImage = "no image found";
 
         const image = await SpotImage.findOne({
             where: {
@@ -53,32 +49,10 @@ router.get('/current', requireAuth, async (req, res, next) => {
             spot.dataValues.avgRating = '0.00'
         }
 
-        const eachSpot = {
-            id: spot.id,
-            ownerId: spot.ownerId,
-            address: spot.address,
-            city: spot.city,
-            state: spot.state,
-            country: spot.country,
-            lat: spot.lat,
-            lng: spot.lng,
-            name: spot.name,
-            description: spot.description,
-            price: spot.price,
-            createdAt: spot.createdAt,
-            updatedAt: spot.updatedAt,
-            avgRating: spot.avgRating,
-            previewImage: spot.previewImage
-        }
-
-        resSpots.push(eachSpot);
-
     }
 
     res.status(200);
-    res.json({ 
-        Spots:resSpots 
-    });
+    res.json({ Spots });
 });
 
 
@@ -87,6 +61,9 @@ router.get('/:spotId', async (req, res, next) => {
     const id = req.params.spotId;
 
     let spot = await Spot.findOne({
+        attributes: {
+            exclude: ['previewImage']
+        },
         where: {
             id
         },
@@ -115,7 +92,7 @@ router.get('/:spotId', async (req, res, next) => {
     };
 
 
-    let avgAndCount = await Spot.findOne({
+    let avgStarRating = await Spot.findOne({
         where: {
             id: id
         },
@@ -138,13 +115,13 @@ router.get('/:spotId', async (req, res, next) => {
     });
 
     //default for avgRating
-    if (avgAndCount.dataValues.avgStarRating === null) {
-        avgAndCount.dataValues.avgStarRating = '0.00'
+    if (avgStarRating.dataValues.avgStarRating === null) {
+        avgStarRating.dataValues.avgStarRating = '0.00'
     };
 
     spot = spot.toJSON();
-    avgAndCount = avgAndCount.toJSON();
-    Object.assign(spot, avgAndCount)
+    avgStarRating = avgStarRating.toJSON();
+    Object.assign(spot, avgStarRating)
 
 
     res.status(200);
@@ -161,6 +138,9 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     const spot = await Spot.findOne({
         where: {
             id: spotId
+        },
+        attributes: {
+            exclude: ['previewImage']
         }
     });
 
@@ -529,6 +509,9 @@ router.post('/', requireAuth, async (req, res, next) => {
         const spot = await Spot.findOne({
             where: {
                 id: newSpot.id
+            },
+            attributes: {
+                exclude: ['previewImage']
             }
         });
 
@@ -605,7 +588,7 @@ router.get('/', async (req, res, next) => {
     }
 
     let spotsRes = await Spot.findAll({
-        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt', 'previewImage'],
         include: [
             {
                 model: Review,
@@ -625,8 +608,6 @@ router.get('/', async (req, res, next) => {
         order: ['id']
     });
 
-    let spotResults = [];
-
     //add image url to previewImage if one
     for (let i = 0; i < spotsRes.length; i++) {
         let spot = spotsRes[i];
@@ -638,50 +619,32 @@ router.get('/', async (req, res, next) => {
             }
         });
 
-        spot.previewImage = "no image found";
-
         if (image) {
             spot.previewImage = image.url;
         }
+
 
         //default for avgRating
         if (spot.dataValues.avgRating === null) {
             spot.dataValues.avgRating = '0.00'
         }
 
-        const eachSpot = {
-            id : spot.id, 
-            ownerId: spot.ownerId , 
-            address: spot.address, 
-            city: spot.city, 
-            state: spot.state, 
-            country: spot.country, 
-            lat: spot.lat, 
-            lng: spot.lng, 
-            name: spot.name , 
-            description: spot.description, 
-            price: spot.price, 
-            createdAt: spot.createdAt, 
-            updatedAt: spot.updatedAt,
-            avgRating: spot.avgRating,
-            previewImage: spot.previewImage
-        }
-
-        spotResults.push(eachSpot)
 
     }
 
     const base = (page * size) - size;
     const base2 = (page * size)
 
-    const Spots = spotResults.slice(base, base2)
+    const Spots = spotsRes.slice(base, base2)
 
-    res.status(200);
-    res.json({
+    let result = {
         Spots,
         page,
         size
-    });
+    }
+
+    res.status(200);
+    res.json(result);
 });
 
 
