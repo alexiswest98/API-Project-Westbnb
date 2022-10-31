@@ -590,7 +590,8 @@ router.get('/', async (req, res, next) => {
                 ]
             ]
         },
-        group: ['Spot.id']
+        group: ['Spot.id'],
+        order: ['id']
     });
 
     //add image url to previewImage if one
