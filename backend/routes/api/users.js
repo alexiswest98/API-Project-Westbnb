@@ -67,7 +67,7 @@ router.post('/', validateSignup, async (req, res) => {
                 }
               })
             }
-            else if(error.path === 'username'){
+            if(error.path === 'username'){
               res.status(403);
               res.json({
                 "message": "User already exists",
