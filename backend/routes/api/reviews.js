@@ -8,7 +8,7 @@ const { Spot, Review, SpotImage, User, ReviewImage, sequelize } = require('../..
 router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;
 
-    let Reviews = await Review.findAll({
+    const Reviews = await Review.findAll({
         where: {
             userId: user.id
         },
@@ -20,7 +20,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             {
                 model: Spot,
                 attributes: ['id', 'ownerId', 'address', 'city', 'state',
-                    'country', 'lat', 'lng', 'name', 'price'],
+                    'country', 'lat', 'lng', 'name', 'price', 'previewImage'],
             },
             {
                 model: ReviewImage,
@@ -33,8 +33,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
     for (let i = 0; i < Reviews.length; i++) {
         let reviewSpot = Reviews[i];
 
-        reviewSpot.Spot.previewImage = "no image found";
-
         const image = await SpotImage.findOne({
             where: {
                 spotId: reviewSpot.Spot.id,
@@ -45,23 +43,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
         if (image) {
             reviewSpot.Spot.previewImage = image.url;
         }
-
-        const newSpot = {
-            id: reviewSpot.Spot.id,
-            ownerId: reviewSpot.Spot.ownerId,
-            address: reviewSpot.Spot.address,
-            city: reviewSpot.Spot.city,
-            state: reviewSpot.Spot.state,
-            country: reviewSpot.Spot.country,
-            lat: reviewSpot.Spot.lat,
-            lng: reviewSpot.Spot.lng,
-            name: reviewSpot.Spot.name,
-            price: reviewSpot.Spot.price,
-            previewImage: reviewSpot.Spot.previewImage
-        }
-
-        reviewSpot.Spot = newSpot;
-
     }
 
 
