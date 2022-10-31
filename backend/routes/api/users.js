@@ -34,58 +34,96 @@ const validateSignup = [
 ];
 
 // Sign up
-router.post('/', validateSignup, async (req, res, next) => {
+// router.post('/', validateSignup, async (req, res, next) => {
+//   const { firstName, lastName, email, password, username } = req.body;
+
+//   try {
+//     const user = await User.signup({ firstName, lastName, email, username, password });
+
+//     user.token = await setTokenCookie(res, user);
+
+//     let myobj = {
+//       id: user.id,
+//       firstName: user.firstName,
+//       lastName: user.lastName,
+//       email: user.email,
+//       username: user.username,
+//       token: ""
+//     }
+
+//     res.status(200);
+//     res.json(myobj);
+
+//   } catch (e) {
+//     e.errors.forEach(error => {
+//       if(error.type === 'unique violation'){
+//         const err = new Error('User already exists');
+//         err.status = 403;
+//         if(error.path === 'email') {
+//           err.errors = { "email": "User with that email already exists" };
+//           res.json({
+//             "message": "User already exists",
+//             "statusCode": 403,
+//             "errors": {
+//               "email": "User with that email already exists"
+//             }
+//           })
+//           }
+//         else if (error.path === 'username') {
+//           err.errors = { "username": "User with that username already exists" };
+//           res.json({
+//             "message": "User already exists",
+//             "statusCode": 403,
+//             "errors": {
+//               "username": "User with that username already exists"
+//             }
+//           })
+//         }
+//         next(err)
+//       }
+//     });
+//     next(e);
+//   }
+// }
+// );
+
+// Sign up
+router.post('/', validateSignup, async (req, res) => {
   const { firstName, lastName, email, password, username } = req.body;
+  const existedEmail = await User.findOne({
+      where: { email: email }
+  })
+  const existedUserName = await User.findOne({
+      where: { username: username }
+  })
 
-  try {
-    const user = await User.signup({ firstName, lastName, email, username, password });
+  if (existedEmail) {
+      res.status(403)
+      res.json({
+          message: "User already exists",
+          statusCode: 403,
+          errors: "User with that email already exists"
 
-    user.token = await setTokenCookie(res, user);
+      })
+  } else if (existedUserName) {
+      res.status(403)
+      res.json({
+          message: "User already exists",
+          statusCode: 403,
+          errors: "User with that username already exists"
 
-    let myobj = {
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      username: user.username,
-      token: ""
-    }
+      })
+  } else {
 
-    res.status(200);
-    res.json(myobj);
+      const result = await User.signup({ firstName, lastName, email, username, password });
 
-  } catch (e) {
-    e.errors.forEach(error => {
-      if(error.type === 'unique violation'){
-        const err = new Error('User already exists');
-        err.status = 403;
-        if(error.path === 'email') {
-          err.errors = { "email": "User with that email already exists" };
-          res.json({
-            "message": "User already exists",
-            "statusCode": 403,
-            "errors": {
-              "email": "User with that email already exists"
-            }
-          })
-          }
-        else if (error.path === 'username') {
-          err.errors = { "username": "User with that username already exists" };
-          res.json({
-            "message": "User already exists",
-            "statusCode": 403,
-            "errors": {
-              "username": "User with that username already exists"
-            }
-          })
-        }
-        next(err)
-      }
-    });
-    next(e);
+      let newToken = await setTokenCookie(res, result);
+      let user = result.toJSON()
+      user.token = newToken
+
+      return res.json(user);
   }
-}
-);
+});
 
 
 module.exports = router;
