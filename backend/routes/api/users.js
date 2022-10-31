@@ -69,16 +69,16 @@ router.post('/', validateSignup, async (req, res, next) => {
             }
           })
           }
-        else if (error.path === 'username') {
-          err.errors = { "username": "User with that username already exists" };
-          res.json({
-            "message": "User already exists",
-            "statusCode": 403,
-            "errors": {
-              "username": "User with that username already exists"
-            }
-          })
-        }
+        // else if (error.path === 'username') {
+        //   err.errors = { "username": "User with that username already exists" };
+        //   res.json({
+        //     "message": "User already exists",
+        //     "statusCode": 403,
+        //     "errors": {
+        //       "username": "User with that username already exists"
+        //     }
+        //   })
+        // }
         next(err)
       }
     });
