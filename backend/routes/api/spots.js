@@ -663,6 +663,7 @@ router.get('/', async (req, res, next) => {
             price: spot.price, 
             createdAt: spot.createdAt, 
             updatedAt: spot.updatedAt,
+            avgRating: spot.avgRating,
             previewImage: spot.previewImage
         }
 
