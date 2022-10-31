@@ -35,7 +35,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         const image = await SpotImage.findOne({
             where: {
-                spotId: reviewSpot.Spot.id
+                spotId: reviewSpot.Spot.id,
+                preview: true
             }
         });
 
