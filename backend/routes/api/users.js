@@ -77,6 +77,7 @@ router.post('/', validateSignup, async (req, res) => {
             "username": "User with that username already exists"
           }
         })
+
       }
 
     });
