@@ -34,7 +34,7 @@ const validateSignup = [
 ];
 
 // Sign up
-router.post('/', validateSignup, async (req, res) => {
+router.post('/', validateSignup, async (req, res, next) => {
   const { firstName, lastName, email, password, username } = req.body;
 
   try {
@@ -56,9 +56,11 @@ router.post('/', validateSignup, async (req, res) => {
 
   } catch (e) {
     e.errors.forEach(error => {
-      if (error.type === 'unique violation') {
-        if (error.path === 'email') {
-          res.status(403);
+      if(error.type === 'unique violation'){
+        const err = new Error('User already exists');
+        err.status = 403;
+        if(error.path === 'email') {
+          err.errors = { "email": "User with that email already exists" };
           res.json({
             "message": "User already exists",
             "statusCode": 403,
@@ -66,21 +68,21 @@ router.post('/', validateSignup, async (req, res) => {
               "email": "User with that email already exists"
             }
           })
-        }
-      }
-      if (error.type === 'unique violation' && error.path === 'username') {
-        res.status(403);
-        res.json({
-          "message": "User already exists",
-          "statusCode": 403,
-          "errors": {
-            "username": "User with that username already exists"
           }
-        })
-
+        else if (error.path === 'username') {
+          err.errors = { "username": "User with that username already exists" };
+          res.json({
+            "message": "User already exists",
+            "statusCode": 403,
+            "errors": {
+              "username": "User with that username already exists"
+            }
+          })
+        }
+        next(err)
       }
-
     });
+    next(e);
   }
 }
 );
