@@ -35,54 +35,53 @@ const validateSignup = [
 
 // Sign up
 router.post('/', validateSignup, async (req, res) => {
-    const { firstName, lastName, email, password, username } = req.body;
+  const { firstName, lastName, email, password, username } = req.body;
 
-    try{
-      const user = await User.signup({ firstName, lastName, email, username, password });
-  
-      user.token = await setTokenCookie(res, user);
-  
-      let myobj = {
-       id: user.id,
-       firstName: user.firstName,
-       lastName: user.lastName,
-       email: user.email,
-       username: user.username,
-       token: ""
-     }
-  
-      res.status(200);
-      res.json(myobj);
+  try {
+    const user = await User.signup({ firstName, lastName, email, username, password });
 
-    } catch(e) {
-        e.errors.forEach(error => {
-          if(error.type === 'unique violation'){
-            if(error.path === 'email'){
-              res.status(403);
-              res.json({
-                "message": "User already exists",
-                "statusCode": 403,
-                "errors": {
-                  "email": "User with that email already exists"
-                }
-              })
-            }
-            else if(error.path === 'username'){
-              res.status(403);
-              res.json({
-                "message": "User already exists",
-                "statusCode": 403,
-                "errors": {
-                  "username": "User with that username already exists"
-                }
-              })
+    user.token = await setTokenCookie(res, user);
 
-            }
-          }
-          
-        });
+    let myobj = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      username: user.username,
+      token: ""
     }
+
+    res.status(200);
+    res.json(myobj);
+
+  } catch (e) {
+    e.errors.forEach(error => {
+      if (error.type === 'unique violation') {
+        if (error.path === 'email') {
+          res.status(403);
+          res.json({
+            "message": "User already exists",
+            "statusCode": 403,
+            "errors": {
+              "email": "User with that email already exists"
+            }
+          })
+        }
+      }
+      if (error.type === 'unique violation' && error.path === 'username') {
+        res.status(403);
+        res.json({
+          "message": "User already exists",
+          "statusCode": 403,
+          "errors": {
+            "username": "User with that username already exists"
+          }
+        })
+      }
+
+    });
   }
+}
 );
 
 

@@ -24,11 +24,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             }
         ],
         attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
-            [
-                sequelize.fn('AVG', sequelize.col('Reviews.stars')),
-                'avgRating'
-            ], 'previewImage'
-        ],
+            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating'], 'previewImage'],
         group: ['Spot.id']
     });
 
@@ -39,13 +35,20 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         const image = await SpotImage.findOne({
             where: {
-                spotId: spot.id
+                spotId: spot.id,
+                preview: true
             }
         });
 
         if (image) {
             spot.previewImage = image.url;
+        };
+
+        //default for avgRating
+        if (spot.dataValues.avgRating === null) {
+            spot.dataValues.avgRating = '0.00'
         }
+
     }
 
     res.status(200);
@@ -68,16 +71,16 @@ router.get('/:spotId', async (req, res, next) => {
             { model: Review, attributes: [] },
             {
                 model: SpotImage,
-                attributes: ["id", "url", "preview"]
+                attributes: ["id", "url", "preview"],
+                required: false
             },
             {
                 model: User, as: "Owner",
-                attibutes: ["id", "firstName", "lastName"]
+                attibutes: ["id", "firstName", "lastName"],
+                required: false
             },
         ],
-        order: [
-            [SpotImage, 'id']
-        ]
+        group: ['SpotImages.id', 'Spot.id', 'Owner.id']
     });
 
     if (!spot) {
@@ -100,18 +103,21 @@ router.get('/:spotId', async (req, res, next) => {
             }
         ],
         attributes: [
-            [
-                sequelize.fn('AVG', sequelize.col('Reviews.stars')),
-                'avgStarRating'
-            ],
+            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgStarRating'],
             [
 
                 sequelize.fn("COUNT", sequelize.col("Reviews.id")),
                 "numReviews"
 
             ]
-        ]
+        ],
+        group: ['Spot.id']
     });
+
+    //default for avgRating
+    if (avgStarRating.dataValues.avgStarRating === null) {
+        avgStarRating.dataValues.avgStarRating = '0.00'
+    };
 
     spot = spot.toJSON();
     avgStarRating = avgStarRating.toJSON();
@@ -196,32 +202,34 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 
 //Delete a Spot
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
-    const spotId = req.params.spotId;
+    const { spotId } = req.params;
+    const { user } = req;
 
-    const spot = await Spot.findByPk(spotId);
+    const currSpot = await Spot.findByPk(spotId);
 
-    if (!spot) {
+    if (!currSpot) {
         res.status(404);
         res.json({
             "message": "Spot couldn't be found",
             "statusCode": 404
         })
-    };
+    }
 
-    if (spot.ownerId !== req.user.id) {
+    if (currSpot.ownerId !== user.id) {
         res.status(403);
         res.json({
             "message": "Forbidden",
             "statusCode": 403
         })
-    };
+    }
 
-    await spot.destroy();
+    await currSpot.destroy();
     res.status(200);
     res.json({
         message: "Successfully deleted",
         statusCode: 200
     })
+
 
 });
 
@@ -498,8 +506,17 @@ router.post('/', requireAuth, async (req, res, next) => {
             price
         });
 
+        const spot = await Spot.findOne({
+            where: {
+                id: newSpot.id
+            },
+            attributes: {
+                exclude: ['previewImage']
+            }
+        });
+
         res.status(201);
-        res.json(newSpot);
+        res.json(spot);
 
     } catch (e) {
         res.status(400);
@@ -584,13 +601,10 @@ router.get('/', async (req, res, next) => {
         ],
         attributes: {
             include: [
-                [
-                    sequelize.fn('AVG', sequelize.col('Reviews.stars')),
-                    'avgRating'
-                ]
+                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating']
             ]
         },
-        group: ['Spot.id'],
+        group: ['Spot.id', 'SpotImages.id'],
         order: ['id']
     });
 
@@ -600,13 +614,22 @@ router.get('/', async (req, res, next) => {
 
         const image = await SpotImage.findOne({
             where: {
-                spotId: spot.id
+                spotId: spot.id,
+                preview: true
             }
         });
 
         if (image) {
             spot.previewImage = image.url;
         }
+
+
+        //default for avgRating
+        if (spot.dataValues.avgRating === null) {
+            spot.dataValues.avgRating = '0.00'
+        }
+
+
     }
 
     const base = (page * size) - size;
