@@ -58,11 +58,11 @@ router.delete('/', (_req, res) => {
     }
 );
 
-router.get('/', restoreUser, (req, res) => {
+router.get('/', (req, res) => {
         const { user } = req;
         if (user) {
             return res.json(user.toSafeObject());
-        } else return res.json({});
+        } else return res.json(null);
     }
 );
 
