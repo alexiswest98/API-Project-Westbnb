@@ -2,18 +2,15 @@
 const express = require('express');
 const router = express.Router();
 
+// backend/routes/index.js
+// ...
 const apiRouter = require('./api');
+
 router.use('/api', apiRouter);
+// ...
 
-// Add a XSRF-TOKEN cookie just for backend testing 
-// router.get("/api/csrf/restore", (req, res) => {
-//   const csrfToken = req.csrfToken();
-//   res.cookie("XSRF-TOKEN", csrfToken);
-//   res.status(200).json({
-//     'XSRF-Token': csrfToken
-//   });
-// });
-
+// Static routes
+// Serve React build files in production
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
   // Serve the frontend's index.html file at the root route
@@ -44,5 +41,16 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
+// backend/routes/index.js
+// ...
+// Add a XSRF-TOKEN cookie
+// router.get("/api/csrf/restore", (req, res) => {
+//   const csrfToken = req.csrfToken();
+//   res.cookie("XSRF-TOKEN", csrfToken);
+//   res.status(200).json({
+//     'XSRF-Token': csrfToken
+//   });
+// });
+// ...
 
 module.exports = router;
