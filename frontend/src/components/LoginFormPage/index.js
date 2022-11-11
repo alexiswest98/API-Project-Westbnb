@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 function LoginFormPage() {
   const dispatch = useDispatch();
-  
+
   const sessionUser = useSelector(state => state.session.user);
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
@@ -32,7 +32,7 @@ function LoginFormPage() {
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>
-        Username or Email
+        Username or Emails
         <input
           type="text"
           value={credential}
