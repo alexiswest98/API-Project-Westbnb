@@ -1,4 +1,3 @@
-// frontend/src/store/csrf.js
 import Cookies from 'js-cookie';
 
 export async function csrfFetch(url, options = {}) {
@@ -8,7 +7,7 @@ export async function csrfFetch(url, options = {}) {
   options.headers = options.headers || {};
 
   // if the options.method is not 'GET', then set the "Content-Type" header to
-    // "application/json", and set the "XSRF-TOKEN" header to the value of the 
+    // "application/json", and set the "XSRF-TOKEN" header to the value of the
     // "XSRF-TOKEN" cookie
   if (options.method.toUpperCase() !== 'GET') {
     options.headers['Content-Type'] =
@@ -25,10 +24,11 @@ export async function csrfFetch(url, options = {}) {
   // if the response status code is under 400, then return the response to the
     // next promise chain
   return res;
-};
+}
 
+
+// call this to get the "XSRF-TOKEN" cookie, should only be used in development
 export function restoreCSRF() {
     return csrfFetch('/api/csrf/restore');
-};
-
+  }
 
