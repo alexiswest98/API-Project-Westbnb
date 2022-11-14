@@ -20,6 +20,12 @@ function LoginForm() {
     );
   };
 
+  const demoLogin = async (e) => {
+    setCredential('Demo-lition')
+    setPassword('password');
+    await dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <ul>
@@ -46,6 +52,7 @@ function LoginForm() {
         />
       </label>
       <button type="submit">Log In</button>
+      <button type="submit" onClick={demoLogin} >Demo User</button>
     </form>
   );
 }
