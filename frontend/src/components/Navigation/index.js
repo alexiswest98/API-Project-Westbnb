@@ -1,14 +1,17 @@
 // frontend/src/components/Navigation/index.js
-import React from 'react';
+import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
-import SignUpFormModal from '../SignupFormPage';
 import './Navigation.css';
+import { Modal } from '../../context/Modal';
+import SignupFormPage from '../SignupFormPage';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
+  const [showModal, setShowModal] = useState(false);
+  const [login, setLogin] = useState(true);
 
   let sessionLinks;
   if (sessionUser) {
@@ -19,7 +22,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <span className="logInButtons">
         <LoginFormModal />
-        <SignUpFormModal />
+        <NavLink to="/signup">Sign Up</NavLink>
       </span>
     );
   }
@@ -28,8 +31,11 @@ function Navigation({ isLoaded }){
     <ul>
       <div>
         <NavLink className="logo" exact to="/">Westbnb</NavLink>
-        {isLoaded && sessionLinks}
+        {isLoaded && <ProfileButton className="profileButton" user={sessionUser} />}
       </div>
+      {showModal && <Modal onClose={()=> setShowModal(false)}>
+        { login ? <loginForm/> : <SignupFormPage/>}
+      </Modal>}
     </ul>
   );
 }

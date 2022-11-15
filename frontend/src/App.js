@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import MainPage from "./components/AllSpots";
 import IndivSpot from "./components/Spot";
+import SignupFormPage from "./components/SignupFormPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,8 +24,11 @@ function App() {
           <Route exact path="/">
             <MainPage/>
           </Route>
-          <Route exact path="/spots/:id">
+          <Route path="/spots/:id">
             <IndivSpot/>
+          </Route>
+          <Route path="/signup">
+            <SignupFormPage/>
           </Route>
         </Switch>
       )}
