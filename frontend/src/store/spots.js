@@ -9,40 +9,49 @@ const DELETE_A_SPOT = 'spot/deleteSpot';
 
 /* ----- ACTIONS ------ */
 const getSpots = (spots) => {
-    type: GET_ALL_SPOTS,
-    spots
+    return {
+        type: GET_ALL_SPOTS,
+        spots
+    }
 };
 
 const getASpot = (spotId) => {
-    type: GET_ONE_SPOT,
-    spotId
+    return {
+        type: GET_ONE_SPOT,
+        spotId
+    }
 };
 
 
 const addSpot = (spot) => {
-    type: ADD_A_SPOT,
-    spot
+    return {
+        type: ADD_A_SPOT,
+        spot
+    }
 };
 
 const deleteSpot = (spotId) => {
-    type: DELETE_A_SPOT,
-    spotId
+    return {
+        type: DELETE_A_SPOT,
+        spotId
+    }
 };
 
 /* ------ THUNKS ------ */
 export const getAllSpot = () => async dispatch => {
-    const spots = await csrfFetch(`api/spots`);
+    const spots = await fetch(`api/spots`);
 
-    if(spots.ok){
+    if (spots.ok) {
         const response = await spots.json();
-        dispatch(getSpots(response));
+        console.log("This is all the spots in the thunk", response)
+        dispatch(getSpots(response.Spots));
     }
 };
 
 export const getOneSpot = (spotId) => async dispatch => {
     const spot = await csrfFetch(`api/spots/${spotId}`);
 
-    if(spot.ok){
+    if (spot.ok) {
         const response = await spot.json();
         await dispatch(getASpot(response));
     }
@@ -55,7 +64,7 @@ export const addOneSpot = (spot) => async dispatch => {
         body: JSON.stringify(spot)
     });
 
-    if(newSpot.ok){
+    if (newSpot.ok) {
         const response = await newSpot.json();
         dispatch(addSpot(response));
         return response;
@@ -69,7 +78,7 @@ export const editOneSpot = (spot) => async dispatch => {
         body: JSON.stringify(spot)
     });
 
-    if(editSpot.ok){
+    if (editSpot.ok) {
         const response = await editSpot.json();
         dispatch(addOneSpot(response));
         return response;
@@ -81,13 +90,13 @@ export const deleteOneSpot = (spot) => async dispatch => {
         method: 'DELETE'
     });
 
-    if(deleteSpot.ok){
+    if (deleteSpot.ok) {
         getAllSpot();
     }
 };
 
 export const addImagetoSpot = (spot) => async dispatch => {
-    const {url, spotId} = spot
+    const { url, spotId } = spot
     const image = await csrfFetch(`api/spots/${spotId}/images`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -97,11 +106,32 @@ export const addImagetoSpot = (spot) => async dispatch => {
         })
     });
 
-    if(image.ok){
-        getOneSpot(spotId)
+    if (image.ok) {
+        dispatch(addSpot(spot))
         //may need dispatch before calling it 
     }
 };
 
 
+/*-------IINITIAL STATE-------*/
+const initialState = { allSpots: {}, spot: {} };
+
 /* ------ REDUCER ------ */
+const spotsReducer = (state = initialState, action) => {
+    let newState = {};
+    switch (action.type) {
+        case GET_ALL_SPOTS:
+            action.spots.forEach(spot => {
+                newState[spot.id] = spot
+            });
+            return newState;
+        // case GET_ONE_SPOT:
+        //     newState = {...state}
+        //     spot = {...action.spot}
+
+        default:
+            return state;
+    }
+}
+
+export default spotsReducer;
