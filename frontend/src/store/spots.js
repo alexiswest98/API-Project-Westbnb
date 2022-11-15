@@ -15,13 +15,6 @@ const getSpots = (spots) => {
     }
 };
 
-const getASpot = (spotId) => {
-    return {
-        type: GET_ONE_SPOT,
-        spotId
-    }
-};
-
 
 const addSpot = (spot) => {
     return {
@@ -30,12 +23,12 @@ const addSpot = (spot) => {
     }
 };
 
-const deleteSpot = (spotId) => {
-    return {
-        type: DELETE_A_SPOT,
-        spotId
-    }
-};
+// const deleteSpot = (spotId) => {
+//     return {
+//         type: DELETE_A_SPOT,
+//         spotId
+//     }
+// };
 
 /* ------ THUNKS ------ */
 export const getAllSpot = () => async dispatch => {
@@ -43,7 +36,6 @@ export const getAllSpot = () => async dispatch => {
 
     if (spots.ok) {
         const response = await spots.json();
-        console.log("This is all the spots in the thunk", response)
         dispatch(getSpots(response.Spots));
     }
 };
@@ -53,7 +45,8 @@ export const getOneSpot = (spotId) => async dispatch => {
 
     if (spot.ok) {
         const response = await spot.json();
-        await dispatch(getASpot(response));
+        await dispatch(addSpot(response));
+        return response;
     }
 };
 
@@ -116,19 +109,22 @@ export const addImagetoSpot = (spot) => async dispatch => {
 /*-------IINITIAL STATE-------*/
 const initialState = { allSpots: {}, spot: {} };
 
+
 /* ------ REDUCER ------ */
 const spotsReducer = (state = initialState, action) => {
-    let newState = {};
+    let newState = {allSpots: {}, spot: {}};
     switch (action.type) {
         case GET_ALL_SPOTS:
+            newState = {...state}
             action.spots.forEach(spot => {
-                newState[spot.id] = spot
+                newState.allSpots[spot.id] = spot
             });
-            return newState;
-        // case GET_ONE_SPOT:
-        //     newState = {...state}
-        //     spot = {...action.spot}
-
+            return newState.allSpots;
+        case GET_ONE_SPOT:
+            newState = {...state}
+            const oneSpot = {...action.spot}
+            newState.spot[oneSpot.id] = oneSpot;
+            return newState.spot;
         default:
             return state;
     }
