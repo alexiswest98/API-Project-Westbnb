@@ -1,15 +1,17 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import React, { useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { getOneSpot } from '../../store/spots';
+import { getOneSpotThunk } from '../../store/spots';
 
 function IndivSpot() {
     const dispatch = useDispatch();
     const {id} = useParams();
-    const spotDetail = useSelector(state => state.spots.allSpots[id])
+    const spot = useSelector(state => state.spots[+id])
+    // console.log(spot)
 
     useEffect(() => {
-        dispatch(getOneSpot(+id))
+        dispatch(getOneSpotThunk(+id))
     }, [dispatch, id])
 
     return (
