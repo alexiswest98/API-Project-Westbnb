@@ -22,7 +22,7 @@ module.exports = {
         country: 'USA',
         lat: 37.798610,
         lng:-122.417650,
-        name: 'New Construction SF Hous with City Views',
+        name: 'New Construction SF House with City Views',
         description: '4 Bed 6 Bath House with Sauna',
         price: 500
       },
