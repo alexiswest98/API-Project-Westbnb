@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const GET_ALL_SPOTS = 'spots/getAllSpots';
 const GET_ONE_SPOT = 'spot/getOneSpot';
 const ADD_A_SPOT = "spots/addSpot";
+// const EDIT_A_SPOT = "spot/editSpot"
 // const DELETE_A_SPOT = 'spot/deleteSpot';
 // const RESET_STATE = 'spot/clearState' do i need this?
 
@@ -115,7 +116,6 @@ export const addOneSpotThunk = (spot) => async dispatch => {
 /*-------IINITIAL STATE-------*/
 const initialState = {};
 
-
 /* ------ REDUCER ------ */
 const spotsReducer = (state = initialState, action) => {
     let newState = {};
@@ -129,6 +129,10 @@ const spotsReducer = (state = initialState, action) => {
         case GET_ONE_SPOT:
             newState = {...state}
             newState[action.spot.id] = {...newState[action.spot.id], ...action.spot}
+            return newState;
+        case ADD_A_SPOT:
+            newState={...state}
+            newState[action.spot.id] = action.spot
             return newState;
         default:
             return state;

@@ -23,7 +23,7 @@ function MainPage() {
                     </div>
                     <div>
                     <h3>{spot.name}</h3>
-                    <h3>★{spot.avgRating}.00</h3>
+                    <h3>★{spot.avgRating}</h3>
                     <p>{spot.city}, {spot.state}</p>
                     <p>${spot.price} night</p>
                     </div>
