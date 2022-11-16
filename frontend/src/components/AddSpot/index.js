@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { addOneSpotThunk } from "../../store/spots";
 import { useHistory } from "react-router-dom";
@@ -17,7 +17,6 @@ function AddSpotComponent() {
   const [price, setPrice] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const spot = useSelector(state => state.spots[state.spots.length - 1])
 
   useEffect(() => {
     const errors = [];

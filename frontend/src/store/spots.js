@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const GET_ALL_SPOTS = 'spots/getAllSpots';
 const GET_ONE_SPOT = 'spot/getOneSpot';
 const ADD_A_SPOT = "spots/addSpot";
+const EDIT_A_SPOT = "spots/editSpot";
 const GET_CURR_SPOTS = "spots/getMySpots"
 const DELETE_A_SPOT = 'spot/deleteSpot';
 // const RESET_STATE = 'spot/clearState' do i need this?
@@ -33,6 +34,13 @@ const getCurrentSpotsAction = (spots) => {
 
 
 const addSpotAction = (spot) => {
+    return {
+        type: EDIT_A_SPOT,
+        spot
+    }
+};
+
+const editSpotAction = (spot) => {
     return {
         type: ADD_A_SPOT,
         spot
@@ -89,7 +97,7 @@ export const editOneSpot = (spot) => async dispatch => {
 
     if (editSpot.ok) {
         const response = await editSpot.json();
-        dispatch(addSpotAction(response));
+        dispatch(editSpotAction(response));
         return response;
     }
 };
@@ -109,7 +117,7 @@ export const deleteOneSpotThunk = (spot) => async dispatch => {
 export const getCurrentSpotsThunk = (spots) => async dispatch => {
     const currSpots = await csrfFetch(`/api/spots/current`);
 
-    if(currSpots.ok){
+    if (currSpots.ok) {
         const response = await currSpots.json();
         dispatch(getCurrentSpotsAction(response));
         return response;
@@ -143,27 +151,31 @@ const spotsReducer = (state = initialState, action) => {
     let newState = {};
     switch (action.type) {
         case GET_ALL_SPOTS:
-            newState = {...state}
+            newState = { ...state }
             action.spots.forEach(spot => {
                 newState[spot.id] = spot
             });
             return newState;
         case GET_ONE_SPOT:
-            newState = {...state}
-            newState[action.spot.id] = {...newState[action.spot.id], ...action.spot}
+            newState = { ...state }
+            newState[action.spot.id] = { ...newState[action.spot.id], ...action.spot }
             return newState;
         case ADD_A_SPOT:
-            newState={...state}
+            newState = { ...state }
             newState[action.spot.id] = action.spot
             return newState;
-            case GET_CURR_SPOTS:
-                newState={...state}
-                newState[action.spot.id] = {...newState[action.spot.id], ...action.spot}
-                return newState;
-            case DELETE_A_SPOT:
-                newState={...state}
-                delete newState[action.spot.id];
-                return newState;
+        case EDIT_A_SPOT:
+            newState={...state}
+            newState[action.spot.id] = { ...newState[action.spot.id], ...action.spot };
+            return newState;
+        case GET_CURR_SPOTS:
+            newState = { ...state }
+            newState[action.spot.id] = { ...newState[action.spot.id], ...action.spot }
+            return newState;
+        case DELETE_A_SPOT:
+            newState = { ...state }
+            delete newState[action.spot.id];
+            return newState;
         default:
             return state;
     }
