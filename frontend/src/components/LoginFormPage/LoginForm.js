@@ -1,39 +1,42 @@
-// frontend/src/components/LoginFormPage/index.js
-import React, { useState } from 'react';
-import * as sessionActions from '../../store/session';
-import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import './LoginForm.css';
+ // frontend/src/components/LoginFormModal/LoginForm.js
+import React, { useState } from "react";
+import * as sessionActions from "../../store/session";
+import { useDispatch } from "react-redux";
 
-function LoginFormPage() {
+function LoginForm( {setShowModal}) {
   const dispatch = useDispatch();
-
-  const sessionUser = useSelector(state => state.session.user);
-  const [credential, setCredential] = useState('');
-  const [password, setPassword] = useState('');
+  const [credential, setCredential] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-
-  if (sessionUser) return (
-    <Redirect to="/" />
-  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password }))
-      .catch(async (res) => {
+    .then(setShowModal(false))
+    .catch(
+      async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
-      });
+      }
+    );
+  };
+
+  const demoLogin = async (e) => {
+    setCredential('Demo-lition')
+    setPassword('password');
+    await dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        {errors.map((error, idx) => (
+          <li key={idx}>{error}</li>
+        ))}
       </ul>
       <label>
-        Username or Emails
+        Username or Email
         <input
           type="text"
           value={credential}
@@ -51,8 +54,9 @@ function LoginFormPage() {
         />
       </label>
       <button type="submit">Log In</button>
+      <button type="submit" onClick={demoLogin} >Demo User</button>
     </form>
   );
 }
 
-export default LoginFormPage;
+export default LoginForm;
