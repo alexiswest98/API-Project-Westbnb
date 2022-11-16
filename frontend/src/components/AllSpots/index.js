@@ -19,12 +19,10 @@ function MainPage() {
                 <div className='indivBox'>
                 <NavLink to={`/spots/${spot.id}`} className="box-link">
                     <img className="imgDiv" src={`${spot.previewImage}`} alt={spot.name}></img>
-                    <div>
                     <h3>{spot.name}</h3>
                     <h3>★{spot.avgRating}</h3>
                     <p>{spot.city}, {spot.state}</p>
                     <p>${spot.price} night</p>
-                    </div>
                 </NavLink>
                 </div>
             ))}

@@ -52,27 +52,18 @@ function AddSpotComponent() {
 
     //input data in state
     const createSpot = await dispatch(addOneSpotThunk(newSpot));
-    console.log(createSpot)
+    // console.log(createSpot)
 
     //after submitting the form
     history.push(`/spots/${createSpot.id}`)
 
-    // Reset the form state.
-    // setAddress("");
-    // setCity("");
-    // setState("");
-    // setCountry("");
-    // setName("");
-    // setDescription("");
-    // setPrice("");
-    // setValidationErrors([]);
-    // setHasSubmitted(false);
   };
 
   return (
-    <div>
+    <div >
       <form onSubmit={onSubmit} className="addSpotBox">
-        <h2>Contact Us</h2>
+        <h2>Let's get you started...</h2>
+        <h2>Please provide the your listing information </h2>
         <div>
           <label htmlFor="name">Name:</label>
           <input

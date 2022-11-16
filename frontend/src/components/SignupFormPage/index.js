@@ -41,10 +41,11 @@ function SignupFormPage({setShowModal}) {
   };
 
   return (
+    <>
+    <ul>
+      {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+    </ul>
     <form className='SignUpModal' onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
       <label>
         firstName
         <input
@@ -101,6 +102,7 @@ function SignupFormPage({setShowModal}) {
       </label>
       <button type="submit">Sign Up</button>
     </form>
+    </>
   );
 }
 

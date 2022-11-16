@@ -4,6 +4,8 @@
   justify-content: center;
   flex-direction: column;
   padding: 3%;
+  height: 90%;
+  width: 90%;
 }
 /* animated button */
 .sub-button {
