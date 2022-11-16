@@ -1,10 +1,16 @@
-.logo {
-    color: rgb(248, 51, 84);
-}
 
-.logInButtons {
+.fullNav {
+    height: 4rem;
+    width: 95%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.logo {
+    height: 5rem;
+}
 
+.profile-dropdown {
+    list-style-type: none;
+}

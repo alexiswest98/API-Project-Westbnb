@@ -7,6 +7,7 @@ import LoginFormModal from '../LoginFormModal';
 import './Navigation.css';
 import { Modal } from '../../context/Modal';
 import SignupFormPage from '../SignupFormPage';
+import logo from './westbnb.png';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -29,9 +30,11 @@ function Navigation({ isLoaded }){
 
   return (
     <ul>
-      <div>
-        <NavLink className="logo" exact to="/">Westbnb</NavLink>
-        {isLoaded && <ProfileButton className="profileButton" user={sessionUser} />}
+      <div className="fullNav">
+        <NavLink exact to="/" className="logo-placement">
+          <img src={logo}className="logo" alt='westbnb'></img>
+          </NavLink>
+        {isLoaded && <div className="profileNav"><ProfileButton user={sessionUser} /></div>}
       </div>
       {showModal && <Modal onClose={()=> setShowModal(false)}>
         { login ? <loginForm/> : <SignupFormPage/>}

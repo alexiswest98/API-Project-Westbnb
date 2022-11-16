@@ -1,23 +1,37 @@
 .imgDiv {
-    width: 90%;
-    height: fit-content(60%);
     border-radius: 10px;
-
+    object-fit: cover;
+    width: 95%;
+    height: 16rem;
+    box-sizing: border-box;
 }
 
 .wholeSpotBox {
+    border-top: solid 1px rgb(201, 194, 194);
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
     width: 100%;
+    height: 100%;
+    align-items: center;
 }
 
 .indivBox {
-
     border: solid 2px rgb(248, 51, 84);
     border-radius: 10px;
     width: 30%;
-    height: 500px;
-    margin: 5px;
+    height: 30%;
+    margin: 10px;
+    background-color: rgb(253, 227, 200);
+    display: flex;
+}
+
+.box-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
 }

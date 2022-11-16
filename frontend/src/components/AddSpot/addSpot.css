@@ -1,3 +1,10 @@
+.addSpotBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 3%;
+}
 /* animated button */
 .sub-button {
     width: 130px;

@@ -17,10 +17,8 @@ function MainPage() {
         <div className="wholeSpotBox">
             {spotsObject.map(spot => (
                 <div className='indivBox'>
-                <NavLink to={`/spots/${spot.id}`}>
-                    <div>
+                <NavLink to={`/spots/${spot.id}`} className="box-link">
                     <img className="imgDiv" src={`${spot.previewImage}`} alt={spot.name}></img>
-                    </div>
                     <div>
                     <h3>{spot.name}</h3>
                     <h3>★{spot.avgRating}</h3>
