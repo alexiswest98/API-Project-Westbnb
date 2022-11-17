@@ -13,4 +13,13 @@
 
 .profile-dropdown {
     list-style-type: none;
+    position: absolute;
+    right: 15px;
+    background-color: rgb(246, 99, 123);
+    padding: 10px;
+}
+
+
+.profile-dropdown> li {
+    position: relative;
 }

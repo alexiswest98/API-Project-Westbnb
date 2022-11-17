@@ -8,12 +8,12 @@ import * as sessionActions from '../../store/session';
 function ProfileButton({ user, setLogin, setShowModal }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  
+
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
   };
-  
+
   useEffect(() => {
     if (!showMenu) return;
 
@@ -22,7 +22,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
     };
 
     document.addEventListener('click', closeMenu);
-  
+
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
@@ -36,13 +36,18 @@ function ProfileButton({ user, setLogin, setShowModal }) {
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
-      {showMenu && ( user ? (
+      {showMenu && (user ? (
         <ul className="profile-dropdown">
           <li>{user.username}</li>
           <li>{user.email}</li>
           <li>
             <Link to="/become-a-host">
-            <button>Become a host</button> 
+              <button>Become a host</button>
+            </Link>
+          </li>
+          <li>
+            <Link to="/spots/current">
+              <button>Current Spots</button>
             </Link>
           </li>
           <li>
@@ -52,19 +57,19 @@ function ProfileButton({ user, setLogin, setShowModal }) {
         (
           <ul className="profile-dropdown">
             <li>
-              <button onClick={()=> {
+              <button onClick={() => {
                 setLogin(true)
                 setShowModal(true)
               }}>Log In</button>
             </li>
             <li>
-              <button onClick={()=> {
+              <button onClick={() => {
                 setLogin(false)
                 setShowModal(true)
               }}>Sign Up</button>
             </li>
           </ul>)
-          )}
+      )}
     </>
   );
 }

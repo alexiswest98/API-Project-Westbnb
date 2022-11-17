@@ -27,7 +27,7 @@ function AddSpotComponent() {
     if (name.length > 50) errors.push("Name must be less than 50 characters");
     if (!description.length) errors.push("Description is required");
     if (!price.length) errors.push("Price per day is required");
-    if (typeof price !== 'number') errors.push("Please enter a valid number");
+    if (typeof price !== 'number' || price < 0) errors.push("Please enter a valid number");
     setValidationErrors(errors);
   }, [address, city, state, country, name, description, price]);
 

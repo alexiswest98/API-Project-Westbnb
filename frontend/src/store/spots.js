@@ -25,12 +25,12 @@ const getSpotAction = (spot) => {
     }
 };
 
-const getCurrentSpotsAction = (spots) => {
-    return {
-        type: GET_CURR_SPOTS,
-        spots
-    }
-};
+// const getCurrentSpotsAction = (spots) => {
+//     return {
+//         type: GET_CURR_SPOTS,
+//         spots
+//     }
+// };
 
 
 const addSpotAction = (spot) => {
@@ -56,7 +56,7 @@ const deleteSpotAction = (spotId) => {
 
 /* ------ THUNKS ------ */
 export const getAllSpotThunk = () => async dispatch => {
-    const spots = await fetch(`api/spots`);
+    const spots = await fetch(`/api/spots`);
 
     if (spots.ok) {
         const response = await spots.json();
@@ -75,7 +75,7 @@ export const getOneSpotThunk = (spotId) => async dispatch => {
 };
 
 export const addOneSpotThunk = (spot) => async dispatch => {
-    const newSpot = await csrfFetch(`api/spots`, {
+    const newSpot = await csrfFetch(`/api/spots`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(spot)
@@ -88,8 +88,9 @@ export const addOneSpotThunk = (spot) => async dispatch => {
     }
 };
 
-export const editOneSpot = (spot) => async dispatch => {
-    const editSpot = await csrfFetch(`api/spots/${spot.id}`, {
+export const editOneSpotThunk = (spot) => async dispatch => {
+    console.log(spot)
+    const editSpot = await csrfFetch(`/api/spots/${spot.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(spot)
@@ -103,7 +104,7 @@ export const editOneSpot = (spot) => async dispatch => {
 };
 
 export const deleteOneSpotThunk = (spot) => async dispatch => {
-    const deleteSpot = await csrfFetch(`apit/spots/${spot.id}`, {
+    const deleteSpot = await csrfFetch(`api/spots/${spot.id}`, {
         method: 'DELETE'
     });
 
@@ -119,7 +120,7 @@ export const getCurrentSpotsThunk = (spots) => async dispatch => {
 
     if (currSpots.ok) {
         const response = await currSpots.json();
-        dispatch(getCurrentSpotsAction(response));
+        dispatch(getSpotsAction(response.Spots));
         return response;
     }
 
@@ -168,10 +169,12 @@ const spotsReducer = (state = initialState, action) => {
             newState={...state}
             newState[action.spot.id] = { ...newState[action.spot.id], ...action.spot };
             return newState;
-        case GET_CURR_SPOTS:
-            newState = { ...state }
-            newState[action.spot.id] = { ...newState[action.spot.id], ...action.spot }
-            return newState;
+        // case GET_CURR_SPOTS:
+        //     newState = { ...state }
+        //     action.spots.forEach(spot => {
+        //         newState[spot.id] = spot
+        //     });
+        //     return newState;
         case DELETE_A_SPOT:
             newState = { ...state }
             delete newState[action.spot.id];

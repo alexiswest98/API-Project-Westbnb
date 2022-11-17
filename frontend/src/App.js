@@ -9,6 +9,7 @@ import MainPage from "./components/AllSpots";
 import IndivSpot from "./components/Spot";
 import SignupFormPage from "./components/SignupFormPage";
 import AddSpotComponent from "./components/AddSpot";
+import CurrSpotsPage from "./components/GetCurrSpots";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage/>
+          </Route>
+          <Route path="/spots/current">
+            <CurrSpotsPage/>
           </Route>
           <Route path="/spots/:id">
             <IndivSpot/>
