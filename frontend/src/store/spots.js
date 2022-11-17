@@ -7,7 +7,7 @@ const ADD_A_SPOT = "spots/addSpot";
 const EDIT_A_SPOT = "spots/editSpot";
 const GET_CURR_SPOTS = "spots/getMySpots"
 const DELETE_A_SPOT = 'spot/deleteSpot';
-// const RESET_STATE = 'spot/clearState' do i need this?
+const ADD_SPOT_IMAGE = 'spot/addImage';
 
 /* ----- ACTIONS ------ */
 const getSpotsAction = (spots) => {
@@ -25,12 +25,12 @@ const getSpotAction = (spot) => {
     }
 };
 
-// const getCurrentSpotsAction = (spots) => {
-//     return {
-//         type: GET_CURR_SPOTS,
-//         spots
-//     }
-// };
+const getCurrentSpotsAction = (spots) => {
+    return {
+        type: GET_CURR_SPOTS,
+        spots
+    }
+};
 
 
 const addSpotAction = (spot) => {
@@ -53,6 +53,14 @@ const deleteSpotAction = (spotId) => {
         spotId
     }
 };
+
+const addSpotImageAction = (image) => {
+    return {
+        type: ADD_SPOT_IMAGE,
+        image
+    }
+};
+
 
 /* ------ THUNKS ------ */
 export const getAllSpotThunk = () => async dispatch => {
@@ -115,33 +123,34 @@ export const deleteOneSpotThunk = (spot) => async dispatch => {
     }
 };
 
-export const getCurrentSpotsThunk = (spots) => async dispatch => {
+export const getCurrentSpotsThunk = () => async dispatch => {
     const currSpots = await csrfFetch(`/api/spots/current`);
 
     if (currSpots.ok) {
         const response = await currSpots.json();
-        dispatch(getSpotsAction(response.Spots));
+        dispatch(getCurrentSpotsAction(response.Spots));
         return response;
     }
 
-}
+};
 
-// export const addImagetoSpotThunk = (spot) => async dispatch => {
-//     const { url, spotId } = spot
-//     const image = await csrfFetch(`api/spots/${spotId}/images`, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({
-//             url,
-//             preview: true
-//         })
-//     });
+export const addImagetoSpotThunk = (spot) => async dispatch => {
+    const { url, id } = spot
+    const image = await csrfFetch(`api/spots/${id}/images`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            url,
+            preview: true
+        })
+    });
 
-//     if (image.ok) {
-//         dispatch(addSpot(spot))
-//         //may need dispatch before calling it 
-//     }
-// };
+    if (image.ok) {
+        const response = await image.json();
+        dispatch(addSpotImageAction(spot))
+        return response;
+    }
+};
 
 
 /*-------IINITIAL STATE-------*/
@@ -169,12 +178,12 @@ const spotsReducer = (state = initialState, action) => {
             newState={...state}
             newState[action.spot.id] = { ...newState[action.spot.id], ...action.spot };
             return newState;
-        // case GET_CURR_SPOTS:
-        //     newState = { ...state }
-        //     action.spots.forEach(spot => {
-        //         newState[spot.id] = spot
-        //     });
-        //     return newState;
+        case GET_CURR_SPOTS:
+            newState = { ...state }
+            action.spots.forEach(spot => {
+                newState[spot.id] = spot
+            });
+            return newState;
         case DELETE_A_SPOT:
             newState = { ...state }
             delete newState[action.spot.id];

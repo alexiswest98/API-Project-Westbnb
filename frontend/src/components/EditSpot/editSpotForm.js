@@ -5,7 +5,7 @@ import "./editSpot.css";
 
 function EditSpotForm() {
     //tap into the specific spot 
-    const spotsObject = Object.values(useSelector(state => state));
+    const spotsObject = Object.values(useSelector(state => state.spots));
     //set all these defaults to the spots info instead of null
     const dispatch = useDispatch();
     const [address, setAddress] = useState("");
@@ -17,7 +17,6 @@ function EditSpotForm() {
     const [price, setPrice] = useState("");
     const [validationErrors, setValidationErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
-
 
     useEffect(() => {
         const errors = [];
