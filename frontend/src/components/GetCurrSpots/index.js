@@ -47,7 +47,7 @@ function CurrSpotsPage() {
                         <p>${spot.price} night</p>
                     </NavLink>
                     <div className="currSpotButtons">
-                        <EditSpotModal spotId={spot.id} />
+                        <EditSpotModal spot={spot} />
                         <button>Delete Spot</button>
                         <button>Add an Image</button>
                     </div>

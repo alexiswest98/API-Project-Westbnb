@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editOneSpotThunk } from "../../store/spots";
 import "./editSpot.css";
 
-function EditSpotForm() {
+function EditSpotForm({spot}) {
     //tap into the specific spot 
     const spotsObject = Object.values(useSelector(state => state.spots));
     //set all these defaults to the spots info instead of null
@@ -18,6 +18,8 @@ function EditSpotForm() {
     const [validationErrors, setValidationErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
+    console.log(spot)
+    
     useEffect(() => {
         const errors = [];
         if (name.length > 50) errors.push("Name must be less than 50 characters");

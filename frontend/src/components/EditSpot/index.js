@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import EditSpotForm from './editSpotForm';
 
-function EditSpotModal() {
+function EditSpotModal({spot}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -10,7 +10,7 @@ function EditSpotModal() {
       <button onClick={() => setShowModal(true)}>Edit Spot</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditSpotForm />
+          <EditSpotForm spot={spot} />
         </Modal>
       )}
     </>
