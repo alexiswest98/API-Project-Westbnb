@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import React, { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { getOneSpotThunk } from '../../store/spots';
+import "./indivSpot.css";
+import none from './no-image.jpg';
 
 function IndivSpot() {
     const dispatch = useDispatch();
@@ -17,13 +19,19 @@ function IndivSpot() {
     if(!spot || !spot.SpotImages ) return null;
 
     return (
-        <div>
+        <div className="mostOuterIndiv">
+        <div className='wholeIndivBox'>
             <h2>{spot.name}</h2>
             <h3>★{spot.avgRating} ∘ {spot.numReviews} review ∘ ✪ Superhost  </h3>
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
             <div className="spotImageDiv">
-                <img src={spot.SpotImages[0]?.url} alt={spot.name}></img>
-                import other images..
+                <img className="mainImage" src={spot.SpotImages[0]?.url || none} alt={spot.name}></img>
+                <div className="subImageBox">
+                <img className="subImage" src={spot.SpotImages[1]?.url || none} alt={spot.name}></img>
+                <img className="subImage" src={spot.SpotImages[2]?.url || none} alt={spot.name}></img>
+                <img className="subImage" src={spot.SpotImages[3]?.url || none} alt={spot.name}></img>
+                <img className="subImage" src={spot.SpotImages[4]?.url || none} alt={spot.name}></img>
+                </div>
             </div>
             <h3>Entire home hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
             <hr></hr>
@@ -33,6 +41,7 @@ function IndivSpot() {
             <p>100% of recent guests gave the location a 5-star rating.</p>
             <h3>Free cancellation before Nov 21.</h3>
             <hr></hr>
+        </div>
         </div>
     )
 }

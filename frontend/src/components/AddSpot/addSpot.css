@@ -3,12 +3,12 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 3%;
   height: 90%;
   width: 90%;
 }
 /* animated button */
 .sub-button {
+  margin-top: 5%;
     width: 130px;
     height: 40px;
     color: #fff;

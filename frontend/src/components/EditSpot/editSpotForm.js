@@ -1,58 +1,71 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { editOneSpotThunk } from "../../store/spots";
 import "./editSpot.css";
 
-function EditSpotForm({spot}) {
+function EditSpotForm({ spot, setShowModal }) {
     //tap into the specific spot 
-    const spotsObject = Object.values(useSelector(state => state.spots));
     //set all these defaults to the spots info instead of null
     const dispatch = useDispatch();
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [country, setCountry] = useState("");
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
+    const [address, setAddress] = useState(spot.address || "");
+    const [city, setCity] = useState(spot.city || "");
+    const [state, setState] = useState(spot.state || "");
+    const [country, setCountry] = useState(spot.country || "");
+    const [name, setName] = useState(spot.name || "");
+    const [description, setDescription] = useState(spot.description || "");
+    const [price, setPrice] = useState(spot.price || "");
     const [validationErrors, setValidationErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
-    console.log(spot)
-    
+    // useEffect(() => {
+    // }, [address, city, state, country, name, description, price])
+
     useEffect(() => {
         const errors = [];
+        if(!name) errors.push("Name is required");
+        if (!address.length) errors.push("Street address is required");
+        if (!city.length) errors.push("City is required");
+        if (!state.length) errors.push("State is required");
+        if (!country.length) errors.push("Country is required");
         if (name.length > 50) errors.push("Name must be less than 50 characters");
+        if (!description.length) errors.push("Description is required");
+        if (!price) errors.push("Price per day is required");
         if (isNaN(price) || price < 0) errors.push("Please enter a valid number");
         setValidationErrors(errors);
-    }, [name, price]);
+    }, [address, city, state, country, name, description, price]);
+
 
     const onSubmit = async (e) => {
         // Prevent the default form behavior so the page doesn't reload.
         e.preventDefault();
 
-        if (validationErrors.length) return alert(`Cannot Update Spot`);
         setHasSubmitted(true);
+        if (validationErrors.length) return alert(`Cannot Submit`);
 
         // Create a new object.
         const updatedSpot = {
+            id: spot.id,
             address,
             city,
             state,
             country,
             name,
             description,
-            price
+            price,
+            previewImage: spot.previewImage,
+            lat: spot.lat,
+            lng: spot.lng
         };
-
+        
         //input data in state
-        await dispatch(editOneSpotThunk(updatedSpot));
+        const newSpot = await dispatch(editOneSpotThunk(updatedSpot)).then(() => setShowModal(false))
+        // console.log("After changes:", newSpot);
 
     };
 
     return (
-        <div className="editSpotModal">
-            <form onSubmit={onSubmit} >
+        <>
+            <form onSubmit={onSubmit} className="editSpotModal" >
                 <h2>Please fill out the fields you would like to update ...</h2>
                 <h4>You may leave out the fields you wish to keep the same.</h4>
                 <div>
@@ -106,6 +119,7 @@ function EditSpotForm({spot}) {
                         type="text"
                         onChange={(e) => setAddress(e.target.value)}
                         value={address}
+
                     />
                 </div>
                 <div>
@@ -131,17 +145,19 @@ function EditSpotForm({spot}) {
                 </button>
             </form>
             {/* to see errors printed at bottom */}
-            {hasSubmitted && validationErrors.length > 0 && (
-                <div>
+            {setHasSubmitted && validationErrors.length > 0 && (
+                <div className="addSpotBox">
                     Please fix these inputs:
                     <ul>
-                        {validationErrors.map((error) => (
-                            <li key={error}>{error}</li>
-                        ))}
+                        <ul>
+                            {validationErrors.map((error) => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
                     </ul>
                 </div>
             )}
-        </div>
+        </>
     );
 }
 

@@ -185,7 +185,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
         if (!lat) { errors.lat = "Latitude is not valid" }
         if (!lng) { errors.lng = "Longitude is not valid" }
         if (!name) { errors.name = "Name must be less than 50 characters" }
-        if (!description) { errors.description = "Longitude is required" }
+        if (!description) { errors.description = "Description is required" }
         if (!price) { errors.price = "Price per day is required" }
 
         res.status(400);

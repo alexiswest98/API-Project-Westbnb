@@ -23,7 +23,7 @@ function SignupFormPage({setShowModal}) {
     if (password === confirmPassword) {
       let signErrors = [];
       return dispatch(sessionActions.signup({ firstName, lastName, email, username, password }))
-        .then(setShowModal(false))
+        .then(() => setShowModal(false))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) {

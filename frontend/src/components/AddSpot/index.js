@@ -27,7 +27,7 @@ function AddSpotComponent() {
     if (name.length > 50) errors.push("Name must be less than 50 characters");
     if (!description.length) errors.push("Description is required");
     if (!price.length) errors.push("Price per day is required");
-    if (typeof price !== 'number' || price < 0) errors.push("Please enter a valid number");
+    if (isNaN(price) || price < 0) errors.push("Please enter a valid number");
     setValidationErrors(errors);
   }, [address, city, state, country, name, description, price]);
 
@@ -60,6 +60,16 @@ function AddSpotComponent() {
 
   return (
     <div >
+      {/* to see errors printed at bottom */}
+      {validationErrors.length > 0 && (
+        <div className="addSpotBox"> Required Fields
+          <ul>
+            {validationErrors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <form onSubmit={onSubmit} className="addSpotBox">
         <h2>Let's get you started...</h2>
         <h2>Please provide the your listing information </h2>
@@ -140,17 +150,6 @@ function AddSpotComponent() {
           <span>Submit</span>
         </button>
       </form>
-      {/* to see errors printed at bottom */}
-      {hasSubmitted && validationErrors.length > 0 && (
-        <div className="addSpotBox">
-          Please fix these inputs:
-          <ul>
-            {validationErrors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 }

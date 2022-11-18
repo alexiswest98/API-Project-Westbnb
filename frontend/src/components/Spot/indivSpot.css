@@ -1,0 +1,55 @@
+.mostOuterIndiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wholeIndivBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: auto;
+    border: 2px solid rgb(246, 93, 93);
+}
+
+.spotImageDiv {
+    width: 95%;
+    height: 30%;
+    /* border: 2px solid rgb(255, 106, 0); */
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+
+.subImageBox {
+    width: 50%;
+    height: 50%;
+    /* border: 2px solid rgb(102, 0, 255); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    object-fit: cover;
+    border-radius: 2%;
+}
+
+.subImage {
+    width: 45%;
+    height: 12em;
+    padding: 2%;
+    object-fit: cover;
+    border: 0.5px solid grey;
+    border-radius: 4%;
+}
+
+.mainImage {
+    width: 50%;
+    height: auto;
+    border-radius: 2%;
+    object-fit: cover;
+} 

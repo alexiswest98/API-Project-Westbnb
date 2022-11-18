@@ -9,8 +9,8 @@ function EditSpotModal({spot}) {
     <>
       <button onClick={() => setShowModal(true)}>Edit Spot</button>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <EditSpotForm spot={spot} />
+        <Modal onClose={() => setShowModal(false)} >
+          <EditSpotForm spot={spot} setShowModal={setShowModal} />
         </Modal>
       )}
     </>

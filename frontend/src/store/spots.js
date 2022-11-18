@@ -35,31 +35,31 @@ const getCurrentSpotsAction = (spots) => {
 
 const addSpotAction = (spot) => {
     return {
-        type: EDIT_A_SPOT,
+        type: ADD_A_SPOT,
         spot
     }
 };
 
 const editSpotAction = (spot) => {
     return {
-        type: ADD_A_SPOT,
+        type: EDIT_A_SPOT,
         spot
     }
 };
 
-const deleteSpotAction = (spotId) => {
+const deleteSpotAction = (spot) => {
     return {
         type: DELETE_A_SPOT,
-        spotId
+        spot
     }
 };
 
-const addSpotImageAction = (image) => {
-    return {
-        type: ADD_SPOT_IMAGE,
-        image
-    }
-};
+// const addSpotImageAction = (image) => {
+//     return {
+//         type: ADD_SPOT_IMAGE,
+//         image
+//     }
+// };
 
 
 /* ------ THUNKS ------ */
@@ -68,7 +68,7 @@ export const getAllSpotThunk = () => async dispatch => {
 
     if (spots.ok) {
         const response = await spots.json();
-        dispatch(getSpotsAction(response.Spots));
+        await dispatch(getSpotsAction(response.Spots));
     }
 };
 
@@ -91,13 +91,12 @@ export const addOneSpotThunk = (spot) => async dispatch => {
 
     if (newSpot.ok) {
         const response = await newSpot.json();
-        dispatch(addSpotAction(response));
+        await dispatch(addSpotAction(response));
         return response;
     }
 };
 
 export const editOneSpotThunk = (spot) => async dispatch => {
-    console.log(spot)
     const editSpot = await csrfFetch(`/api/spots/${spot.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -106,19 +105,19 @@ export const editOneSpotThunk = (spot) => async dispatch => {
 
     if (editSpot.ok) {
         const response = await editSpot.json();
-        dispatch(editSpotAction(response));
+        await dispatch(editSpotAction(response));
         return response;
     }
 };
 
 export const deleteOneSpotThunk = (spot) => async dispatch => {
-    const deleteSpot = await csrfFetch(`api/spots/${spot.id}`, {
+    const deleteSpot = await csrfFetch(`/api/spots/${spot.id}`, {
         method: 'DELETE'
     });
 
     if (deleteSpot.ok) {
         const response = await deleteSpot.json();
-        dispatch(deleteSpotAction(response));
+        await dispatch(deleteSpotAction(response));
         return response;
     }
 };
@@ -128,29 +127,29 @@ export const getCurrentSpotsThunk = () => async dispatch => {
 
     if (currSpots.ok) {
         const response = await currSpots.json();
-        dispatch(getCurrentSpotsAction(response.Spots));
+        await dispatch(getCurrentSpotsAction(response.Spots));
         return response;
     }
 
 };
 
-export const addImagetoSpotThunk = (spot) => async dispatch => {
-    const { url, id } = spot
-    const image = await csrfFetch(`api/spots/${id}/images`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            url,
-            preview: true
-        })
-    });
+// export const addImagetoSpotThunk = (spot) => async dispatch => {
+//     const { url, id } = spot
+//     const image = await csrfFetch(`api/spots/${id}/images`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//             url,
+//             preview: true
+//         })
+//     });
 
-    if (image.ok) {
-        const response = await image.json();
-        dispatch(addSpotImageAction(spot))
-        return response;
-    }
-};
+//     if (image.ok) {
+//         const response = await image.json();
+//         dispatch(addSpotImageAction(spot))
+//         return response;
+//     }
+// };
 
 
 /*-------IINITIAL STATE-------*/
@@ -181,7 +180,7 @@ const spotsReducer = (state = initialState, action) => {
         case GET_CURR_SPOTS:
             newState = { ...state }
             action.spots.forEach(spot => {
-                newState[spot.id] = spot
+                newState[spot.id] = { ...newState[spot.id], ...spot };
             });
             return newState;
         case DELETE_A_SPOT:
