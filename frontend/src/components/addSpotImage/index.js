@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
-import DeleteASpotForm from './deleteSpot';
+import AddSpotImage from './addSpotImage';
 
-function DeleteSpotModal({spot}) {
+
+function AddSpotImageModal({spot}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Delete Spot</button>
+      <button onClick={() => setShowModal(true)}>Add an Image to Spot</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <DeleteASpotForm spot={spot} setShowModal={setShowModal}/>
+          <AddSpotImage spot={spot} setShowModal={setShowModal}/>
         </Modal>
       )}
     </>
   );
 }
 
-export default DeleteSpotModal;
+export default AddSpotImageModal;

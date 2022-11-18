@@ -47,19 +47,19 @@ const editSpotAction = (spot) => {
     }
 };
 
-const deleteSpotAction = (spot) => {
+const deleteSpotAction = (spotId) => {
     return {
         type: DELETE_A_SPOT,
-        spot
+        spotId
     }
 };
 
-// const addSpotImageAction = (image) => {
-//     return {
-//         type: ADD_SPOT_IMAGE,
-//         image
-//     }
-// };
+const addSpotImageAction = (img) => {
+    return {
+        type: ADD_SPOT_IMAGE,
+        img
+    }
+};
 
 
 /* ------ THUNKS ------ */
@@ -110,15 +110,14 @@ export const editOneSpotThunk = (spot) => async dispatch => {
     }
 };
 
-export const deleteOneSpotThunk = (spot) => async dispatch => {
-    const deleteSpot = await csrfFetch(`/api/spots/${spot.id}`, {
+export const deleteOneSpotThunk = (spotId) => async dispatch => {
+    const deleteSpot = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     });
 
     if (deleteSpot.ok) {
         const response = await deleteSpot.json();
         await dispatch(deleteSpotAction(response));
-        return response;
     }
 };
 
@@ -133,23 +132,19 @@ export const getCurrentSpotsThunk = () => async dispatch => {
 
 };
 
-// export const addImagetoSpotThunk = (spot) => async dispatch => {
-//     const { url, id } = spot
-//     const image = await csrfFetch(`api/spots/${id}/images`, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({
-//             url,
-//             preview: true
-//         })
-//     });
+export const addImagetoSpotThunk = (spot, img) => async dispatch => {
+    const image = await csrfFetch(`/api/spots/${spot.id}/images`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(img)
+    });
 
-//     if (image.ok) {
-//         const response = await image.json();
-//         dispatch(addSpotImageAction(spot))
-//         return response;
-//     }
-// };
+    if (image.ok) {
+        const response = await image.json();
+        dispatch(addSpotImageAction(response))
+        return response;
+    }
+};
 
 
 /*-------IINITIAL STATE-------*/
@@ -185,7 +180,7 @@ const spotsReducer = (state = initialState, action) => {
             return newState;
         case DELETE_A_SPOT:
             newState = { ...state }
-            delete newState[action.spot.id];
+            delete newState[action.spotId];
             return newState;
         default:
             return state;

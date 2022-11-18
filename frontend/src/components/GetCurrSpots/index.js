@@ -4,6 +4,7 @@ import { NavLink, Link, useHistory } from "react-router-dom";
 import { getCurrentSpotsThunk } from "../../store/spots";
 import EditSpotModal from "../EditSpot";
 import DeleteSpotModal from "../DeleteSpot";
+import AddSpotImageModal from "../addSpotImage";
 import "./currSpots.css"
 
 function CurrSpotsPage() {
@@ -48,8 +49,8 @@ function CurrSpotsPage() {
                     </NavLink>
                     <div className="currSpotButtons">
                         <EditSpotModal spot={spot} />
-                        <DeleteSpotModal/>
-                        <button>Add an Image</button>
+                        <DeleteSpotModal spot={spot}/>
+                        <AddSpotImageModal spot={spot}/>
                     </div>
                 </div>
             ))) :

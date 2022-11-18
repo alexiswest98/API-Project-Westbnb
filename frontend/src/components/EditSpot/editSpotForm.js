@@ -52,9 +52,9 @@ function EditSpotForm({ spot, setShowModal }) {
             name,
             description,
             price,
-            previewImage: spot.previewImage,
-            lat: spot.lat,
-            lng: spot.lng
+            previewImage: spot?.previewImage,
+            lat: spot?.lat,
+            lng: spot?.lng
         };
         
         //input data in state
