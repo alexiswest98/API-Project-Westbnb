@@ -18,7 +18,7 @@ function DeleteASpotForm({ spot, setShowModal }) {
         const errors = [];
         if (verif !== sampleVerif) errors.push("Inputs must match to delete");
         setErrors(errors);
-    }, [dispatch, verif]);
+    }, [dispatch, verif, sampleVerif]);
 
     const deleteFunc = async (e) => {
         e.preventDefault();

@@ -5,6 +5,7 @@ import { getCurrentSpotsThunk } from "../../store/spots";
 import EditSpotModal from "../EditSpot";
 import DeleteSpotModal from "../DeleteSpot";
 import AddSpotImageModal from "../addSpotImage";
+import noImage from "../Spot/no-image.jpg";
 import "./currSpots.css"
 
 function CurrSpotsPage() {
