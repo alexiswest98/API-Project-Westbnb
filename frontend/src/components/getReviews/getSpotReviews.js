@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 import { getAllReviewsThunk } from "../../store/reviews";
+import DeleteReviewModal from "../deleteReview";
 import "./getSpotReview.css";
 
 function GetReviewsBox() {
@@ -34,6 +35,9 @@ function GetReviewsBox() {
                         <img className="reviewImage" src={review.ReviewImages[0]?.url} alt="reviewImage"></img>
                     </div>
                     )} */}
+                { review.userId === user.id && (
+                    <DeleteReviewModal review={review}/>)
+                }
                 </div>
             ))) :
                 (<div>

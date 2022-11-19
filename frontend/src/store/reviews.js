@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 /* ----- TYPES ------ */
 const GET_ALL_REVIEWS = 'reviews/getAllreviews';
-const ADD_IMAGE_REVIEW = 'reviews/getAllreviews';
+// const ADD_IMAGE_REVIEW = 'reviews/getAllreviews';
 const ADD_A_REVIEW = "review/addSpot";
 const DELETE_A_REVIEW = 'spot/deleteSpot';
 
@@ -22,19 +22,19 @@ const addReviewAction = (spotId, review) => {
     }
 };
 
-const deleteReviewAction = (review) => {
+const deleteReviewAction = (reviewId) => {
     return {
         type: DELETE_A_REVIEW,
-        review
+        reviewId
     }
 };
 
-const addImageReviewAction = (reviewImage) => {
-    return {
-        type: ADD_IMAGE_REVIEW,
-        reviewImage
-    }
-};
+// const addImageReviewAction = (reviewImage) => {
+//     return {
+//         type: ADD_IMAGE_REVIEW,
+//         reviewImage
+//     }
+// };
 
 /* ------ THUNKS ------ */
 export const getAllReviewsThunk = (spotId) => async dispatch => {
@@ -68,8 +68,7 @@ export const deleteReviewThunk = (reviewId) => async dispatch => {
 
     if (deleteReview.ok) {
         const response = await deleteReview.json();
-        await dispatch(deleteReviewAction(response))
-        return response;
+        await dispatch(deleteReviewAction(reviewId));
     }
 };
 
@@ -112,8 +111,8 @@ const reviewsReducer = (state = initialState, action) => {
             newState = { ...state };
             delete newState[action.id];
             return newState;
-        case ADD_IMAGE_REVIEW:
-            newState={...state}
+        // case ADD_IMAGE_REVIEW:
+        //     newState={...state}
         default:
             return state;
     }

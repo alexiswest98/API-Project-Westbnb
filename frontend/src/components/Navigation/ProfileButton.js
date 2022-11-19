@@ -35,8 +35,9 @@ function ProfileButton({ user, setLogin, setShowModal }) {
   };
 
   return (
-    <>
-      <button onClick={openMenu}>
+    <div className="wholeNav">
+      <button onClick={openMenu} className="profileMenu"> 
+        <span className="hamburger">≡</span>
         <i className="fas fa-user-circle" />
       </button>
       {showMenu && (user ? (
@@ -45,20 +46,20 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           <li>{user.email}</li>
           <li>
             <Link to="/become-a-host">
-              <button>Become a host</button>
+              <button className="navButton">Become a host</button>
             </Link>
           </li>
           <li>
             <Link to="/spots/current">
-              <button>Current Spots</button>
+              <button className="navButton">Current Spots</button>
             </Link>
           </li>
           <li>
-            <button onClick={logout}>Log Out</button>
+            <button onClick={logout} className="navButton">Log Out</button>
           </li>
         </ul>) :
         (
-          <ul className="profile-dropdown">
+          <ul className="profile-dropdown-normal">
             <li>
               <button onClick={() => {
                 setLogin(true)
@@ -73,7 +74,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
             </li>
           </ul>)
       )}
-    </>
+    </div>
   );
 }
 

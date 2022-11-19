@@ -1,6 +1,6 @@
 
 .fullNav {
-    height: 4rem;
+    height: 5rem;
     width: 95%;
     display: flex;
     justify-content: space-between;
@@ -8,18 +8,52 @@
 }
 
 .logo {
-    height: 5rem;
+    height: 100%;
+}
+
+.logo-placement {
+    height:100%
 }
 
 .profile-dropdown {
     list-style-type: none;
     position: absolute;
-    right: 15px;
     background-color: rgb(246, 99, 123);
-    padding: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 45%;
+    width: 15%;
+    right: 5%;
 }
 
 
 .profile-dropdown> li {
     position: relative;
+    cursor: pointer;
+    height: 20%;
+    width: 100%;
+}
+
+.profileMenu {
+    position: relative;
+    display: flex;
+    padding: 25%;
+    border: 0.5px solid grey;
+    border-radius: 6px;
+    /* transition: box-shadow 0.2s ease; */
+    cursor: pointer;
+}
+
+.hamburger {
+    margin-right: 5px;
+}
+
+.outerFullNavComplete {
+    border-bottom: 0.5px solid grey;
+}
+
+.navButton {
+    width: 100%;
+    height: 100%
 }

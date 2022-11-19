@@ -29,7 +29,7 @@ function Navigation({ isLoaded }) {
   // }
 
   return (
-    <ul>
+    <ul className="outerFullNavComplete">
       <li className="fullNav">
         <NavLink exact to="/" className="logo-placement">
           <img src={logo} className="logo" alt='westbnb'></img>
