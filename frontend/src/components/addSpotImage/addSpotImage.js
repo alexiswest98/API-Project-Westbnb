@@ -14,7 +14,6 @@ function AddSpotImage({ spot, setShowModal }) {
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
     useEffect(() => {
-
         const errors = [];
         if (!url) errors.push("Url is required");
         setErrors(errors);

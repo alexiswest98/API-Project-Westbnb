@@ -111,13 +111,18 @@ export const editOneSpotThunk = (spot) => async dispatch => {
 };
 
 export const deleteOneSpotThunk = (spotId) => async dispatch => {
+    // console.log("delete one spot thunk running", spotId)
     const deleteSpot = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'DELETE'
     });
 
+    // console.log("after fetch this is the deleted spot", deleteSpot)
+
     if (deleteSpot.ok) {
+        // console.log("in the if block")
         const response = await deleteSpot.json();
-        await dispatch(deleteSpotAction(response));
+        // console.log("this is the response", response)
+        await dispatch(deleteSpotAction(spotId));
     }
 };
 
@@ -179,6 +184,8 @@ const spotsReducer = (state = initialState, action) => {
             });
             return newState;
         case DELETE_A_SPOT:
+            // console.log('Delete a spot case running', action)
+            // console.log('this is action.spotId', action.spotId)
             newState = { ...state }
             delete newState[action.spotId];
             return newState;

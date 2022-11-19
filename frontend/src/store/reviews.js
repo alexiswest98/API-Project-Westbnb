@@ -15,10 +15,10 @@ const getReviewsAction = (reviews) => {
     }
 };
 
-const addReviewAction = (review) => {
+const addReviewAction = (spotId, review) => {
     return {
         type: ADD_A_REVIEW,
-        review
+        spotId, review
     }
 };
 
@@ -40,22 +40,23 @@ const addImageReviewAction = (reviewImage) => {
 export const getAllReviewsThunk = (spotId) => async dispatch => {
     const reviews = await fetch(`/api/spots/${spotId}/reviews`);
 
-    if(reviews.ok){
+    if (reviews.ok) {
         const response = await reviews.json();
-        await dispatch(getReviewsAction(response))
+        dispatch(getReviewsAction(response.Reviews))
+        return response;
     }
 };
 
-export const addReviewThunk = (spot) => async dispatch => {
-    const newReview = await csrfFetch(`/api/spots/${spot.id}/reviews`, {
+export const addReviewThunk = (spotId, review) => async dispatch => {
+    const newReview = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(spot)
+        body: JSON.stringify(review)
     });
 
-    if(newReview.ok) {
+    if (newReview.ok) {
         const response = await newReview.json();
-        await dispatch(addReviewAction(response));
+        await dispatch(addReviewAction(spotId, response));
         return response;
     }
 };
@@ -65,29 +66,29 @@ export const deleteReviewThunk = (reviewId) => async dispatch => {
         method: 'DELETE'
     });
 
-    if(deleteReview.ok){
+    if (deleteReview.ok) {
         const response = await deleteReview.json();
         await dispatch(deleteReviewAction(response))
         return response;
     }
 };
 
-export const addImageReviewThunk = (reviewId) => async dispatch => {
-    const reviewImage = await csrfFetch(`/api/reviews/${reviewId}/images`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            url
-        })
-    });
+// export const addImageReviewThunk = (reviewId) => async dispatch => {
+//     const reviewImage = await csrfFetch(`/api/reviews/${reviewId}/images`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({
+//             url
+//         })
+//     });
 
-    if(reviewImage.ok){
-        const response = await reviewImage.json();
-        await dispatch(addImageReviewAction(response));
-        return response;
-    }
+//     if (reviewImage.ok) {
+//         const response = await reviewImage.json();
+//         await dispatch(addImageReviewAction(response));
+//         return response;
+//     }
 
-};
+// };
 
 
 /*-------IINITIAL STATE-------*/
@@ -97,7 +98,26 @@ const initialState = {};
 
 const reviewsReducer = (state = initialState, action) => {
     let newState = {};
-    switch (action.type){
+    switch (action.type) {
         case GET_ALL_REVIEWS:
+            action.reviews.forEach((review) => {
+                newState[review.id] = review;
+            });
+            return newState;
+        case ADD_A_REVIEW:
+            newState = { ...state };
+            newState[action.review.id] = action.review;
+            return newState;
+        case DELETE_A_REVIEW:
+            newState = { ...state };
+            delete newState[action.id];
+            return newState;
+        case ADD_IMAGE_REVIEW:
+            newState={...state}
+        default:
+            return state;
     }
+
 }
+
+export default reviewsReducer;

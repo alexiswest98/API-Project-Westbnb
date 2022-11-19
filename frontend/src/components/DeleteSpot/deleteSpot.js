@@ -21,15 +21,17 @@ function DeleteASpotForm({ spot, setShowModal }) {
     }, [dispatch, verif, sampleVerif]);
 
     const deleteFunc = async (e) => {
+        // console.log("delete spot button clicked", "this is spotId:", spot.id)
         e.preventDefault();
 
         setHasSubmitted(true);
         if (errors.length) return alert(`Cannot Delete Spot`);
 
         const deleteSent = await dispatch(deleteOneSpotThunk(spot.id)).then(() => setShowModal(false))
+        // console.log("after thunk dispatched this is sent", deleteSent)
 
         dispatch(getAllSpotThunk())
-        history.push('/')
+        history.push('/spots/current')
 
 
     }

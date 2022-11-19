@@ -53,3 +53,31 @@
     border-radius: 2%;
     object-fit: cover;
 } 
+
+.reviewBox {
+    border-top: 2px solid rgb(252, 145, 163);
+    width: 95%;
+    display:flex;
+    flex-direction: row;
+    padding: 2%;
+}
+
+.reviewsLeftBox {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid green;
+    width: 60%;
+    height: auto;
+}
+
+.reviewsRightBox {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgb(225, 133, 3);
+    width: 30%;
+    padding: 5%;
+}
