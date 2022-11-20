@@ -146,7 +146,7 @@ export const addImagetoSpotThunk = (spot, img) => async dispatch => {
 
     if (image.ok) {
         const response = await image.json();
-        dispatch(addSpotImageAction(response))
+        dispatch(addSpotImageAction(img))
         return response;
     }
 };
@@ -189,6 +189,10 @@ const spotsReducer = (state = initialState, action) => {
             newState = { ...state }
             delete newState[action.spotId];
             return newState;
+        // case ADD_SPOT_IMAGE:
+        //     newState = {...state}
+        //     newState[action.spot.id].SpotImages.push(action.img)
+        //     return newState;
         default:
             return state;
     }

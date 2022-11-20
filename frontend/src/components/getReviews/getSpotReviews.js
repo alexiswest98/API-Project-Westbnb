@@ -35,7 +35,7 @@ function GetReviewsBox() {
                         <img className="reviewImage" src={review.ReviewImages[0]?.url} alt="reviewImage"></img>
                     </div>
                     )} */}
-                { review.userId === user.id && (
+                { user && review && review?.userId === user?.id && (
                     <DeleteReviewModal review={review}/>)
                 }
                 </div>
