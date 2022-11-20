@@ -39,7 +39,9 @@ function Navigation({ isLoaded }) {
           <input type="text" placeholder=" Any week" className='centerText' id='left'></input>
           <input type="text" placeholder=" Add guests" className='centerText'></input>
           <button className='search'>
+          <span>
           <i class="fa-solid fa-magnifying-glass"></i>
+          </span>
           </button>
         </div>
         {isLoaded && (<div className='profileButtonFull'>
@@ -50,7 +52,7 @@ function Navigation({ isLoaded }) {
         )}
       </li>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+        <Modal onClose={() => setShowModal(false)} className="borderRtoModal">
           {login ? <LoginForm setShowModal={setShowModal} /> :
             <SignupFormPage setShowModal={setShowModal} />}
         </Modal>

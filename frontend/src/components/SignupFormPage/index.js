@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
 
-function SignupFormPage({setShowModal}) {
+function SignupFormPage({ setShowModal }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [firstName, setFirstName] = useState("");
@@ -42,66 +42,74 @@ function SignupFormPage({setShowModal}) {
 
   return (
     <>
-    <ul>
-      {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-    </ul>
-    <form className='SignUpModal' onSubmit={handleSubmit}>
-      <label>
-        firstName
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        lastName
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Email
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Username
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Confirm Password
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Sign Up</button>
-    </form>
+      <form className='SignUpModal' onSubmit={handleSubmit}>
+      <ul>
+        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+      </ul>
+        <div className="logInBorderBott">
+          <h4>Sign Up</h4>
+        </div>
+        <div className="inputstoSignUp">
+        <h2 className="welcomeText">Welcome to Airbnb</h2>
+        <label className="outer-credentials-su">
+          <input className="input-signUp" id="input-Login-top"
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+            placeholder="First Name required"
+          />
+        </label>
+        <label className="outer-credentials-su">
+          <input className="input-signUp"
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+            placeholder="Last Name required"
+          />
+        </label>
+        <label className="outer-credentials-su">
+          <input className="input-signUp"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="Email required"
+          />
+        </label>
+        <label className="outer-credentials-su">
+          <input className="input-signUp"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            placeholder="Username required"
+          />
+        </label>
+        <label className="outer-credentials-su">
+          <input className="input-signUp"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="Password required"
+          />
+        </label>
+        <label className="outer-credentials-su">
+          <input className="input-signUp" id="input-Login-bottom"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            placeholder="Confirm Password"
+          />
+        </label>
+        </div>
+        <div className="buttons-for-login">
+        <button type="submit" className="log-in-butt">Sign Up</button>
+        </div>
+      </form>
     </>
   );
 }

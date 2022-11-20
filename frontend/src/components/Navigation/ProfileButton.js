@@ -41,16 +41,16 @@ function ProfileButton({ user, setLogin, setShowModal }) {
         <i className="fas fa-user-circle" />
         </div>
       {showMenu && (user ? (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <Link to="/become-a-host">
+        <ul className="profile-dropdown" >
+          <li className="borderYes">{user.username}</li>
+          <li className="borderYes">{user.email}</li>
+          <li className="borderYes">
+            <Link to="/become-a-host" className="navButton">
               <button className="navButton">Become a host</button>
             </Link>
           </li>
-          <li>
-            <Link to="/spots/current">
+          <li className="borderYes">
+            <Link to="/spots/current" className="navButton">
               <button className="navButton">Current Spots</button>
             </Link>
           </li>
@@ -59,15 +59,17 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           </li>
         </ul>) :
         (
-          <ul className="profile-dropdown">
-            <li>
-              <button onClick={() => {
+          <ul className="profile-dropdown2">
+            <li className="navButton2">
+              <button className="navButton"
+                onClick={() => {
                 setLogin(true)
                 setShowModal(true)
               }}>Log In</button>
             </li>
             <li>
-              <button onClick={() => {
+              <button className="navButton"
+                onClick={() => {
                 setLogin(false)
                 setShowModal(true)
               }}>Sign Up</button>

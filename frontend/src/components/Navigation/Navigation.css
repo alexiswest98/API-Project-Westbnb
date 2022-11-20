@@ -1,4 +1,5 @@
 
+
 .outerFullNavComplete {
     list-style: none;
     border-bottom: 1px solid rgb(162, 160, 160);
@@ -43,7 +44,7 @@ ul {
     margin-top: 1%;
 }
 
-@media only screen and (max-width: 1375px) {
+@media only screen and (max-width: 1275px) {
     .centerSearchBar {
         display: none;
     }
@@ -92,6 +93,7 @@ ul {
     /* color: #fff; */
     border: none;
     cursor: pointer;
+    position: relative;
   
 }
 
@@ -132,34 +134,77 @@ ul {
     color: rgb(107, 105, 105);
 }
 
+.fa-solid {
+    color: #fff;
+}
+
 .profile-dropdown {
     position: absolute;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     top: 110%;
     list-style: none;
     right: 5%;
     width: 15em;
     height: 20em;
-    border-radius: 2%;
     box-shadow: 0 0 7px #c7c7c7;
-    background-color: white;
+    border-radius: 10%;
+    background-color: rgb(255, 255, 255);
+}
+
+.profile-dropdown2 {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 110%;
+    list-style: none;
+    right: 4%;
+    width: 15em;
+    height: 10em;
+    box-shadow: 0 0 7px #c7c7c7;
+    border-radius: 10%;
+    background-color: rgb(255, 255, 255);
 }
 
 .profile-dropdown> li {
-    height: 20%;
-    border: 0.5px solid grey;
+    height: 19%;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
-    color:rgb(239, 99, 122)
+    color:rgb(239, 99, 122);
+}
+
+.borderYes {
+    border-bottom: 0.5px solid grey;
 }
 
 .navButton {
     width: 100%;
     height: 100%;
     border:none;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
+    font-size: 14px;
+    color: rgb(79, 78, 78);
+}
+
+.profile-dropdown2> li {
+    height: 40%;
+    padding: 2%;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    color:rgb(239, 99, 122);
+}
+
+.navButton2 {
+    border-bottom: 0.5px solid grey;
 }

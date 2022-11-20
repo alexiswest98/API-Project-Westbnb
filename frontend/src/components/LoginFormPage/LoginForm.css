@@ -1,0 +1,81 @@
+
+.loginFormModal {
+    display: flex;
+    flex-direction: column;
+    width: 36em;
+    height: 40em;
+    align-items: center;
+}
+
+.logInBorderBott {
+    border-bottom: 0.5px solid grey;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputstoLogIn {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 90%;
+    height: 30%;
+}
+
+.outer-credentials {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.outer-credentials2 {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.welcomeText {
+    font-size: 23px;
+    font-weight: normal;
+}
+
+.input-Login {
+    width: 100%;
+    height: 70%;
+    border: 1px solid grey;
+    font-size: 15px;
+}
+
+#input-Login-top {
+    /* top-left | top-right | bottom-right | bottom-left */
+    border-radius: 0.5em 0.5em 0 0;
+}
+
+#input-Login-bottom {
+    /* top-left | top-right | bottom-right | bottom-left */
+    border-radius: 0 0 0.5em 0.5em;
+}
+
+.buttons-for-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width:90%;
+    height: 20%;
+}
+
+.log-in-butt {
+    background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+    border: none;
+    width: 100%;
+    height: 40%;
+    color: white;
+    font-size: 1em;
+    border-radius: 1em;
+    cursor: pointer;
+}
