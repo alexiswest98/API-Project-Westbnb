@@ -35,11 +35,11 @@ function ProfileButton({ user, setLogin, setShowModal }) {
   };
 
   return (
-    <div className="wholeNav">
-      <button onClick={openMenu} className="profileMenu"> 
+      <button onClick={openMenu} className="wholeProfileButton"> 
+        <div className="iconsProfile">
         <span className="hamburger">≡</span>
         <i className="fas fa-user-circle" />
-      </button>
+        </div>
       {showMenu && (user ? (
         <ul className="profile-dropdown">
           <li>{user.username}</li>
@@ -74,7 +74,7 @@ function ProfileButton({ user, setLogin, setShowModal }) {
             </li>
           </ul>)
       )}
-    </div>
+      </button>
   );
 }
 

@@ -34,7 +34,15 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/" className="logo-placement">
           <img src={logo} className="logo" alt='westbnb'></img>
         </NavLink>
-        {isLoaded && (<div className="profileNav">
+        <div className='centerSearchBar'>
+          <input type="text" placeholder=" Anywhere" className='centerText' id="right"></input>
+          <input type="text" placeholder=" Any week" className='centerText' id='left'></input>
+          <input type="text" placeholder=" Add guests" className='centerText'></input>
+          <button className='search'>
+          <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        {isLoaded && (<div className='profileButtonFull'>
           <ProfileButton user={sessionUser}
             setLogin={setLogin}
             setShowModal={setShowModal} />
