@@ -7,6 +7,7 @@ import "./indivSpot.css";
 import none from './no-image.jpg';
 import GetReviewsBox from '../getReviews/getSpotReviews';
 import AddReviewModal from '../addReview';
+import { getAllReviewsThunk } from '../../store/reviews';
 
 function IndivSpot() {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function IndivSpot() {
 
     useEffect(() => {
         dispatch(getOneSpotThunk(+id))
+        dispatch(getAllReviewsThunk(+id));
     }, [dispatch, id])
 
     if (!spot || !spot.SpotImages) return null;

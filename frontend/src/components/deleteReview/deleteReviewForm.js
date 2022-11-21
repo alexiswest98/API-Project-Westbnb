@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getAllReviewsThunk } from "../../store/reviews";
 import {deleteReviewThunk} from "../../store/reviews";
+import { getOneSpotThunk } from "../../store/spots";
 import "./deleteReview.css";
 import "../addReview/addReview.css"
 
@@ -21,6 +22,7 @@ function DeleteReviewForm({setShowModal, review}){
         await dispatch(deleteReviewThunk(review.id)).then(() => setShowModal(false))
 
         dispatch(getAllReviewsThunk(+id));
+        dispatch(getOneSpotThunk(+id))
         // history.push(`/spots/${id}`);
     }
 
