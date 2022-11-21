@@ -19,6 +19,7 @@ function AddReview({ setShowModal }) {
         const errors = [];
         if (!review) errors.push("Review is required.");
         if(review.length > 255) errors.push("Review must be under 255 characters.")
+        if(!stars) errors.push("Stars are required")
         setErrors(errors);
     }, [dispatch, review, stars, id]);
 
@@ -32,7 +33,7 @@ function AddReview({ setShowModal }) {
             review,
             stars
         }
-
+        
         await dispatch(addReviewThunk(id, newReview)) 
         setShowModal(false)
 

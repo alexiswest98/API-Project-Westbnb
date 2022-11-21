@@ -30,7 +30,7 @@ function EditSpotForm({ spot, setShowModal }) {
         if (name.length > 50) errors.push("Name must be less than 50 characters");
         if (!description.length) errors.push("Description is required");
         if (!price) errors.push("Price per day is required");
-        if (isNaN(price) || price < 0) errors.push("Please enter a valid number");
+        if (isNaN(price) || price <= 0) errors.push("Please enter a valid number");
         setValidationErrors(errors);
     }, [address, city, state, country, name, description, price]);
 

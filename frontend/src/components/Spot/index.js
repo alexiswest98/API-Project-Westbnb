@@ -29,35 +29,80 @@ function IndivSpot() {
     return (
         <div className="mostOuterIndiv">
             <div className='wholeIndivBox'>
-                <h2>{spot.name}</h2>
-                <h3>★{spot.avgRating} ∘ {spot.numReviews} {spot.numReviews === 1 ? ("review") : ("reviews")} ∘ ✪ Superhost  </h3>
-                <h3>{spot.city}, {spot.state}, {spot.country}</h3>
-                <div className="spotImageDiv">
-                    <img className="mainImage" src={spot.SpotImages[0]?.url || none} alt={spot.name}></img>
-                    <div className="subImageBox">
-                        <img className="subImage" src={spot.SpotImages[1]?.url || none} alt={spot.name}></img>
-                        <img className="subImage" src={spot.SpotImages[2]?.url || none} alt={spot.name}></img>
-                        <img className="subImage" src={spot.SpotImages[3]?.url || none} alt={spot.name}></img>
-                        <img className="subImage" src={spot.SpotImages[4]?.url || none} alt={spot.name}></img>
+                <div className='indiv-information'>
+                    <h1 className='indivSpot-name'>{spot.name}</h1>
+                    <div className='indiv-spot-sub-info'>
+                        <h3 className='adding-margin'> ★{spot.avgStarRating} · {spot.numReviews} {spot.numReviews == 1 ? ("review") : ("reviews")} </h3>
+                        <span className='adding-margin'>· ✪ Superhost ·</span>
+                        <h3>{spot.city}, {spot.state}, {spot.country}</h3>
                     </div>
                 </div>
-                <h3>Entire home hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
-                <h3>{spot.Owner.firstName} {spot.Owner.lastName} is a Superhost</h3>
-                <p>Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</p>
-                <h3>Great location</h3>
-                <p>100% of recent guests gave the location a 5-star rating.</p>
-                <h3>Free cancellation before Nov 21.</h3>
+                <div className="spotImageDiv">
+                    <div className='main-image-div'>
+                        <img className="mainImage" src={spot.SpotImages[0]?.url || none} alt={spot.name}></img>
+                    </div>
+                    <div className="subImageBox">
+                        <img className="subImage" src={spot.SpotImages[1]?.url || none} alt={spot.name}></img>
+                        <img className="subImage" id='subImage-top-right' src={spot.SpotImages[2]?.url || none} alt={spot.name}></img>
+                        <img className="subImage" src={spot.SpotImages[3]?.url || none} alt={spot.name}></img>
+                        <img className="subImage" id='subImage-bottom-right' src={spot.SpotImages[4]?.url || none} alt={spot.name}></img>
+                    </div>
+                </div>
+                <div className='indiv-spot-details-div'>
+                    <div className='just-need-width'>
+                        <div className='indiv-spot-left'>
+                            <h3 className='entire-home'>Entire home hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
+                            <p className='spot-description-indiv'>{spot.description}</p>
+                        </div>
+                        <div className='boiler-plate-details'>
+                            <div className='boiler-plate-height' id='boiler-top-border'>
+                                <div className='lil-icon'>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div className='boiler-deets'>
+                                    <h4 className='boiler-title'>Self Check-in</h4>
+                                    <p className='boiler-sub'>Check yourself in with the keypad.</p>
+                                </div>
+                            </div>
+                            <div className='boiler-plate-height'>
+                                <div className='lil-icon'>
+                                    <i className="fa-solid fa-door-open"></i>
+                                </div>
+                                <div className='boiler-deets'>
+                                    <h4 className='boiler-title'>{spot.Owner.firstName} {spot.Owner.lastName} is a Superhost</h4>
+                                    <p className='boiler-sub'>Superhosts are experienced, highly rated hosts who are committed to providing great stays for guests.</p>
+                                </div>
+                            </div>
+                            <div className='boiler-plate-height' id="boiler-bottom-border">
+                                <div className='lil-icon'>
+                                    <i class="fa-solid fa-medal"></i>
+                                </div>
+                                <div className='boiler-deets'>
+                                    <h4 className='boiler-title'>Great location</h4>
+                                    <p className='boiler-sub'>100% of recent guests gave the location a 5-star rating.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='aircover'>
+                            <img className='aircover-img' src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg" arc="aircover"></img>
+                            <p className='boiler-sub'>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</p>
+                        </div>
+                    </div>
+                </div>
                 <div className="reviewBox">
                     <div className="reviewsLeftBox">
+                        <div className='review-title-flex'>
                         <h2>Reviews</h2>
-                        <GetReviewsBox className="currReviewBox"/>
+                        <p>★{spot.avgStarRating} · {spot.numReviews} {spot.numReviews == 1 ? ("review") : ("reviews")}</p>
+                        </div>
+                        <GetReviewsBox className="currReviewBox" />
                     </div>
                     <div className="reviewsRightBox">
-                    <h2>Would you like to review this Spot?</h2>
-                    {user && !reviewExists && !isOwner ? (
-                        <AddReviewModal/>) :
-                        (<h4>Sorry you can't add a review at this moment.</h4>)
-                    }
+                        <h2>Would you like to review this Spot?</h2>
+                        {user && !reviewExists && !isOwner ? (
+                            <AddReviewModal />) :
+                            (<h4>Sorry you can't add a review at this moment.</h4>)
+                        }
                     </div>
                 </div>
             </div>
