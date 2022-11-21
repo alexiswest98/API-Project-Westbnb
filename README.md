@@ -11,15 +11,12 @@ This Project is Built with ...
 Westbnb is a full stack application that imitates Airbnb's database and interface where a user can create, edit, and delete bookings, spots, reviews, and related images. Along with being able to sign up and log in, there is also a demo user feature. You can view this at [Westbnb]
 
 
-<!-- resources links -->
-[Westbnb]: https://alexis-west-airbnb.herokuapp.com/
-
 ## Getting Started
-1. Clone the repo: https://github.com/alexiswest98/API-Project
+1. Clone the repo: [here]
 
 2. git clone in your terminal
-  -SSH: git@github.com:alexiswest98/API-Project.git
-  -HTTPS: https://github.com/alexiswest98/API-Project.git
+  -SSH: <<git@github.com:alexiswest98/API-Project.git>>
+  -HTTPS: <<https://github.com/alexiswest98/API-Project.git>>
 
 3. Navigate to the backend folder and type in npm install 
 
@@ -30,10 +27,13 @@ Westbnb is a full stack application that imitates Airbnb's database and interfac
 6. Do the same in the frontend folder and run npm install and then npm start. You will be directed to: http://localhost:3000/ 
 
 ## Project Wiki
-- [API ROUTES DB SCHEMA STORE] https://github.com/alexiswest98/API-Project/wiki
+- [API ROUTES, DB, SCHEMA STORE]
 
 <img width="1404" alt="Screenshot 2022-11-21 at 5 03 58 AM" src="https://user-images.githubusercontent.com/96459347/203062368-3497c800-0a64-4ce6-9595-952f4c184b28.png">
 
 ![Screenshot 2022-11-21 at 5 04 27 AM](https://user-images.githubusercontent.com/96459347/203062324-0b789fbe-2ba0-49b6-934f-13f0e7955b78.png)
 
-
+<!-- resources links -->
+[Westbnb]: https://alexis-west-airbnb.herokuapp.com/
+[here]: https://github.com/alexiswest98/API-Project
+[API ROUTES, DB, SCHEMA STORE]: https://github.com/alexiswest98/API-Project/wiki
