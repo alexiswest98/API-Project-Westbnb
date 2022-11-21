@@ -42,16 +42,15 @@ function DeleteASpotForm({ spot, setShowModal }) {
                 {setHasSubmitted && errors.length > 0 && <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>}
-                <h2>Please copy and paste to delete</h2>
+                <h2 className="verif-delete-title">Please copy and paste to delete</h2>
                 <label htmlFor="verif">{`I ${sessionUser.firstName} ${sessionUser.lastName} wish to delete this spot.`}</label>
-                <input
+                <input className="delete-input-text"
                     id="verif"
                     type="text"
                     onChange={(e) => setVerif(e.target.value)}
                     value={verif}
                 />
-                <button className="deleteButton">
-                    <span>:(</span>
+                <button class="delete-button">
                     <span>Delete</span>
                 </button>
             </div>

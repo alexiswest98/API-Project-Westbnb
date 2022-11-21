@@ -64,13 +64,13 @@ function EditSpotForm({ spot, setShowModal }) {
     };
 
     return (
-        <>
+        <div className="whole-edit-box">
             <form onSubmit={onSubmit} className="editSpotModal" >
-                <h2>Please fill out the fields you would like to update ...</h2>
-                <h4>You may leave out the fields you wish to keep the same.</h4>
+                <h2 className="edit-form-title">Please fill out the fields you would like to update ...</h2>
+                <h4 className="edit-form-inst">You may leave out the fields you wish to keep the same.</h4>
                 <div>
                     <label htmlFor="name">Updated Name:</label>
-                    <input
+                    <input className="input-edit-form"
                         id="name"
                         type="text"
                         onChange={(e) => setName(e.target.value)}
@@ -79,7 +79,7 @@ function EditSpotForm({ spot, setShowModal }) {
                 </div>
                 <div>
                     <label htmlFor="city">Updated City:</label>
-                    <input
+                    <input className="input-edit-form"
                         id="city"
                         type="text"
                         onChange={(e) => setCity(e.target.value)}
@@ -88,14 +88,14 @@ function EditSpotForm({ spot, setShowModal }) {
                 </div>
                 <div>
                     <label htmlFor="state">Updated State:</label>
-                    <input
+                    <input className="input-edit-form"
                         id="state"
                         name="state"
                         type="text"
                         onChange={(e) => setState(e.target.value)}
                         value={state}
                     />
-                    <select
+                    <select className="input-edit-form-co"
                         name="country"
                         onChange={(e) => setCountry(e.target.value)}
                         value={country} >
@@ -115,7 +115,7 @@ function EditSpotForm({ spot, setShowModal }) {
                 <div>
                     <label htmlFor="address">Updated Address:</label>
                     <input
-                        id="address"
+                        id="address" className="input-edit-form"
                         type="text"
                         onChange={(e) => setAddress(e.target.value)}
                         value={address}
@@ -124,7 +124,7 @@ function EditSpotForm({ spot, setShowModal }) {
                 </div>
                 <div>
                     <label htmlFor="description">Updated Description:</label>
-                    <input
+                    <input className="input-edit-form"
                         id="description"
                         type="text"
                         onChange={(e) => setDescription(e.target.value)}
@@ -133,20 +133,19 @@ function EditSpotForm({ spot, setShowModal }) {
                 </div>
                 <div>
                     <label htmlFor="price">Updated Price:</label>
-                    <input
+                    <input className="input-edit-form"
                         id="price"
                         type="text"
                         onChange={(e) => setPrice(e.target.value)}
                         value={price}
                     />
                 </div>
-                <button className="sub-button">
-                    <span>Submit the Updates</span>
+                <button class="custom-btn btn-6">
+                    <span>Submit</span>
                 </button>
             </form>
-            {/* to see errors printed at bottom */}
-            {setHasSubmitted && validationErrors.length > 0 && (
-                <div className="addSpotBox">
+                {setHasSubmitted && validationErrors.length > 0 && (
+                <div className="edit-spot-errors">
                     Please fix these inputs:
                     <ul>
                         <ul>
@@ -157,7 +156,7 @@ function EditSpotForm({ spot, setShowModal }) {
                     </ul>
                 </div>
             )}
-        </>
+        </div>
     );
 }
 

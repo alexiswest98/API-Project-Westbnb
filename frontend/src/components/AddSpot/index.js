@@ -79,7 +79,8 @@ function AddSpotComponent() {
     <div >
       {/* to see errors printed at bottom */}
       {validationErrors.length > 0 && (
-        <div className="addSpotBox"> Required Fields
+        <div className="addSpotBox2"> 
+        <h4 className="validation-errors-title">Required Fields</h4>
           <ul>
             {validationErrors.map((error) => (
               <li key={error}>{error}</li>
@@ -88,11 +89,11 @@ function AddSpotComponent() {
         </div>
       )}
       <form onSubmit={onSubmit} className="addSpotBox">
-        <h2>Let's get you started...</h2>
+        <h3 className="lets-get-started">Let's get you started...</h3>
         <h2>Please provide the your listing information </h2>
         <div>
           <label htmlFor="name">Name:</label>
-          <input
+          <input className="input-for-add"
             id="name"
             type="text"
             onChange={(e) => setName(e.target.value)}
@@ -101,7 +102,7 @@ function AddSpotComponent() {
         </div>
         <div>
           <label htmlFor="city">City:</label>
-          <input
+          <input className="input-for-add"
             id="city"
             type="text"
             onChange={(e) => setCity(e.target.value)}
@@ -110,14 +111,14 @@ function AddSpotComponent() {
         </div>
         <div>
           <label htmlFor="state">State:</label>
-          <input
+          <input className="input-for-add"
             id="state"
             name="state"
             type="text"
             onChange={(e) => setState(e.target.value)}
             value={state}
           />
-          <select
+          <select className="input-coun-spot"
             name="country"
             onChange={(e) => setCountry(e.target.value)}
             value={country}
@@ -137,7 +138,7 @@ function AddSpotComponent() {
         </div>
         <div>
           <label htmlFor="address">Address:</label>
-          <input
+          <input className="input-for-add"
             id="address"
             type="text"
             onChange={(e) => setAddress(e.target.value)}
@@ -146,7 +147,7 @@ function AddSpotComponent() {
         </div>
         <div>
           <label htmlFor="description">Description:</label>
-          <input
+          <input className="input-for-add"
             id="description"
             type="text"
             onChange={(e) => setDescription(e.target.value)}
@@ -155,7 +156,7 @@ function AddSpotComponent() {
         </div>
         <div>
           <label htmlFor="price">Price:</label>
-          <input
+          <input className="input-for-add"
             id="price"
             type="number"
             onChange={(e) => setPrice(e.target.value)}
@@ -164,15 +165,14 @@ function AddSpotComponent() {
         </div>
         <div>
           <label htmlFor="url">Image Url: </label>
-          <input
+          <input className="input-for-add"
             id="url"
             type="url"
             onChange={(e) => setUrl(e.target.value)}
             value={url}
           />
         </div>
-        <button className="sub-button">
-          <span>:)</span>
+        <button class="custom-btn btn-6" id="add-spot-butt">
           <span>Submit</span>
         </button>
       </form>

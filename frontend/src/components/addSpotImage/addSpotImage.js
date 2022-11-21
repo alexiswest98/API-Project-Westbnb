@@ -38,10 +38,11 @@ function AddSpotImage({ spot, setShowModal }) {
     }
 
     return (
-        <div className="addSpotImageBox">
-            <form onSubmit={handleSubmit}>
+        <div className="wholeDeleteModal">
+            <form onSubmit={handleSubmit} className="deleteInput">
                 {setHasSubmitted && errors.length > 0 && (
-                    <div> Required Fields
+                    <div> 
+                        <h4 className="validation-errors-title">Required Fields</h4>
                         <ul>
                             {errors.map((error) => (
                                 <li key={error}>{error}</li>
@@ -49,7 +50,7 @@ function AddSpotImage({ spot, setShowModal }) {
                         </ul>
                     </div>
                 )}
-                <h1>Let's Add a Photo</h1>
+                <h1 className="add-img-spot">Let's Add a Photo</h1>
                 <div>
                     <label htmlFor="url">Url: </label>
                     <input
@@ -59,8 +60,7 @@ function AddSpotImage({ spot, setShowModal }) {
                         value={url}
                     />
                 </div>
-                <button type="submit" className="deleteButton">
-                    <span>:)</span>
+                <button type="submit" class="custom-btn btn-6">
                     <span>Submit</span>
                 </button>
             </form>
