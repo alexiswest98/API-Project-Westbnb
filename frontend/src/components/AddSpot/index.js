@@ -30,6 +30,8 @@ function AddSpotComponent() {
     if (name.length > 50) errors.push("Name must be less than 50 characters");
     if (!description.length) errors.push("Description is required");
     if (!price.length) errors.push("Price per day is required");
+    if(price.length > 10) errors.push("Price is too much")
+    if(price <= 0) errors.push("Price needs to higher than $0")
     if (isNaN(price) || price < 0) errors.push("Please enter a valid number");
     if(!url.length) errors.push("Please enter photo url");
     setValidationErrors(errors);

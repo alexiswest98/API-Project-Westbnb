@@ -18,6 +18,7 @@ function AddReview({ setShowModal }) {
     useEffect(() => {
         const errors = [];
         if (!review) errors.push("Review is required.");
+        if(review.length > 255) errors.push("Review must be under 255 characters.")
         setErrors(errors);
     }, [dispatch, review, stars, id]);
 

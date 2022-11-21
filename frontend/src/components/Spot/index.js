@@ -30,7 +30,7 @@ function IndivSpot() {
         <div className="mostOuterIndiv">
             <div className='wholeIndivBox'>
                 <h2>{spot.name}</h2>
-                <h3>★{spot.avgRating} ∘ {spot.numReviews} {spot.numReviews <= 1 ? ("review") : ("reviews")} ∘ ✪ Superhost  </h3>
+                <h3>★{spot.avgRating} ∘ {spot.numReviews} {spot.numReviews === 1 ? ("review") : ("reviews")} ∘ ✪ Superhost  </h3>
                 <h3>{spot.city}, {spot.state}, {spot.country}</h3>
                 <div className="spotImageDiv">
                     <img className="mainImage" src={spot.SpotImages[0]?.url || none} alt={spot.name}></img>
