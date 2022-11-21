@@ -46,7 +46,7 @@ function CurrSpotsPage() {
                     <h2>You don't have any spots</h2>
                     <h3>Considering becoming a host?</h3>
                     <Link to="/become-a-host">
-                        <button>Click here!</button>
+                        <button class="custom-btn btn-6">Click here!</button>
                     </Link>
 
                 </>
