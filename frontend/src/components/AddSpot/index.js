@@ -62,7 +62,7 @@ function AddSpotComponent() {
 
     //input data in state
     const createSpot = await dispatch(addOneSpotThunk(newSpot));
-    console.log(createSpot)
+    // console.log(createSpot)
 
     if (createSpot) {
       await dispatch(addImagetoSpotThunk(createSpot, newImage))

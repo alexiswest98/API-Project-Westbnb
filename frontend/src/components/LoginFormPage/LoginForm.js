@@ -22,7 +22,7 @@ function LoginForm( {setShowModal}) {
       });
     };
 
-    console.log(errors)
+    // console.log(errors)
 
   const demoLogin = async (e) => {
     setCredential('Demo-lition')
