@@ -14,17 +14,13 @@ Westbnb is a full stack application that imitates Airbnb's database and interfac
 ## Getting Started
 1. Clone the repo: [here]
 
-2. git clone in your terminal
-  -SSH: <<git@github.com:alexiswest98/API-Project.git>>
-  -HTTPS: <<https://github.com/alexiswest98/API-Project.git>>
+2. Navigate to the backend folder and type in npm install 
 
-3. Navigate to the backend folder and type in npm install 
+3. Create a .env file in the root of the backend folder and copy the contents from the .env.example file: cp .env.example .env
 
-4. Create a .env file in the root of the backend folder and copy the contents from the .env.example file: cp .env.example .env
+4. Migrate and seed the files. There are the following json scripts for your convenience: npm run migrate npm run seed
 
-5. Migrate and seed the files. There are the following json scripts for your convenience: npm run migrate npm run seed
-
-6. Do the same in the frontend folder and run npm install and then npm start. You will be directed to: http://localhost:3000/ 
+5. Do the same in the frontend folder and run npm install and then npm start. You will be directed to: http://localhost:3000/ 
 
 ## Project Wiki
 - [API ROUTES, DB, SCHEMA STORE]
