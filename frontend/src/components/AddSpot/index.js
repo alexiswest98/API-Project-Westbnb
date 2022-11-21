@@ -27,6 +27,7 @@ function AddSpotComponent() {
     if (!city.length) errors.push("Valid City is required");
     if (!state.length) errors.push("Valid State is required");
     if (!country.length) errors.push("Valid Country is required");
+    if(!name) errors.push("Name is required")
     if (name.length > 50) errors.push("Name must be less than 50 characters");
     if (!description.length) errors.push("Description is required");
     if (!price.length) errors.push("Price per day is required");
