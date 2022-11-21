@@ -49,7 +49,7 @@
 
 .mainImage {
     width: 50%;
-    height: auto;
+    height: 100%;
     border-radius: 2%;
     object-fit: cover;
 } 
