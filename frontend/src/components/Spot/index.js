@@ -98,7 +98,7 @@ function IndivSpot() {
                         <GetReviewsBox className="currReviewBox" />
                     </div>
                     <div className="reviewsRightBox">
-                        <h2>Would you like to review this Spot?</h2>
+                        <h2 className='would-you-review'>Would you like to review this Spot?</h2>
                         {user && !reviewExists && !isOwner ? (
                             <AddReviewModal />) :
                             (<h4>Sorry you can't add a review at this moment.</h4>)

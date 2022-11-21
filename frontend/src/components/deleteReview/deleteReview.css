@@ -1,1 +1,32 @@
 
+ .delete-conf-modal {
+    height: 20em;
+    width: 25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .conf-delete-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 80%;
+    align-items: center;
+ }
+
+ .conf-delete-title {
+    margin-block-start: 0;
+ }
+
+.delete-button {
+    background: radial-gradient(circle at center center, rgb(151, 0, 28) 0%, rgb(140, 2, 28) 27.5%, rgb(152, 3, 30) 40%, rgb(176, 3, 35) 57.5%, rgb(198, 3, 39) 75%, rgb(251, 76, 108) 100%);
+    width: 9em;
+    height: 3em;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 1em;
+}

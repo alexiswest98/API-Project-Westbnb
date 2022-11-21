@@ -19,7 +19,7 @@ function CurrSpotsPage() {
 
     return (
         <div className="wholeCurrBox">
-            <h1>YOUR SPOTS AVAILABLE</h1>
+            <h1 className="curr-spot-title">YOUR SPOTS AVAILABLE</h1>
             {currSpotsArray.length ? (currSpotsArray.map(spot => (
                 <div className='currIndivBox'>
                     <NavLink to={`/spots/${spot.id}`} className="currBoxLink">  
@@ -30,9 +30,15 @@ function CurrSpotsPage() {
                         <p>${spot.price} night</p>
                     </NavLink>
                     <div className="currSpotButtons">
+                        <div className="curr-spot-buttons">
                         <EditSpotModal spot={spot} />
+                        </div>
+                        <div className="curr-spot-buttons">
                         <DeleteSpotModal spot={spot}/>
+                        </div>
+                        <div className="curr-spot-buttons">
                         <AddSpotImageModal spot={spot}/>
+                        </div>
                     </div>
                 </div>
             ))) :

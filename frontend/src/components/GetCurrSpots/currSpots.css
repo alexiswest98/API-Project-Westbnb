@@ -18,14 +18,17 @@
 }
 
 .currIndivBox {
-    border: solid 2px rgb(248, 51, 84);
+    /* border: solid 2px rgb(248, 51, 84); */
+    box-shadow: 0 0 8px rgb(248, 51, 84);
+    background-color: rgb(255, 242, 226);
     border-radius: 10px;
-    width:35%;
-    height:auto;
+    width:40%;
+    height:30em;
     margin: 10px;
-    background-color: rgb(253, 227, 200);
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
+    padding: 0.5%;
 }
 
 .currBoxLink {
@@ -36,10 +39,21 @@
     height: 100%;
     width: 100%;
     text-decoration: none;
+    color: black;
 }
 
 .currSpotButtons {
     display: flex;
-    height: 20%;
+    height: 50%;
     flex-direction: column;
+    justify-content: space-around;
+}
+
+.curr-spot-title {
+    color: rgb(96, 93, 93);
+    font-weight: 400;
+}
+
+.curr-spot-buttons {
+    height: 33%;
 }

@@ -45,7 +45,8 @@ function AddReview({ setShowModal }) {
     return (
         <div className="addReviewModal">
             {errors.length > 0 && (
-                <div> Required Fields
+                <div className="validation-errors">
+                    <h4 className="validation-errors-title">Required Fields</h4>
                     <ul>
                         {errors.map((error) => (
                             <li key={error}>{error}</li>
@@ -53,23 +54,25 @@ function AddReview({ setShowModal }) {
                     </ul>
                 </div>
             )}
-            <form onSubmit={handleSubmit}>
-                <h2>Let's add a review...</h2>
+            <form onSubmit={handleSubmit} className="add-review-form">
+                <h2 className="lets-add-title">Let's add a review...</h2>
                 <div>
-                    <label htmlFor="review">Review:</label>
+                    <label htmlFor="review">Review: </label>
                     <input
                         id="review"
                         type="text"
                         onChange={(e) => setReview(e.target.value)}
                         value={review}
+                        className="enter-review-text"
                     />
                 </div>
                 <div>
-                    <label htmlFor="stars">Stars:</label>
+                    <label htmlFor="stars">Stars: </label>
                     <select
                         name="stars"
                         onChange={(e) => setStars(e.target.value)}
                         value={stars}
+                        className="star-input"
                     >
                         <option value="" disabled></option>
                         <option>1</option>
@@ -79,7 +82,7 @@ function AddReview({ setShowModal }) {
                         <option>5</option>
                     </select>
                 </div>
-                <button type="submit">
+                <button type="submit" class="custom-btn btn-6">
                     <span>Submit</span>
                 </button>
             </form>

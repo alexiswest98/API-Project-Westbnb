@@ -8,7 +8,8 @@ function AddSpotImageModal({spot}) {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Add an Image to Spot</button>
+      <button class="custom-btn btn-6"
+      onClick={() => setShowModal(true)}>Add an Image</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <AddSpotImage spot={spot} setShowModal={setShowModal}/>

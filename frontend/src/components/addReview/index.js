@@ -8,7 +8,8 @@ function AddReviewModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Add a Review</button>
+      <button class="custom-btn btn-6"
+      onClick={() => setShowModal(true)}>Add a Review</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <AddReview setShowModal={setShowModal}/>
