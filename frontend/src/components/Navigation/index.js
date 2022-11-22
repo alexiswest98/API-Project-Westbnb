@@ -34,7 +34,7 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/" className="logo-placement">
           <img src={logo} className="logo" alt='westbnb'></img>
         </NavLink>
-        {/* <div className='centerSearchBar'>
+        <div className='centerSearchBar'>
           <input type="text" placeholder=" Anywhere" className='centerText' id="right"></input>
           <input type="text" placeholder=" Any week" className='centerText' id='left'></input>
           <input type="text" placeholder=" Add guests" className='centerText'></input>
@@ -43,7 +43,7 @@ function Navigation({ isLoaded }) {
           <i class="fa-solid fa-magnifying-glass"></i>
           </span>
           </button>
-        </div> */}
+        </div>
         {isLoaded && (<div className='profileButtonFull'>
           <ProfileButton user={sessionUser}
             setLogin={setLogin}
