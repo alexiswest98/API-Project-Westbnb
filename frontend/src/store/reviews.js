@@ -3,8 +3,9 @@ import { csrfFetch } from "./csrf";
 /* ----- TYPES ------ */
 const GET_ALL_REVIEWS = 'reviews/getAllreviews';
 // const ADD_IMAGE_REVIEW = 'reviews/getAllreviews';
-const ADD_A_REVIEW = "review/addSpot";
-const DELETE_A_REVIEW = 'spot/deleteSpot';
+//altered 1/2/22
+const ADD_A_REVIEW = "review/addReview";
+const DELETE_A_REVIEW = 'spot/deleteReview'
 
 /* ----- ACTIONS ------ */
 

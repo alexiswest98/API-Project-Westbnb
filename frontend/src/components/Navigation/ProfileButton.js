@@ -35,11 +35,11 @@ function ProfileButton({ user, setLogin, setShowModal }) {
   };
 
   return (
-      <button onClick={openMenu} className="wholeProfileButton"> 
-        <div className="iconsProfile">
+    <button onClick={openMenu} className="wholeProfileButton">
+      <div className="iconsProfile">
         <span className="hamburger">≡</span>
         <i className="fas fa-user-circle" />
-        </div>
+      </div>
       {showMenu && (user ? (
         <ul className="profile-dropdown" >
           <li className="borderYes">{user.username}</li>
@@ -63,20 +63,20 @@ function ProfileButton({ user, setLogin, setShowModal }) {
             <li className="navButton2">
               <button className="navButton"
                 onClick={() => {
-                setLogin(true)
-                setShowModal(true)
-              }}>Log In</button>
+                  setLogin(true)
+                  setShowModal(true)
+                }}>Log In</button>
             </li>
             <li>
               <button className="navButton"
                 onClick={() => {
-                setLogin(false)
-                setShowModal(true)
-              }}>Sign Up</button>
+                  setLogin(false)
+                  setShowModal(true)
+                }}>Sign Up</button>
             </li>
           </ul>)
       )}
-      </button>
+    </button>
   );
 }
 
