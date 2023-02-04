@@ -16,62 +16,62 @@ module.exports = {
       {
         spotId: 1,
         userId: 1,
-        startDate: '2022-10-01',        //YYYY-MM-DD returns as a string
-        endDate:'2022-11-01'
+        startDate: '2023-02-04',        //YYYY-MM-DD returns as a string
+        endDate:'2023-02-12'
       },
       {
         spotId: 2,
         userId: 2,
-        startDate: '2022-10-02',
-        endDate:'2022-11-02'
+        startDate: '2023-02-04',
+        endDate:'2023-02-12'
       },
       {
         spotId: 3,
         userId:3,
-        startDate: '2022-10-03',
-        endDate:'2022-11-03'
+        startDate: '2023-02-04',
+        endDate:'2023-02-12'
       },
       {
         spotId: 4,
         userId: 4,
-        startDate: '2022-10-04',
-        endDate:'2022-11-04'
+        startDate: '2023-02-04',
+        endDate:'2023-02-12'
       },
       {
         spotId: 5,
         userId: 5,
-        startDate: '2022-10-05',
-        endDate:'2022-11-05'
+        startDate: '2023-02-04',
+        endDate:'2023-02-12'
       },
       {
         spotId: 6,
         userId: 6,
-        startDate: '2022-10-06',
-        endDate:'2022-11-06'
+        startDate: '2023-02-04',
+        endDate:'2023-02-12'
       },
       {
         spotId: 7,
         userId: 7,
-        startDate: '2022-10-07',
-        endDate:'2022-11-07'
+        startDate: '2023-02-04',
+        endDate:'2023-02-12'
       },
       {
         spotId: 8,
         userId: 8,
-        startDate: '2022-10-08',
-        endDate:'2022-11-08'
+        startDate: '2023-02-04',
+        endDate:'2023-02-12'
       },
       {
         spotId: 9,
         userId: 9,
-        startDate: '2022-10-09',
-        endDate:'2022-11-09'
+        startDate: '2023-02-04',
+        endDate:'2023-02-12'
       },
       {
         spotId: 10,
         userId: 10,
-        startDate: '2022-10-10',
-        endDate:'2022-11-10'
+        startDate: '2023-02-04',
+        endDate:'2023-02-12'
       }
     ])
   },

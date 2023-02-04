@@ -30,7 +30,8 @@ module.exports = {
         allowNull: false
       },
       stars: {
-        type: Sequelize.INTEGER
+        type: Sequelize.REAL,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
