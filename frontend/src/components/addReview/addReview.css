@@ -8,7 +8,7 @@
     font-weight: 500;
     background: transparent;
     cursor: pointer;
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
     position: relative;
     display: inline-block;
      box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
@@ -36,11 +36,11 @@
     content: "";
     height: 0%;
     width: 1px;
-   box-shadow:
+   /* box-shadow:
      -1px -1px 20px 0px rgba(255,255,255,1),
      -4px -4px 5px 0px rgba(255,255,255,1),
      7px 7px 20px 0px rgba(0,0,0,.4),
-     4px 4px 5px 0px rgba(0,0,0,.3);
+     4px 4px 5px 0px rgba(0,0,0,.3); */
   }
   .btn-6:before {
     right: 0;
@@ -50,10 +50,11 @@
   .btn-6:after {
     left: 0;
     bottom: 0;
-    transition: all 500ms ease;
+    /* transition: all 500ms ease; */
   }
   .btn-6:hover{
     background: transparent;
+    border: 1px solid rgb(255, 56, 92);
     color: rgb(255, 56, 92);
     box-shadow: none;
   }

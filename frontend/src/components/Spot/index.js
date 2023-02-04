@@ -26,6 +26,12 @@ function IndivSpot() {
         dispatch(getAllReviewsThunk(+id));
     }, [dispatch, id])
 
+    function getStars(number) {
+        if(number.toString().length > 3) return number;
+        if(number.toString().length == 3) return number + '0';
+        if(number.toString().length == 1) return number + '.00';
+    }
+
     if (!spot || !spot.SpotImages) return null;
 
     return (
@@ -34,7 +40,7 @@ function IndivSpot() {
                 <div className='indiv-information'>
                     <h1 className='indivSpot-name'>{spot.name}</h1>
                     <div className='indiv-spot-sub-info'>
-                        <h3 className='adding-margin'> ★{spot.avgStarRating} · {spot.numReviews} {spot.numReviews == 1 ? ("review") : ("reviews")} </h3>
+                        <h3 className='adding-margin'>★ {getStars(spot.avgStarRating)} · {spot.numReviews} {spot.numReviews == 1 ? ("review") : ("reviews")} </h3>
                         <span className='adding-margin'>· ✪ Superhost ·</span>
                         <h3>{spot.city}, {spot.state}, {spot.country}</h3>
                     </div>
@@ -95,7 +101,7 @@ function IndivSpot() {
                     <div className="reviewsLeftBox">
                         <div className='review-title-flex'>
                         <h2>Reviews</h2>
-                        <p>★{spot.avgStarRating} · {spot.numReviews} {spot.numReviews == 1 ? ("review") : ("reviews")}</p>
+                        <p>★ {getStars(spot.avgStarRating)} · {spot.numReviews} {spot.numReviews == 1 ? ("review") : ("reviews")}</p>
                         </div>
                         <GetReviewsBox className="currReviewBox" />
                     </div>

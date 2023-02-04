@@ -36,12 +36,12 @@ function Navigation({ isLoaded }) {
         </NavLink>
         <div className='centerSearchBar'>
           <input type="text" placeholder=" Anywhere" className='centerText' id="right"></input>
-          <input type="text" placeholder=" Any week" className='centerText' id='left'></input>
-          <input type="text" placeholder=" Add guests" className='centerText'></input>
+          {/* <input type="text" placeholder=" Any week" className='centerText' id='left'></input>
+          <input type="text" placeholder=" Add guests" className='centerText'></input> */}
           <button className='search'>
-          <span>
-          <i class="fa-solid fa-magnifying-glass"></i>
-          </span>
+              <div className='circle-search-div'>⬤
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
           </button>
         </div>
         {isLoaded && (<div className='profileButtonFull'>

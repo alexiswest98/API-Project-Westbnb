@@ -15,6 +15,12 @@ function GetReviewsBox() {
     const reviewList = Object.values(reviews)
     // console.log("reviews", reviewList)
 
+    function getStars(number) {
+        if(number.toString().length > 3) return number;
+        if(number.toString().length == 3) return number + '0';
+        if(number.toString().length == 1) return number + '.00';
+    }
+
     useEffect(() => {
         const newDispatch = dispatch(getAllReviewsThunk(+id))
     }, [dispatch, id])
@@ -27,7 +33,7 @@ function GetReviewsBox() {
             {reviewList.length ? (reviewList.map(review => (
                 <div className="currReviewDiv">
                     <h3>{review.User?.firstName} {review.User?.lastName}</h3>
-                    <h3>★{review?.stars}</h3>
+                    <h3>★{getStars(review?.stars)}</h3>
                     <h4>{review?.review}</h4>
                     <p>{review.createdAt.slice(0, 10)}</p>
                     {/* <p>{review.createdAt}</p> */}

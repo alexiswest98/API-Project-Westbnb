@@ -7,7 +7,7 @@
 }
 
 .wholeCurrBox {
-    border-top: solid 1px rgb(201, 194, 194);
+    /* border-top: solid 1px rgb(201, 194, 194); */
     display: flex;
     justify-content: center;
     flex-direction: column;

@@ -25,7 +25,7 @@ function CurrSpotsPage() {
                     <NavLink to={`/spots/${spot.id}`} className="currBoxLink">  
                         {<img className="currImg" src={spot?.previewImage} alt={spot.name}></img>}
                         <h3>{spot.name}</h3>
-                        <h3>★{spot.avgRating}</h3>
+                        <h3>★ {spot.avgRating}</h3>
                         <p>{spot.city}, {spot.state}, {spot.country}</p>
                         <p>${spot.price} night</p>
                     </NavLink>

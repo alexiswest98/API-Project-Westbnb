@@ -10,7 +10,7 @@
 .indivBox {
     /* border: solid 2px rgb(248, 51, 84); */
     border-radius: 1em;
-    box-shadow: 0 0 7px #c7c7c7;
+    box-shadow: 0 2px 5px #c7c7c7;
     width: 23%;
     height: auto;
     display: flex;
