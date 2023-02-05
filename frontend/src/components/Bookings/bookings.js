@@ -20,8 +20,7 @@ export default function BookingsForm({ spot, isOwner }) {
 
         const payload = {
             checkIn,
-            checkOut,
-            guests
+            checkOut
         };
 
         console.log(payload)

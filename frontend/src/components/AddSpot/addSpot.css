@@ -1,3 +1,4 @@
+
 .addSpotBox2 {
   display: flex;
   align-items: center;
@@ -27,7 +28,7 @@
 }
 
 .input-coun-spot {
-  width: 5em;
+  width: 10em;
   height: 3.1em;
   border: 1px solid grey;
   font-size: 13px;

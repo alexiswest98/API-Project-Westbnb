@@ -143,8 +143,10 @@
     margin-left: 5%;
     margin-top: 1%;
     border: none;
-    font-size: 1.2em;
+    font-size: 0.9em;
     color: rgb(99, 99, 99);
+    text-transform: uppercase;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 
 .reserve {

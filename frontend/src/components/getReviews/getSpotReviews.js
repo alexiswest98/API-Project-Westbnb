@@ -35,13 +35,15 @@ function GetReviewsBox() {
                     <h3>{review.User?.firstName} {review.User?.lastName}</h3>
                     <h3>★{getStars(review?.stars)}</h3>
                     <h4>{review?.review}</h4>
-                    <p>{review.createdAt.slice(0, 10)}</p>
                     {/* <p>{review.createdAt}</p> */}
                     {review.ReviewImages?.length > 0 && (
                     <div className="reviewImageBox">
                         <img className="reviewImage" src={review.ReviewImages[0]?.url} alt="reviewImage"></img>
                     </div>
                     )}
+                    <div className="move-left-review-date">
+                        <span>{review.createdAt.slice(0, 10)}</span>
+                    </div>
                 { user && review && review?.userId === user?.id && (
                     <DeleteReviewModal review={review}/>)
                 }

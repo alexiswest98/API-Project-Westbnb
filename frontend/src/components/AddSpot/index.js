@@ -27,14 +27,14 @@ function AddSpotComponent() {
     if (!city.length) errors.push("Valid City is required");
     if (!state.length) errors.push("Valid State is required");
     if (!country.length) errors.push("Valid Country is required");
-    if(!name) errors.push("Name is required")
+    if (!name) errors.push("Name is required")
     if (name.length > 50) errors.push("Name must be less than 50 characters");
     if (!description.length) errors.push("Description is required");
     if (!price.length) errors.push("Price per day is required");
-    if(price.length > 10) errors.push("Price is too much")
-    if(price <= 0) errors.push("Price needs to higher than $0")
+    if (price.length > 10) errors.push("Price is too much")
+    if (price <= 0) errors.push("Price needs to higher than $0")
     if (isNaN(price) || price < 0) errors.push("Please enter a valid number");
-    if(!url.length) errors.push("Please enter photo url");
+    if (!url.length) errors.push("Please enter photo url");
     setValidationErrors(errors);
   }, [address, city, state, country, name, description, price, url]);
 
@@ -77,11 +77,11 @@ function AddSpotComponent() {
   };
 
   return (
-    <div >
+    <div>
       {/* to see errors printed at bottom */}
       {validationErrors.length > 0 && (
-        <div className="addSpotBox2"> 
-        <h4 className="validation-errors-title">Required Fields</h4>
+        <div className="addSpotBox2">
+          <h4 className="validation-errors-title">Required Fields</h4>
           <ul>
             {validationErrors.map((error) => (
               <li key={error}>{error}</li>

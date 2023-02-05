@@ -18,8 +18,14 @@
 .reviewImage {
     width: 100%;
     border-radius: 2%;
+    margin-bottom: 1%;
 }
 
 .would-you-review {
     color: #FF5A60;
+}
+
+.move-left-review-date {
+    display: flex;
+    justify-content: flex-end;
 }
