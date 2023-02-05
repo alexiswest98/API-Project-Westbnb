@@ -45,13 +45,18 @@ function ProfileButton({ user, setLogin, setShowModal }) {
           <li className="borderYes">{user.username}</li>
           <li className="borderYes">{user.email}</li>
           <li className="borderYes">
+            <Link to="/my-trips" className="navButton">
+              <button className="navButton">My Trips</button>
+            </Link>
+          </li>
+          <li className="borderYes">
             <Link to="/become-a-host" className="navButton">
               <button className="navButton">Become a host</button>
             </Link>
           </li>
           <li className="borderYes">
             <Link to="/spots/current" className="navButton">
-              <button className="navButton">Current Spots</button>
+              <button className="navButton">Manage Listings</button>
             </Link>
           </li>
           <li>

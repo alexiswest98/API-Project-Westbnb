@@ -19,9 +19,9 @@ function CurrSpotsPage() {
 
     return (
         <div className="wholeCurrBox">
-            <h1 className="curr-spot-title">YOUR SPOTS AVAILABLE</h1>
+            <h1 className="curr-spot-title">Your Spots Available</h1>
             {currSpotsArray.length ? (currSpotsArray.map(spot => (
-                <div className='currIndivBox'>
+                <div className='currIndivBox' key={`${spot.id}`}>
                     <NavLink to={`/spots/${spot.id}`} className="currBoxLink">  
                         {<img className="currImg" src={spot?.previewImage} alt={spot.name}></img>}
                         <h3>{spot.name}</h3>

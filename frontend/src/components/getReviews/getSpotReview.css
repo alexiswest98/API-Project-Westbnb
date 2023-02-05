@@ -12,11 +12,12 @@
     padding: 2%;
     border: solid 1px rgb(159, 156, 156);
     border-radius: 2%;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .reviewImage {
     width: 100%;
+    border-radius: 2%;
 }
 
 .would-you-review {

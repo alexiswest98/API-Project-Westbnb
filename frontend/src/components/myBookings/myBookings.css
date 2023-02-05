@@ -1,0 +1,10 @@
+.whole-outer-my-bookings {
+    width: 100%;
+    background-color: yellow;
+}
+
+.my-trips-title {
+    color: rgb(96, 93, 93);
+    font-weight: 400;
+    font-size: 2.2em;
+}

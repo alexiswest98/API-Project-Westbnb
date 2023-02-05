@@ -8,6 +8,7 @@ import none from './no-image.jpg';
 import GetReviewsBox from '../getReviews/getSpotReviews';
 import AddReviewModal from '../addReview';
 import { getAllReviewsThunk } from '../../store/reviews';
+import BookingsForm from '../Bookings/bookings';
 
 function IndivSpot() {
     const dispatch = useDispatch();
@@ -23,13 +24,13 @@ function IndivSpot() {
 
     useEffect(() => {
         dispatch(getOneSpotThunk(+id))
-        dispatch(getAllReviewsThunk(+id));
+        dispatch(getAllReviewsThunk(+id))
     }, [dispatch, id])
 
     function getStars(number) {
         if(number.toString().length > 3) return number;
-        if(number.toString().length == 3) return number + '0';
-        if(number.toString().length == 1) return number + '.00';
+        if(number.toString().length === 3) return number + '0';
+        if(number.toString().length === 1) return number + '.00';
     }
 
     if (!spot || !spot.SpotImages) return null;
@@ -40,7 +41,7 @@ function IndivSpot() {
                 <div className='indiv-information'>
                     <h1 className='indivSpot-name'>{spot.name}</h1>
                     <div className='indiv-spot-sub-info'>
-                        <h3 className='adding-margin'>★ {getStars(spot.avgStarRating)} · {spot.numReviews} {spot.numReviews == 1 ? ("review") : ("reviews")} </h3>
+                        <h3 className='adding-margin'>★ {getStars(spot.avgStarRating)} · {spot.numReviews} {spot.numReviews === 1 ? ("review") : ("reviews")} </h3>
                         <span className='adding-margin'>· ✪ Superhost ·</span>
                         <h3>{spot.city}, {spot.state}, {spot.country}</h3>
                     </div>
@@ -65,7 +66,7 @@ function IndivSpot() {
                         <div className='boiler-plate-details'>
                             <div className='boiler-plate-height' id='boiler-top-border'>
                                 <div className='lil-icon'>
-                                    <i class="fa-solid fa-location-dot"></i>
+                                    <i className="fa-solid fa-door-open"></i>
                                 </div>
                                 <div className='boiler-deets'>
                                     <h4 className='boiler-title'>Self Check-in</h4>
@@ -74,7 +75,7 @@ function IndivSpot() {
                             </div>
                             <div className='boiler-plate-height'>
                                 <div className='lil-icon'>
-                                    <i className="fa-solid fa-door-open"></i>
+                                    <i class="fa-solid fa-medal"></i>
                                 </div>
                                 <div className='boiler-deets'>
                                     <h4 className='boiler-title'>{spot.Owner.firstName} {spot.Owner.lastName} is a Superhost</h4>
@@ -83,7 +84,7 @@ function IndivSpot() {
                             </div>
                             <div className='boiler-plate-height' id="boiler-bottom-border">
                                 <div className='lil-icon'>
-                                    <i class="fa-solid fa-medal"></i>
+                                    <i class="fa-solid fa-location-dot"></i>
                                 </div>
                                 <div className='boiler-deets'>
                                     <h4 className='boiler-title'>Great location</h4>
@@ -92,16 +93,17 @@ function IndivSpot() {
                             </div>
                         </div>
                         <div className='aircover'>
-                            <img className='aircover-img' src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg" arc="aircover"></img>
+                            <img className='aircover-img' src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg" alt="aircover logo"></img>
                             <p className='boiler-sub'>Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</p>
                         </div>
                     </div>
+                    <BookingsForm spot={spot} isOwner={isOwner}></BookingsForm>
                 </div>
                 <div className="reviewBox">
                     <div className="reviewsLeftBox">
                         <div className='review-title-flex'>
                         <h2>Reviews</h2>
-                        <p>★ {getStars(spot.avgStarRating)} · {spot.numReviews} {spot.numReviews == 1 ? ("review") : ("reviews")}</p>
+                        <p>★ {getStars(spot.avgStarRating)} · {spot.numReviews} {spot.numReviews === 1 ? ("review") : ("reviews")}</p>
                         </div>
                         <GetReviewsBox className="currReviewBox" />
                     </div>

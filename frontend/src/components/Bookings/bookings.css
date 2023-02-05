@@ -1,0 +1,213 @@
+.bookings-outer-container {
+    width: 40%;
+    height: 100%;
+    box-shadow: 0 0 8px #e3e1e1;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bookings-div {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+}
+
+.top-booking-details {
+    height: 16%;
+    width: 100%;
+    /* background-color: yellow; */
+    display: flex;
+    justify-content: center;
+}
+
+.price-per-night-book {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 42.5%;
+    /* background-color: greenyellow; */
+}
+
+.spot-price-booking {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.night-margin {
+    margin-left: 2%;
+}
+
+.rating-star-book {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    width: 42.5%;
+    /* background-color: rgb(250, 213, 184); */
+}
+
+.reserve-booking-container {
+    /* background-color: rgb(206, 255, 154); */
+    height: 39%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.reservation-form {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 85%;
+    height: 100%;
+}
+
+.outer-border-booking-form {
+    width: 100%;
+    height: 62%;
+    border: 1px solid grey;
+    border-radius: 1em;
+}
+
+.check-in-check-out {
+    display: flex;
+    width: 100%;
+    height: 50%;
+    border-bottom: 1px solid grey;
+}
+
+.guests-container {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+}
+
+.check-in-margin {
+    margin-left: 5%;
+    font-size: 0.6em;
+    font-weight: 700;
+}
+
+.check-in-dropdown {
+    background-color: white;
+    width: 50%;
+    border-right: 1px solid grey;
+    border-radius: 1em 0 0 0;
+    /* border-right: 1px solid grey;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-left: 1px solid grey; */
+}
+
+.check-out-dropdown {
+    background-color: white;
+    width: 50%;
+    border-radius: 0 1em 0 0;
+    /* border-radius:0 1em 1em 0;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-right: 1px solid grey; */
+}
+
+.guests-margin {
+    margin-left: 2%;
+    margin-top: 1%;
+    font-size: 0.6em;
+    font-weight: 700;
+}
+
+.guests-dropdown {
+    width: 95%;
+    height: 53%;
+    margin-left: 2%;
+    margin-top: 1%;
+    border: none;
+    border-radius: 0 0 0.7em 0.7em;
+    color: rgb(99, 99, 99);
+    font-size: 1em;
+}
+
+.date {
+    width: 93%;
+    height: 55%;
+    margin-left: 5%;
+    margin-top: 1%;
+    border: none;
+    font-size: 1.2em;
+    color: rgb(99, 99, 99);
+}
+
+.reserve {
+    margin-top: 4%;
+    width: 100%;
+    height: 26%;
+    border: none;
+    color: white;
+    border-radius: 0.5em;
+    font-size: 1em;
+    background-color: rgb(255, 56, 92);
+    cursor: pointer;
+}
+
+.reserve:hover {
+    background: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+}
+
+.reservation-deets-container {
+    height: 30%;
+    width: 85%;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+    /* background-color: rgb(160, 160, 246); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.charged {
+    margin-block-start: 0.5em;
+    margin-block-end: 1em;
+    font-weight: 300;
+}
+
+.costs {
+    width: 100%;
+    height: 30%;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.plain-link-gray {
+    text-decoration: underline;
+    color: rgb(34, 34, 34);
+    font-weight: 300;
+}
+
+.prices-num-booking {
+    color: rgb(34, 34, 34);
+    font-weight: 300;
+}
+
+.total-container {
+    height: 12%;
+    margin-top: 3%;
+    width: 85%;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+    border-top: 0.5px solid grey;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: lightgreen; */
+}

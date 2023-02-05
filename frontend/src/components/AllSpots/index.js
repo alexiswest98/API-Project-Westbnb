@@ -14,9 +14,9 @@ function MainPage() {
     }, [dispatch])
 
     function getStars(number) {
-        if(number.toString().length > 3) return number;
-        if(number.toString().length == 3) return number + '0';
-        if(number.toString().length == 1) return number + '.00';
+        if (number.toString().length > 3) return number;
+        if (number.toString().length === 3) return number + '0';
+        if (number.toString().length === 1) return number + '.00';
     }
 
 
@@ -24,21 +24,21 @@ function MainPage() {
         <div className="wholeSpotBox">
             {spotsObject.map(spot => (
                 <div className='indivBox'>
-                <NavLink to={`/spots/${spot.id}`} className="boxLink">
-                    <img className="imgDiv" src={`${spot.previewImage}`} alt={spot.name}></img>
-                    <div className="main-Details">
-                    <div className="order-for-title">
-                    <h4 className="main-spot-name">{spot.city}, {spot.state}</h4>
-                    <h3 className="star-rating">★ {getStars(spot.avgRating)}</h3>
-                    {/* .toString().length > 1 ? spot.avgRating : spot.avgRating + ".00" */}
-                    </div>
-                    <div>
-                    {/* <p>Added 4 weeks ago</p> */}
-                    <p className="bottom-main-name">{spot.name}</p>
-                    <p className="bottom-main-price">${spot.price} night</p>
-                    </div>
-                    </div>
-                </NavLink>
+                    <NavLink to={`/spots/${spot.id}`} className="boxLink">
+                        <img className="imgDiv" src={`${spot.previewImage}`} alt={spot.name}></img>
+                        <div className="main-Details">
+                            <div className="order-for-title">
+                                <h4 className="main-spot-name">{spot.city}, {spot.state}</h4>
+                                <h3 className="star-rating">★ {getStars(spot.avgRating)}</h3>
+                                {/* .toString().length > 1 ? spot.avgRating : spot.avgRating + ".00" */}
+                            </div>
+                            <div>
+                                {/* <p>Added 4 weeks ago</p> */}
+                                <p className="bottom-main-name">{spot.name}</p>
+                                <p className="bottom-main-price">${spot.price} night</p>
+                            </div>
+                        </div>
+                    </NavLink>
                 </div>
             ))}
 

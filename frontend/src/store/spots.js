@@ -7,7 +7,10 @@ const ADD_A_SPOT = "spots/addSpot";
 const EDIT_A_SPOT = "spots/editSpot";
 const GET_CURR_SPOTS = "spots/getMySpots"
 const DELETE_A_SPOT = 'spot/deleteSpot';
+
+    //related to Images
 const ADD_SPOT_IMAGE = 'spot/addImage';
+const DELETE_SPOT_IMAGE = 'spotImages/deleteSpotImage'
 
 /* ----- ACTIONS ------ */
 const getSpotsAction = (spots) => {
@@ -58,6 +61,13 @@ const addSpotImageAction = (img) => {
     return {
         type: ADD_SPOT_IMAGE,
         img
+    }
+};
+
+const deleteSpotImageAction = (spotImageId) => {
+    return {
+        type: DELETE_SPOT_IMAGE,
+        spotImageId
     }
 };
 
@@ -148,6 +158,17 @@ export const addImagetoSpotThunk = (spot, img) => async dispatch => {
         const response = await image.json();
         dispatch(addSpotImageAction(img))
         return response;
+    }
+};
+
+export const deleteSpotImageThunk = (spotImageId) => async dispatch => {
+    const deletedSpotImage = await csrfFetch(`/api/spot-images/${spotImageId}`, {
+        method: 'DELETE'
+    });
+
+    if (deletedSpotImage.ok) {
+        const response = await deletedSpotImage.json();
+        dispatch(deleteSpotImageAction(spotImageId));
     }
 };
 

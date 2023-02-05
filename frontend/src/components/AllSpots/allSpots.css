@@ -44,7 +44,8 @@
     display: flex;
     flex-direction: column;
     /* background-color: rgb(220, 191, 247); */
-    padding: 1.5%;
+    padding-right: 2%;
+    padding-left: 2%;
 }
 
 .main-spot-name {

@@ -4,7 +4,7 @@
     width: 36em;
     height: 40em;
     align-items: center;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 
@@ -40,7 +40,8 @@
 }
 
 .input-signUp {
-    width: 100%;
+    width: 98%;
+    padding-left: 2%;
     height: 100%;
     border: 1px solid grey;
     font-size: 15px;

@@ -8,6 +8,7 @@ const router = express.Router();
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { validationResult } = require('express-validator');
 
 const validateLogin = [
     check('credential')
@@ -44,10 +45,10 @@ router.post('/', validateLogin, async (req, res, next) => {
       lastName: user.lastName,
       email: user.email,
       username: user.username,
-      token: ""
+      token: user.token
     }
 
-      return res.json(myobj);
+      return res.json({myobj});
     }
   );
 
@@ -58,11 +59,11 @@ router.delete('/', (_req, res) => {
     }
 );
 
-router.get('/', (req, res) => {
+router.get('/', restoreUser, (req, res) => {
         const { user } = req;
         if (user) {
             return res.json(user.toSafeObject());
-        } else return res.json(null);
+        } else return res.json({user: null});
     }
 );
 

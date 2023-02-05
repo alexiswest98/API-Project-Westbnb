@@ -10,6 +10,7 @@ import IndivSpot from "./components/Spot";
 import SignupFormPage from "./components/SignupFormPage";
 import AddSpotComponent from "./components/AddSpot";
 import CurrSpotsPage from "./components/GetCurrSpots";
+import MyBookings from "./components/myBookings/myBookings";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ function App() {
           </Route>
           <Route path="/become-a-host">
             <AddSpotComponent/>
+          </Route>
+          <Route path="/my-trips">
+            <MyBookings/>
           </Route>
         </Switch>
       )}

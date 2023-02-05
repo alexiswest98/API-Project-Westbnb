@@ -19,14 +19,21 @@
 
  .conf-delete-title {
     margin-block-start: 0;
+    font-size: 1.9em;
+    margin-bottom: 4vh;
  }
 
 .delete-button {
     background: radial-gradient(circle at center center, rgb(151, 0, 28) 0%, rgb(140, 2, 28) 27.5%, rgb(152, 3, 30) 40%, rgb(176, 3, 35) 57.5%, rgb(198, 3, 39) 75%, rgb(251, 76, 108) 100%);
-    width: 9em;
-    height: 3em;
+    width: 7em;
+    height: 2.5em;
     cursor: pointer;
     color: white;
     border: none;
     border-radius: 1em;
+}
+
+.delete-button:hover {
+   box-shadow: 0 0.5em 0.5em -0.4em black;
+   background: radial-gradient(farthest-corner, rgb(151, 0, 28) 0%, rgb(140, 2, 28) 27.5%, rgb(152, 3, 30) 40%, rgb(176, 3, 35) 57.5%, rgb(198, 3, 39) 75%, rgb(251, 76, 108) 100%);
 }

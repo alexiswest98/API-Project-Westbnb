@@ -17,8 +17,8 @@ function GetReviewsBox() {
 
     function getStars(number) {
         if(number.toString().length > 3) return number;
-        if(number.toString().length == 3) return number + '0';
-        if(number.toString().length == 1) return number + '.00';
+        if(number.toString().length === 3) return number + '0';
+        if(number.toString().length === 1) return number + '.00';
     }
 
     useEffect(() => {
@@ -31,7 +31,7 @@ function GetReviewsBox() {
     return reviewList && (
         <div className='wholeReviewBox'>
             {reviewList.length ? (reviewList.map(review => (
-                <div className="currReviewDiv">
+                <div className="currReviewDiv" key={`${review.id}`}>
                     <h3>{review.User?.firstName} {review.User?.lastName}</h3>
                     <h3>★{getStars(review?.stars)}</h3>
                     <h4>{review?.review}</h4>
