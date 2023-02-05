@@ -45,7 +45,7 @@ function Navigation({ isLoaded }) {
           </button>
         </div>
         {isLoaded && (<div className='profileButtonFull'>
-          <ProfileButton user={sessionUser}
+          <ProfileButton
             setLogin={setLogin}
             setShowModal={setShowModal} />
         </div>

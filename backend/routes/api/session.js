@@ -48,7 +48,7 @@ router.post('/', validateLogin, async (req, res, next) => {
       token: user.token
     }
 
-      return res.json({myobj});
+      return res.json(myobj);
     }
   );
 

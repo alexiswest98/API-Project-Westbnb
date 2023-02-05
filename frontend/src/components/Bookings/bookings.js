@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+// import { useRef } from "react";
+// import { useParams } from "react-router-dom";
+// import { useDispatch, useSelector } from 'react-redux';
 import "./bookings.css";
 
 export default function BookingsForm({ spot, isOwner }) {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
+    const [checkOutMin, setCheckOutMin] = useState('');
     const [guests, setGuests] = useState('');
 
     function getStars(number) {
@@ -14,6 +16,13 @@ export default function BookingsForm({ spot, isOwner }) {
         if (number.toString().length === 3) return number + '0';
         if (number.toString().length === 1) return number + '.00';
     }
+
+    function nextDay(checkIn) {
+        const checkInDate = new Date(checkIn);
+        const nextDay = new Date(checkInDate.getTime() + 24 * 60 * 60 * 1000);
+        return nextDay.toISOString().split("T")[0];
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -58,8 +67,12 @@ export default function BookingsForm({ spot, isOwner }) {
                                         className='date'
                                         type="date"
                                         value={checkIn}
-                                        onChange={(e) => setCheckIn(e.target.value)}
+                                        onChange={(e) => {
+                                            setCheckIn(e.target.value)
+                                            setCheckOutMin(nextDay(e.target.value))
+                                        }}
                                         required
+                                        min={new Date().toISOString().split("T")[0]}
                                     />
                                 </div>
                                 <div className='check-out-dropdown'>
@@ -69,6 +82,7 @@ export default function BookingsForm({ spot, isOwner }) {
                                         type="date"
                                         value={checkOut}
                                         onChange={(e) => setCheckOut(e.target.value)}
+                                        min={checkOutMin}
                                         required
                                     />
                                 </div>
