@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 // import { useRef } from "react";
-// import { useParams } from "react-router-dom";
-// import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserBookingsThunk } from "../../store/bookings";
+import { addBookingThunk } from "../../store/bookings";
 import "./bookings.css";
 
 export default function BookingsForm({ spot, isOwner }) {
@@ -10,6 +12,12 @@ export default function BookingsForm({ spot, isOwner }) {
     const [checkOut, setCheckOut] = useState('');
     const [checkOutMin, setCheckOutMin] = useState('');
     const [guests, setGuests] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+
+    const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     function getStars(number) {
         if (number.toString().length > 3) return number;
@@ -23,28 +31,44 @@ export default function BookingsForm({ spot, isOwner }) {
         return nextDay.toISOString().split("T")[0];
     }
 
+    //to calcultae days and do math for total
+    function diffInDays(date1, date2) {
+        const dateEnd = new Date(date1);
+        const dateStart = new Date(date2);
+        const diff = Math.abs(dateEnd - dateStart);
+        return diff / (24 * 60 * 60 * 1000);
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        setHasSubmitted(true);
+        if (errors.length) return alert(`${errors}`);
+
         const payload = {
-            checkIn,
-            checkOut
+            spotId: spot.id,
+            userId: user.id,
+            startDate: checkIn,
+            endDate: checkOut
         };
 
-        console.log(payload)
+        // console.log(payload)
 
-        // const newBooking = await dispatch(createBooking(payload, thisSpot, user));
-        // const spots = await dispatch(getSpots());
-        // console.log(spots.Spots[id]);
-        // if (newReview) history.push(`/spots/${id}`);
+        const newBooking = await dispatch(addBookingThunk(payload, spot.id));
+        if (newBooking) history.push(`/my-trips`);
     };
 
-    // useEffect(() => {
-    //     dispatch(getCurrentSpotsThunk());
-    // }, [dispatch])
+    useEffect(() => {
+        const errorsArr = [];
+        if (!checkIn) errorsArr.push("Check in date is required.");
+        if(!checkOut) errorsArr.push("Check out date is required")
+        if(!guests) errorsArr.push("Number of guests is required")
+        setErrors(errorsArr);
+    }, [dispatch, checkIn, checkOut, guests]);
 
-    return ( !isOwner &&
+    return (
+        !isOwner &&
         <div className="bookings-outer-container">
             <div className="bookings-div">
                 <div className="top-booking-details">
@@ -107,8 +131,8 @@ export default function BookingsForm({ spot, isOwner }) {
                 <div className="reservation-deets-container">
                     <p className='charged'>You won't be charged yet</p>
                     <div className='costs'>
-                        <a className='plain-link-gray'>${spot.price}</a>
-                        <span className="prices-num-booking">${spot.price}</span>
+                        <a className='plain-link-gray'>${spot.price} {checkIn && checkOut && 'x' + " " + diffInDays(checkOut, checkIn) + " " + "nights"}</a>
+                        <span className="prices-num-booking">${checkIn && checkOut ? spot.price * diffInDays(checkOut, checkIn) : spot.price}</span>
                     </div>
                     <div className='costs'>
                         <a className='plain-link-gray'>Cleaning fee</a>
@@ -122,7 +146,8 @@ export default function BookingsForm({ spot, isOwner }) {
                 </div>
                 <div className="total-container">
                     <h4>Total Before Taxes</h4>
-                    <h4>${(spot.price * 0.3) + (spot.price * 0.2) + spot.price}</h4>
+                    <h4>${checkIn && checkOut ? spot.price * diffInDays(checkOut, checkIn) + (spot.price * 0.3) + (spot.price * 0.2) :
+                    (spot.price * 0.3) + (spot.price * 0.2) + spot.price}</h4>
                 </div>
             </div>
         </div>

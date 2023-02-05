@@ -35,7 +35,7 @@ function Navigation({ isLoaded }) {
           <img src={logo} className="logo" alt='westbnb'></img>
         </NavLink>
         <div className='centerSearchBar'>
-          <input type="text" placeholder=" Anywhere" className='centerText' id="right"></input>
+          <input type="text" placeholder=" Anywhere (from SF, Miami, Chicago, LA)" className='centerText' id="right"></input>
           {/* <input type="text" placeholder=" Any week" className='centerText' id='left'></input>
           <input type="text" placeholder=" Add guests" className='centerText'></input> */}
           <button className='search'>

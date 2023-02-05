@@ -19,6 +19,7 @@ function MainPage() {
         if (number.toString().length === 1) return number + '.00';
     }
 
+    if(spotsObject.length === 0) return null;
 
     return (
         <div className="wholeSpotBox">

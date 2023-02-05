@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getUserBookingsThunk } from "../../store/bookings";
+import { deleteBookingThunk } from "../../store/bookings";
 import "./myBookings.css"
 
 export default function MyBookings() {
@@ -27,23 +28,25 @@ export default function MyBookings() {
         return diff / (24 * 60 * 60 * 1000);
     }
 
-    if(!bookingRes) return null;
-
     return (
         <div className="whole-outer-my-bookings">
             <h1 className="my-trips-title">My Trips</h1>
             <div className="whole-res-container">
                 {bookingRes.map(res => (
-                    <NavLink to={`/spots/${res.spotId}`} className="indiv-my-res-container">
-                        <img src={`${res.Spot.previewImage}`} alt="home reservation" className="res-prev-img"></img>
-                        <div className="res-text">
-                            <h1>{res.Spot.city}, {res.Spot.state}</h1>
-                            <h3>{formatDate(res.startDate)} - {formatDate(res.endDate)}</h3>
-                            <h3>{diffInDays(res.endDate, res.startDate)} days total</h3>
+                    <div className="whole-outer-indiv-booking">
+                        <NavLink to={`/spots/${res.spotId}`} className="indiv-my-res-container">
+                            <img src={`${res.Spot?.previewImage}`} alt="home reservation" className="res-prev-img"></img>
+                            <div className="res-text">
+                                <h1>{res.Spot?.city}, {res.Spot?.state}</h1>
+                                <h3>{formatDate(res.startDate)} - {formatDate(res.endDate)}</h3>
+                                <h3>{diffInDays(res.endDate, res.startDate)} days total</h3>
+                            </div>
+                        </NavLink>
+                        <div className="delete-booking-container">
+                            <button className="delete-button" onClick={() => {dispatch(deleteBookingThunk(res.id))}}>Delete Booking</button>
                         </div>
-                    </NavLink>
+                    </div>
                 ))}
-
             </div>
         </div>
     )
