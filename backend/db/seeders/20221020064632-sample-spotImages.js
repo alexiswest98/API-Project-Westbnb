@@ -237,7 +237,7 @@ module.exports = {
         spotId: 11,
         url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/988/A11336988_55_5.jpg',
         preview: true,
-      },
+      }/**,
       {
         spotId: 12,
         url: 'https://ssl.cdn-redfin.com/photo/68/bigphoto/350/11713350_0.jpg',
@@ -297,7 +297,7 @@ module.exports = {
         spotId: 14,
         url: 'https://ssl.cdn-redfin.com/photo/40/bigphoto/187/23-239187_18_0.jpg',
         preview: true
-      }
+      }*/
      ])
   },
 
