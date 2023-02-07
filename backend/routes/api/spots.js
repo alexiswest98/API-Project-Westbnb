@@ -128,7 +128,6 @@ router.get('/:spotId', async (req, res, next) => {
     res.json(spot);
 });
 
-
 //Edit a Spot
 router.put('/:spotId', requireAuth, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
