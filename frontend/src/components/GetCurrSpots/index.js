@@ -17,6 +17,12 @@ function CurrSpotsPage() {
         dispatch(getCurrentSpotsThunk())
     }, [dispatch]);
 
+    function getStars(number) {
+        if (number.toString().length > 3) return number;
+        if (number.toString().length === 3) return number + '0';
+        if (number.toString().length === 1) return number + '.00';
+    }
+
     return (
         <div className="wholeCurrBox">
             <h1 className="curr-spot-title">Your Spots Available</h1>
@@ -25,7 +31,7 @@ function CurrSpotsPage() {
                     <NavLink to={`/spots/${spot.id}`} className="currBoxLink">  
                         {<img className="currImg" src={spot?.previewImage} alt={spot.name}></img>}
                         <h3>{spot.name}</h3>
-                        <h3>★ {spot.avgRating}</h3>
+                        <h3>★ {getStars(spot.avgRating)}</h3>
                         <p>{spot.city}, {spot.state}, {spot.country}</p>
                         <p>${spot.price} night</p>
                     </NavLink>
