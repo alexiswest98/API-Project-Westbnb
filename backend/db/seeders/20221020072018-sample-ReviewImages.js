@@ -64,7 +64,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
      const Op = Sequelize.Op;
-     return queryInterface.bulkDelete('ReviewImages', {
+     await queryInterface.bulkDelete('ReviewImages', {
       reviewId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
     }, {});
   }

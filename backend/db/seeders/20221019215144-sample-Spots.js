@@ -154,13 +154,13 @@ module.exports = {
         country: 'USA',
         lat: 41.904971,
         lng: -87.6266848,
-        name: 'Contemporary newest addition to historic Chicago District',
+        name: 'Contemporary addition to historic Chicago District',
         description: 'Set on an oversized 45 x 145-foot lot, this home offers privacy, security, and serenity',
         price: 800
       },
       {
         ownerId: 1,
-        address: '154 Spring St Ph',
+        address: '154 Spring St',
         city: 'New York',
         state: 'New York',
         country: 'USA',
@@ -193,7 +193,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
      const Op = Sequelize.Op;
-     return queryInterface.bulkDelete('Spots', {
+     await queryInterface.bulkDelete('Spots', {
       city: { [Op.in]: ['San Francisco', 'Miami Beach', 'Los Angeles', 'New York', 'Chicago'] }
     }, {});
   }
