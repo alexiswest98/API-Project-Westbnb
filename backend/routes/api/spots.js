@@ -44,11 +44,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
         };
 
         //default for avgRating
-        if (spot.dataValues.avgRating === null) {
-            spot.dataValues.avgRating = '0.00'
-        }
-
-        //default for avgRating
         // Finding avgRating
         const reviews = await Review.findAll({
             where: {
@@ -150,8 +145,8 @@ router.get('/:spotId', async (req, res, next) => {
 
     spot.avgRating = sum / count;
 
-    if (avgStarRating.dataValues.avgStarRating === null) {
-        avgStarRating.dataValues.avgStarRating = '0.00'
+    if (spot.avgStarRating === null) {
+        spot.avgStarRating = '0.00'
     };
 
     spot = spot.toJSON();
