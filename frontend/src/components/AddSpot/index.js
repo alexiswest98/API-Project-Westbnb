@@ -21,6 +21,8 @@ function AddSpotComponent() {
   const [validationErrors, setValidationErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
+  const path = window.location.pathname;
+
   useEffect(() => {
     const errors = [];
     if (!address.length || address.length < 4) errors.push("Valid Street address is required");
@@ -36,6 +38,12 @@ function AddSpotComponent() {
     if (isNaN(price) || price < 0) errors.push("Please enter a valid number");
     if (!url.length) errors.push("Please enter photo url");
     setValidationErrors(errors);
+
+    if(path !== "/my-results/:search") {
+      const inputSearch = document.getElementById("right")
+      inputSearch.value = '';
+    }
+
   }, [address, city, state, country, name, description, price, url]);
 
   const onSubmit = async (e) => {

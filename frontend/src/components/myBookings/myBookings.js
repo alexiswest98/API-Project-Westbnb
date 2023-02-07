@@ -9,10 +9,15 @@ import "./myBookings.css"
 
 export default function MyBookings() {
     const dispatch = useDispatch();
+    const path = window.location.pathname;
     const bookingRes = Object.values(useSelector(state => state.bookings))
 
     useEffect(() => {
         dispatch(getUserBookingsThunk())
+        if(path !== "/my-results/:search") {
+            const inputSearch = document.getElementById("right")
+            inputSearch.value = '';
+          }
     }, [dispatch])
 
     function formatDate(dateString) {

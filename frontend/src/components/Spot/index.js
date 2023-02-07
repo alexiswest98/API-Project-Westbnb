@@ -19,12 +19,17 @@ function IndivSpot() {
     const reviews = Object.values(useSelector(state => state.reviews))
     // console.log(spot)
     let reviewExists = reviews.find(review => review.userId === user?.id);
+    const path = window.location.pathname;
 
     let isOwner = spot?.ownerId === user?.id;
 
     useEffect(() => {
         dispatch(getOneSpotThunk(+id))
         dispatch(getAllReviewsThunk(+id))
+        if(path !== "/my-results/:search") {
+            const inputSearch = document.getElementById("right")
+            inputSearch.value = '';
+          }
     }, [dispatch, id])
 
     function getStars(number) {

@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getAllSpotThunk } from "../../store/spots";
 // import { logout } from "../../store/session";
-import "./allSpots.css"
+import "../AllSpots/allSpots.css"
 
-function MainPage() {
+function ResultPage() {
     const dispatch = useDispatch();
-    const path = window.location.pathname;
-    const spotsObject = Object.values(useSelector(state => state.spots));
+    const {search} = useParams();
+    const searchQuery = search;
+
+    const spotsUnfiltered = Object.values(useSelector(state => state.spots));
+    const spotsObject = spotsUnfiltered.filter(spot => spot.city.toLowerCase() === searchQuery.toLowerCase())
 
     useEffect(() => {
-        dispatch(getAllSpotThunk());
-        if(path !== "/my-results/:search") {
-            const inputSearch = document.getElementById("right")
-            inputSearch.value = '';
-          }
+        dispatch(getAllSpotThunk())
     }, [dispatch])
 
 
@@ -53,4 +53,4 @@ function MainPage() {
     )
 }
 
-export default MainPage;
+export default ResultPage;

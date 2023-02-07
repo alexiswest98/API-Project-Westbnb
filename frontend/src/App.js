@@ -11,6 +11,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import AddSpotComponent from "./components/AddSpot";
 import CurrSpotsPage from "./components/GetCurrSpots";
 import MyBookings from "./components/myBookings/myBookings";
+import ResultPage from "./components/myResults/Results";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path="/my-trips">
             <MyBookings/>
+          </Route>
+          <Route path="/my-results/:search">
+            <ResultPage/>
           </Route>
         </Switch>
       )}

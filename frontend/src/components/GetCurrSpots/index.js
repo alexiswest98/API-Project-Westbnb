@@ -9,12 +9,17 @@ import "./currSpots.css"
 
 function CurrSpotsPage() {
     const dispatch = useDispatch();
+    const path = window.location.pathname;
     const sessionUserId = useSelector(state => state.session.user.id);
     const spotsObject = Object.values(useSelector(state => state.spots));
     const currSpotsArray = spotsObject.filter(spot => spot.ownerId === sessionUserId);
 
     useEffect(() => {
-        dispatch(getCurrentSpotsThunk())
+        dispatch(getCurrentSpotsThunk());
+        if(path !== "/my-results/:search") {
+            const inputSearch = document.getElementById("right")
+            inputSearch.value = '';
+          }
     }, [dispatch]);
 
     function getStars(number) {
