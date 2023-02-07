@@ -23,8 +23,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 attributes: []
             }
         ],
-        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
-            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 1), 'avgRating'], 'previewImage'],
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt'],
         group: ['Spot.id']
     });
 
@@ -47,6 +46,27 @@ router.get('/current', requireAuth, async (req, res, next) => {
         //default for avgRating
         if (spot.dataValues.avgRating === null) {
             spot.dataValues.avgRating = '0.00'
+        }
+
+        //default for avgRating
+        // Finding avgRating
+        const reviews = await Review.findAll({
+            where: {
+                spotId: spot.id,
+            },
+            raw: true,
+        });
+
+        let sum = 0;
+        let count = reviews.length;
+        for (let review of reviews) {
+            sum += review.stars;
+        }
+
+        spot.avgRating = sum / count;
+
+        if (spot.avgRating === null) {
+            spot.avgRating = '0.00'
         }
 
     }
@@ -103,7 +123,6 @@ router.get('/:spotId', async (req, res, next) => {
             }
         ],
         attributes: [
-            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 1), 'avgStarRating'],
             [
 
                 sequelize.fn("COUNT", sequelize.col("Reviews.id")),
@@ -115,6 +134,22 @@ router.get('/:spotId', async (req, res, next) => {
     });
 
     //default for avgRating
+    // Finding avgRating
+    const reviews = await Review.findAll({
+        where: {
+            spotId: id,
+        },
+        raw: true,
+    });
+
+    let sum = 0;
+    let count = reviews.length;
+    for (let review of reviews) {
+        sum += review.stars;
+    }
+
+    spot.avgRating = sum / count;
+
     if (avgStarRating.dataValues.avgStarRating === null) {
         avgStarRating.dataValues.avgStarRating = '0.00'
     };
@@ -599,11 +634,6 @@ router.get('/', async (req, res, next) => {
                 attributes: []
             }
         ],
-        attributes: {
-            include: [
-                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 1), 'avgRating']
-            ]
-        },
         group: ['Spot.id', 'SpotImages.id'],
         order: ['id']
     });
@@ -625,10 +655,25 @@ router.get('/', async (req, res, next) => {
 
 
         //default for avgRating
-        if (spot.dataValues.avgRating === null) {
-            spot.dataValues.avgRating = '0.00'
+        // Finding avgRating
+        const reviews = await Review.findAll({
+            where: {
+                spotId: spot.id,
+            },
+            raw: true,
+        });
+
+        let sum = 0;
+        let count = reviews.length;
+        for (let review of reviews) {
+            sum += review.stars;
         }
 
+        spot.avgRating = sum / count;
+
+        if (spot.avgRating === null) {
+            spot.avgRating = '0.00'
+        }
 
     }
 
