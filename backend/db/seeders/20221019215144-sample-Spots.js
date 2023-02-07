@@ -145,7 +145,7 @@ module.exports = {
         name: 'True masterpiece Miami Beach construction',
         description: 'This property boasts a 12,172 sq. ft. lot with 78 feet of prime waterfront and breathtaking views',
         price: 3000
-      },
+      }/**,
       {
         ownerId: 1,
         address: '54 E Scott St',
@@ -181,7 +181,7 @@ module.exports = {
         name: 'Designer owned, 1920s Laurel Canyon retreat',
         description: 'The extraordinary 3 bd 3 ba plus family room home has been brilliantly restored for contemporary living',
         price: 210
-      }
+      }*/
     ])
   },
 
@@ -194,7 +194,7 @@ module.exports = {
      */
      const Op = Sequelize.Op;
      await queryInterface.bulkDelete('Spots', {
-      city: { [Op.in]: ['San Francisco', 'Miami Beach', 'Los Angeles', 'New York', 'Chicago'] }
+      city: { [Op.in]: ['San Francisco', 'Miami Beach'/**, 'Los Angeles', 'New York', 'Chicago'*/] }
     }, {});
   }
 };
