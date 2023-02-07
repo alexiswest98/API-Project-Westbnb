@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getAllSpotThunk } from "../../store/spots";
+import { logout } from "../../store/session";
 import "./allSpots.css"
 
 function MainPage() {
@@ -12,6 +13,8 @@ function MainPage() {
     useEffect(() => {
         dispatch(getAllSpotThunk())
     }, [dispatch])
+
+
 
     function getStars(number) {
         if (number.toString().length > 3) return number;
