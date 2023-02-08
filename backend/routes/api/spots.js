@@ -26,7 +26,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         ],
         attributes: {
             include: [
-                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating']
+                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
             ]
         },
         group: ['Spot.id']
@@ -50,7 +50,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         //default for avgRating
         if (spot.dataValues.avgRating === null) {
-            spot.dataValues.avgRating = '0.00'
+            spot.dataValues.avgRating = "0.00"
+        } else {
+            spot.dataValues.avgRating = spot.dataValues.avgRating.toFixed(2)
         }
 
     }
@@ -107,7 +109,7 @@ router.get('/:spotId', async (req, res, next) => {
             }
         ],
         attributes: [
-            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgStarRating'],
+            [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgStarRating'],
             [
 
                 sequelize.fn("COUNT", sequelize.col("Reviews.id")),
@@ -121,7 +123,10 @@ router.get('/:spotId', async (req, res, next) => {
     //default for avgRating
     if (avgStarRating.dataValues.avgStarRating === null) {
         avgStarRating.dataValues.avgStarRating = '0.00'
-    };
+    } else {
+        avgStarRating.dataValues.avgStarRating = avgStarRating.dataValues.avgStarRating.toFixed(2)
+    }
+
 
     spot = spot.toJSON();
     avgStarRating = avgStarRating.toJSON();
@@ -604,7 +609,7 @@ router.get('/', async (req, res, next) => {
         ],
         attributes: {
             include: [
-                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating']
+                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
             ]
         },
         group: ['Spot.id', 'SpotImages.id'],
@@ -629,9 +634,10 @@ router.get('/', async (req, res, next) => {
 
         //default for avgRating
         if (spot.dataValues.avgRating === null) {
-            spot.dataValues.avgRating = '0.00'
+            spot.dataValues.avgRating = "0.00"
+        } else {
+            spot.dataValues.avgRating = spot.dataValues.avgRating.toFixed(2)
         }
-
 
     }
 

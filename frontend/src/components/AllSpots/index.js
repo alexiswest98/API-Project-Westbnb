@@ -19,11 +19,11 @@ function MainPage() {
     }, [dispatch])
 
 
-    function getStars(number) {
-        if (number.toString().length > 3) return number;
-        if (number.toString().length === 3) return number + '0';
-        if (number.toString().length === 1) return number + '.00';
-    }
+    // function getStars(number) {
+    //     if (number.toString().length > 3) return number;
+    //     if (number.toString().length === 3) return number + '0';
+    //     if (number.toString().length === 1) return number + '.00';
+    // }
 
     if(spotsObject.length === 0) return null;
 
@@ -36,7 +36,7 @@ function MainPage() {
                         <div className="main-Details">
                             <div className="order-for-title">
                                 <h4 className="main-spot-name">{spot.city}, {spot.state}</h4>
-                                <h3 className="star-rating">★ {getStars(spot.avgRating)}</h3>
+                                <h3 className="star-rating">★ {spot.avgRating}</h3>
                                 {/* .toString().length > 1 ? spot.avgRating : spot.avgRating + ".00" */}
                             </div>
                             <div>

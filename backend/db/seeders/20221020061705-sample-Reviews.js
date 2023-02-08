@@ -20,6 +20,12 @@ module.exports = {
         stars: 5.00
       },
       {
+        spotId: 1,
+        userId: 3,
+        review: 'The host cancelled last minute.',
+        stars: 2.00
+      },
+      {
         spotId: 2,
         userId: 3,
         review: 'Their place is amazing! My family of 6 were completely comfortable and felt so fortunate to find this wonderful retreat!',
@@ -72,7 +78,7 @@ module.exports = {
         userId: 1,
         review: 'This place was an amazing property with a beautiful view of the bay. He was very courteous to us, and very hospitable.',
         stars: 5.00
-      }/**,
+      },
       {
         spotId: 11,
         userId: 2,
@@ -92,11 +98,11 @@ module.exports = {
         stars: 5.00
       },
       {
-        spotId: 14,
+        spotId: 1,
         userId: 5,
-        review: 'Does not get more LA than this',
+        review: 'Does not get better than this',
         stars: 4.00
-      }*/
+      }
      ])
   },
 
@@ -109,7 +115,7 @@ module.exports = {
      */
      const Op = Sequelize.Op;
      await queryInterface.bulkDelete('Reviews', {
-      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] }
     }, {});
   }
 };

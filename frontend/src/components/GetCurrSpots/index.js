@@ -22,11 +22,11 @@ function CurrSpotsPage() {
           }
     }, [dispatch]);
 
-    function getStars(number) {
-        if (number.toString().length > 3) return number;
-        if (number.toString().length === 3) return number + '0';
-        if (number.toString().length === 1) return number + '.00';
-    }
+    // function getStars(number) {
+    //     if (number.toString().length > 3) return number;
+    //     if (number.toString().length === 3) return number + '0';
+    //     if (number.toString().length === 1) return number + '.00';
+    // }
 
     return (
         <div className="wholeCurrBox">
@@ -36,7 +36,7 @@ function CurrSpotsPage() {
                     <NavLink to={`/spots/${spot.id}`} className="currBoxLink">  
                         {<img className="currImg" src={spot?.previewImage} alt={spot.name}></img>}
                         <h3>{spot.name}</h3>
-                        <h3>★ {getStars(spot.avgRating)}</h3>
+                        <h3>★ {spot.avgRating}</h3>
                         <p>{spot.city}, {spot.state}, {spot.country}</p>
                         <p>${spot.price} night</p>
                     </NavLink>

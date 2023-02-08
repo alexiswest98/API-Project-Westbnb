@@ -4,11 +4,17 @@
     display: flex;
     justify-content: space-between;
     align-content: space-between;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.wholeReviewBox::-webkit-scrollbar {
+    display: none;
 }
 
 .currReviewDiv {
-    width: 45%;
-    height: 48%;
+    width: 43%;
+    height: 40%;
     padding: 2%;
     border: solid 1px rgb(159, 156, 156);
     border-radius: 2%;
