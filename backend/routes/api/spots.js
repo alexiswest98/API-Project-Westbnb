@@ -600,7 +600,7 @@ router.get('/', async (req, res, next) => {
         ],
         attributes: {
             include: [
-                [sequelize.fn('AVG', sequelize.col('Reviews.stars')), 'avgRating']
+                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating']
             ]
         },
         group: ['Spot.id', 'SpotImages.id'],
@@ -624,11 +624,10 @@ router.get('/', async (req, res, next) => {
 
 
         //default for avgRating
-        if (spot.avgRating === null) {
-            spot.avgRating = '0.00'
-        } else {
-            spot.avgRating = Number(spot.avgRating).toFixed(2)
+        if (spot.dataValues.avgRating === null) {
+            spot.dataValues.avgRating = '0.00'
         }
+
 
     }
 
