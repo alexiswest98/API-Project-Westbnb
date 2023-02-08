@@ -10,6 +10,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;
 
     let Spots = await Spot.findAll({
+        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt', 'previewImage'],
         where: {
             ownerId: user.id
         },
@@ -23,8 +24,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 attributes: []
             }
         ],
-        attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt',
-            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating'], 'previewImage'],
+        attributes: {
+            include: [
+                [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('Reviews.stars')), 2), 'avgRating']
+            ]
+        },
         group: ['Spot.id']
     });
 
