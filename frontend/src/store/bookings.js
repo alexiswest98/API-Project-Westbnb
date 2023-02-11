@@ -87,7 +87,7 @@ const initialState = {};
 
 /* ------ REDUCER ------ */
 const bookingsReducer = (state = initialState, action) => {
-    let newState = {...state};
+    let newState = {};
     switch (action.type) {
         case GET_SPOT_BOOKINGS:
             action.bookings.Bookings.forEach(booking => {

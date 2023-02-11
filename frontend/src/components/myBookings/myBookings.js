@@ -10,7 +10,10 @@ import "./myBookings.css"
 export default function MyBookings() {
     const dispatch = useDispatch();
     const path = window.location.pathname;
+    const user = Object.values(useSelector(state => state.session.user))
     const bookingRes = Object.values(useSelector(state => state.bookings))
+    const myBookings = bookingRes.filter(booking => booking.userId === user.id)
+    // console.log(myBookings)
 
     useEffect(() => {
         dispatch(getUserBookingsThunk())
