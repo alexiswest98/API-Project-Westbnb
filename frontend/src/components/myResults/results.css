@@ -1,0 +1,12 @@
+.no-results-div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-results-title {
+    color: rgb(96, 93, 93);
+    font-weight: 400;
+    font-size: 2.2em;
+}

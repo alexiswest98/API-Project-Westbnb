@@ -35,3 +35,7 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.review-created-at {
+    color: rgb(96, 93, 93);
+}

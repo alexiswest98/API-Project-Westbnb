@@ -8,6 +8,7 @@ import none from './no-image.jpg';
 import GetReviewsBox from '../getReviews/getSpotReviews';
 import AddReviewModal from '../addReview';
 import { getAllReviewsThunk } from '../../store/reviews';
+import { getSpotBookingsThunk } from "../../store/bookings";
 import BookingsForm from '../Bookings/bookings';
 
 function IndivSpot() {
@@ -26,6 +27,7 @@ function IndivSpot() {
     useEffect(() => {
         dispatch(getOneSpotThunk(+id))
         dispatch(getAllReviewsThunk(+id))
+        dispatch(getSpotBookingsThunk(+id))
         if(path !== "/my-results/:search") {
             const inputSearch = document.getElementById("right")
             inputSearch.value = '';

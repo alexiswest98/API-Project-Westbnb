@@ -3,11 +3,12 @@ import { useState } from "react";
 // import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserBookingsThunk } from "../../store/bookings";
 import { addBookingThunk } from "../../store/bookings";
 import "./bookings.css";
 
 export default function BookingsForm({ spot, isOwner }) {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [checkOutMin, setCheckOutMin] = useState('');
@@ -16,14 +17,16 @@ export default function BookingsForm({ spot, isOwner }) {
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
-    const history = useHistory();
+    const bookings = Object.values(useSelector(state => state.bookings));
+    const currSpotBook = bookings.filter(book => book.spotId === spot.id)
+    // console.log(currSpotBook)
 
-    function getStars(number) {
-        if (number.toString().length > 3) return number;
-        if (number.toString().length === 3) return number + '0';
-        if (number.toString().length === 1) return number + '.00';
-    }
+
+    // function getStars(number) {
+    //     if (number.toString().length > 3) return number;
+    //     if (number.toString().length === 3) return number + '0';
+    //     if (number.toString().length === 1) return number + '.00';
+    // }
 
     function nextDay(checkIn) {
         const checkInDate = new Date(checkIn);
@@ -39,6 +42,18 @@ export default function BookingsForm({ spot, isOwner }) {
         return diff / (24 * 60 * 60 * 1000);
     }
 
+    //calculating if possible start date or end date coincide with exisitng ones
+    function doesBookingCoincide(bookingsArray, possibleStartDate, possibleEndDate) {
+        for(let i = 0; i < bookingsArray.length; i++) {
+            let eachBook = bookingsArray[i]
+            return (
+              (possibleStartDate >= eachBook.startDate && possibleStartDate <= eachBook.endDate) ||
+              (possibleEndDate >= eachBook.startDate && possibleEndDate <= eachBook.endDate)
+            )
+        }
+    } 
+
+    // console.log("*******", doesBookingCoincide(currSpotBook, checkIn, checkOut) )
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,11 +76,10 @@ export default function BookingsForm({ spot, isOwner }) {
 
     useEffect(() => {
         const errorsArr = [];
-        if (!checkIn) errorsArr.push("Check in date is required.");
-        if(!checkOut) errorsArr.push("Check out date is required")
-        if(!guests) errorsArr.push("Number of guests is required")
+        if(!user) errorsArr.push("Please log in to look at bookings")
+        if(doesBookingCoincide(currSpotBook, checkIn, checkOut)) errorsArr.push("Existing bookings for this spot coincide with your request. Please try new dates.")
         setErrors(errorsArr);
-    }, [dispatch, checkIn, checkOut, guests]);
+    }, [dispatch, user, checkIn, checkOut]);
 
     return (
         !isOwner &&
@@ -77,7 +91,7 @@ export default function BookingsForm({ spot, isOwner }) {
                         <span className="night-margin">night</span>
                     </div>
                     <div className="rating-star-book">
-                        <h4>★ {getStars(spot.avgStarRating)} · </h4>
+                        <h4>★ {spot.avgStarRating} · </h4>
                         <span className="night-margin">{spot.numReviews} {spot.numReviews === 1 ? ("review") : ("reviews")}</span>
                     </div>
                 </div>
@@ -136,18 +150,18 @@ export default function BookingsForm({ spot, isOwner }) {
                     </div>
                     <div className='costs'>
                         <a className='plain-link-gray'>Cleaning fee</a>
-                        <span className="prices-num-booking">${spot.price * 0.2}</span>
+                        <span className="prices-num-booking">${Math.round(spot.price * 0.2)}</span>
                     </div>
                     <div className='costs'>
                         <a className='plain-link-gray'>Service fee</a>
-                        <span className="prices-num-booking">${spot.price * 0.3}</span>
+                        <span className="prices-num-booking">${Math.round(spot.price * 0.3)}</span>
                     </div>
                     <span className='line2'></span>
                 </div>
                 <div className="total-container">
                     <h4>Total Before Taxes</h4>
-                    <h4>${checkIn && checkOut ? spot.price * diffInDays(checkOut, checkIn) + (spot.price * 0.3) + (spot.price * 0.2) :
-                    (spot.price * 0.3) + (spot.price * 0.2) + spot.price}</h4>
+                    <h4>${checkIn && checkOut ? spot.price * diffInDays(checkOut, checkIn) + Math.round(spot.price * 0.3) + Math.round(spot.price * 0.2) :
+                    Math.round(spot.price * 0.3) + Math.round(spot.price * 0.2) + spot.price}</h4>
                 </div>
             </div>
         </div>
