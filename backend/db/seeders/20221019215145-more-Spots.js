@@ -61,6 +61,30 @@ module.exports = {
         name: 'Designer owned, 1920s Laurel Canyon retreat',
         description: 'The extraordinary 3 bd 3 ba plus family room home has been brilliantly restored for contemporary living',
         price: 210
+      },
+      {
+        ownerId: 1,
+        address: '1865 Brickell Ave Unit A703',
+        city: 'Miami',
+        state: 'Florida',
+        country: 'USA',
+        lat: 25.754500,
+        lng: -80.196460,
+        name: 'A gorgeous cozy Miami waterfront unit in Brickell',
+        description: 'This 1 bed 1.5 bath has all new electrical + LED lighting + additional high-end finishes and designer upgrades',
+        price: 170
+      },
+      {
+        ownerId: 1,
+        address: '163 E 64th St',
+        city: 'New York',
+        state: 'New York',
+        country: 'USA',
+        lat: 40.765308,
+        lng: -73.965218,
+        name: 'One of the finest Victorian townhouses in NYC',
+        description: 'This 5 bed 6.5 bath designer home has Versaille wood floors and soaring 13.5 foot ceilings',
+        price: 650
       }
     ])
   },
@@ -74,7 +98,7 @@ module.exports = {
      */
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete('Spots', {
-      city: { [Op.in]: ['Miami Beach', 'Los Angeles', 'New York', 'Chicago'] }
+      city: { [Op.in]: ['Miami Beach', 'Miami', 'Los Angeles', 'New York', 'Chicago'] }
     }, {});
   }
 };

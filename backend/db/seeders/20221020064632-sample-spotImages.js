@@ -297,6 +297,56 @@ module.exports = {
         spotId: 14,
         url: 'https://ssl.cdn-redfin.com/photo/40/bigphoto/187/23-239187_18_0.jpg',
         preview: true
+      },
+      {
+        spotId: 15,
+        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/579/A11341579_0.jpg',
+        preview: true
+      },
+      {
+        spotId: 15,
+        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/579/A11341579_2_0.jpg',
+        preview: true
+      },
+      {
+        spotId: 15,
+        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/579/A11341579_10_0.jpg',
+        preview: true
+      },
+      {
+        spotId: 15,
+        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/579/A11341579_12_0.jpg',
+        preview: true
+      },
+      {
+        spotId: 15,
+        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/579/A11341579_13_0.jpg',
+        preview: true
+      },
+      {
+        spotId: 16,
+        url: 'https://ssl.cdn-redfin.com/photo/211/bigphoto/170/OLRS-0071170_9.jpg',
+        preview: true
+      },
+      {
+        spotId: 16,
+        url: 'https://ssl.cdn-redfin.com/photo/211/bigphoto/170/OLRS-0071170_4_F.jpg',
+        preview: true
+      },
+      {
+        spotId: 16,
+        url: 'https://ssl.cdn-redfin.com/photo/211/bigphoto/170/OLRS-0071170_9_C.jpg',
+        preview: true
+      },
+      {
+        spotId: 16,
+        url: 'https://ssl.cdn-redfin.com/photo/211/bigphoto/170/OLRS-0071170_11_C.jpg',
+        preview: true
+      },
+      {
+        spotId: 16,
+        url: 'https://ssl.cdn-redfin.com/photo/211/bigphoto/170/OLRS-0071170_15_C.jpg',
+        preview: true
       }
      ])
   },
@@ -310,7 +360,7 @@ module.exports = {
      */
      const Op = Sequelize.Op;
      await queryInterface.bulkDelete('SpotImages', {
-      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] }
     }, {});
   }
 };

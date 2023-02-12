@@ -76,7 +76,7 @@ export default function BookingsForm({ spot, isOwner }) {
 
     useEffect(() => {
         const errorsArr = [];
-        if(!user) errorsArr.push("Please log in to look at bookings")
+        if(!user) errorsArr.push("Please log in to reserve a booking")
         if(doesBookingCoincide(currSpotBook, checkIn, checkOut)) errorsArr.push("Existing bookings for this spot coincide with your request. Please try new dates.")
         setErrors(errorsArr);
     }, [dispatch, user, checkIn, checkOut]);

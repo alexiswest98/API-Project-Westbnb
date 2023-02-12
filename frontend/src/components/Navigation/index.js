@@ -52,7 +52,7 @@ function Navigation({ isLoaded }) {
           <img src={logo} className="logo" alt='westbnb'></img>
         </NavLink>
         <div className='centerSearchBar'>
-          <input type="text" placeholder=" Anywhere (from SF, Miami, Chicago, LA)" className='centerText' id="right" onChange={(e)=> setSearch(e.target.value)}></input>
+          <input type="text" placeholder=" Any City (from SF, LA, NY Miami, Chicago)" className='centerText' id="right" onChange={(e)=> setSearch(e.target.value)}></input>
           <button className='search' onClick={handleSubmit}>
               <div className='circle-search-div'>⬤
                 <i class="fa-solid fa-magnifying-glass"></i>

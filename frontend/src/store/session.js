@@ -8,7 +8,7 @@ const REMOVE_USER = 'session/removeUser';
 const setUser = (user) => {
     return {
         type: SET_USER,
-        payload: user,
+        payload: user
     };
 };
 
@@ -36,7 +36,7 @@ export const login = (user) => async (dispatch) => {
 export const restoreUser = () => async dispatch => {
     const response = await csrfFetch('/api/session');
     const data = await response.json();
-    dispatch(setUser(data.user));
+    dispatch(setUser(data));
     return response;
 };
 
@@ -53,7 +53,7 @@ export const signup = (user) => async (dispatch) => {
         }),
     });
     const data = await response.json();
-    dispatch(setUser(data.user));
+    dispatch(setUser(data));
     return response;
 };
 

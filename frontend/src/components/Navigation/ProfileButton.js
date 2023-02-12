@@ -42,7 +42,7 @@ function ProfileButton({ setLogin, setShowModal }) {
         <span className="hamburger">≡</span>
         <i className="fas fa-user-circle" />
       </div>
-      {showMenu && (user ? (
+      {showMenu && (user && user.user !== null ? (
         <ul className="profile-dropdown" >
           <li className="borderYes">{user.username}</li>
           <li className="borderYes">{user.email}</li>

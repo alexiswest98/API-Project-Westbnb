@@ -39,3 +39,8 @@
 .review-created-at {
     color: rgb(96, 93, 93);
 }
+
+.margin-left-review {
+    margin-left: 2%;
+    width: 100%;
+}

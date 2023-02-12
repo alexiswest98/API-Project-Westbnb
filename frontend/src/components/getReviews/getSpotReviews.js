@@ -49,7 +49,7 @@ function GetReviewsBox() {
                 }
                 </div>
             ))) :
-                (<div>
+                (<div className="margin-left-review">
                 <h3>Awkward...</h3>
                 <h2>This spot doesn't have reviews yet!</h2>
                 </div>)}
