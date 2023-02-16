@@ -29,7 +29,8 @@ export default function BookingsForm({ spot, isOwner }) {
     // }
 
     const getNormalPrice = (number) => {
-        return Math.round(number * 0.3) + Math.round(number * 0.2) + number
+        let fees = Math.round(number * 0.3) + Math.round(number * 0.2)
+        return fees + number
     }
 
     function nextDay(checkIn) {
