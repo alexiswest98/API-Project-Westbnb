@@ -28,6 +28,10 @@ export default function BookingsForm({ spot, isOwner }) {
     //     if (number.toString().length === 1) return number + '.00';
     // }
 
+    const getNormalPrice = (number) => {
+        return Math.round(number * 0.3) + Math.round(number * 0.2) + number
+    }
+
     function nextDay(checkIn) {
         const checkInDate = new Date(checkIn);
         const nextDay = new Date(checkInDate.getTime() + 24 * 60 * 60 * 1000);
@@ -161,7 +165,7 @@ export default function BookingsForm({ spot, isOwner }) {
                 <div className="total-container">
                     <h4>Total Before Taxes</h4>
                     <h4>${checkIn && checkOut ? spot.price * diffInDays(checkOut, checkIn) + Math.round(spot.price * 0.3) + Math.round(spot.price * 0.2) :
-                    Math.round(spot.price * 0.3) + Math.round(spot.price * 0.2) + spot.price}</h4>
+                    getNormalPrice(spot.price)}</h4>
                 </div>
             </div>
         </div>
