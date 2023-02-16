@@ -21,7 +21,6 @@ export default function BookingsForm({ spot, isOwner }) {
     const currSpotBook = bookings.filter(book => book.spotId === spot.id)
     // console.log(currSpotBook)
 
-
     // function getStars(number) {
     //     if (number.toString().length > 3) return number;
     //     if (number.toString().length === 3) return number + '0';
@@ -30,7 +29,8 @@ export default function BookingsForm({ spot, isOwner }) {
 
     const getNormalPrice = (number) => {
         let fees = Math.round(number * 0.3) + Math.round(number * 0.2)
-        return fees + number
+        let result = (parseInt(fees) + parseInt(number))
+        return result;
     }
 
     function nextDay(checkIn) {
