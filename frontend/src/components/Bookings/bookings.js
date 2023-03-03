@@ -66,6 +66,7 @@ export default function BookingsForm({ spot, isOwner }) {
         setHasSubmitted(true);
         if (errors.length) return alert(`${errors}`);
 
+
         const payload = {
             spotId: spot.id,
             userId: user.id,
@@ -81,8 +82,9 @@ export default function BookingsForm({ spot, isOwner }) {
 
     useEffect(() => {
         const errorsArr = [];
-        if(!user) errorsArr.push("Please log in to reserve a booking")
+        if(user.user === null) errorsArr.push("Please log in to reserve a booking")
         if(doesBookingCoincide(currSpotBook, checkIn, checkOut)) errorsArr.push("Existing bookings for this spot coincide with your request. Please try new dates.")
+        // console.log(user.user === null)
         setErrors(errorsArr);
     }, [dispatch, user, checkIn, checkOut]);
 
