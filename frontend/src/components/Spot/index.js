@@ -40,6 +40,8 @@ function IndivSpot() {
     //     if(number.toString().length === 1) return number + '.00';
     // }
 
+    console.log(user.user === null)
+
     if (!spot || !spot.SpotImages) return null;
 
     return (
@@ -116,10 +118,12 @@ function IndivSpot() {
                     </div>
                     <div className="reviewsRightBox">
                         <h2 className='would-you-review'>Would you like to review this Spot?</h2>
-                        {user && !reviewExists && !isOwner ? (
-                            <AddReviewModal />) :
-                            (<h4>Sorry you can't add a review at this moment.</h4>)
+                        { !reviewExists && !isOwner && (
+                            <AddReviewModal />)
                         }
+                        {reviewExists && (<h4>You have already left a review for this spot.</h4>)}
+                        {isOwner && (<h4>You cannot leave a review for your own spot.</h4>)}
+                        {user.user === null && (<h4>Please login to leave a review.</h4>)}
                     </div>
                 </div>
             </div>
