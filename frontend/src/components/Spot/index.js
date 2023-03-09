@@ -40,7 +40,7 @@ function IndivSpot() {
     //     if(number.toString().length === 1) return number + '.00';
     // }
 
-    console.log(user.user === null)
+    // console.log(user.user === null)
 
     if (!spot || !spot.SpotImages) return null;
 
@@ -123,7 +123,7 @@ function IndivSpot() {
                         }
                         {reviewExists && (<h4>You have already left a review for this spot.</h4>)}
                         {isOwner && (<h4>You cannot leave a review for your own spot.</h4>)}
-                        {user.user === null && (<h4>Please login to leave a review.</h4>)}
+                        {user === null || user?.user === null && (<h4>Please login to leave a review.</h4>)}
                     </div>
                 </div>
             </div>
