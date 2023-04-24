@@ -22,7 +22,7 @@ module.exports = {
       {
         spotId: 1,
         userId: 3,
-        review: 'The host cancelled last minute.',
+        review: 'The host had to cancel the last night last minute.',
         stars: 2.00
       },
       {

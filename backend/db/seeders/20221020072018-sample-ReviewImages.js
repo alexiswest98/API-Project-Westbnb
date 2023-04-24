@@ -19,7 +19,7 @@ module.exports = {
       },
       {
         reviewId: 2,
-        url: 'https://ssl.cdn-redfin.com/photo/8/bigphoto/369/ML81901369_7_J.jpg'
+        url: 'https://ssl.cdn-redfin.com/photo/9/bigphoto/980/490980_31_0.webp'
       },
       {
         reviewId: 3,

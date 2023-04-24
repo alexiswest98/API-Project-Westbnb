@@ -15,37 +15,37 @@ module.exports = {
      await queryInterface.bulkInsert('SpotImages', [
       {
         spotId: 1,
-        url: 'https://ssl.cdn-redfin.com/photo/9/bigphoto/353/422657353_5_0.jpg',
+        url: 'https://photos.zillowstatic.com/fp/ca2f29f19430190fe8036f97e03e66c3-uncropped_scaled_within_1536_1152.webp',
         preview: true,
       },
       {
         spotId: 1,
-        url: 'https://ssl.cdn-redfin.com/photo/9/bigphoto/353/422657353_1_0.jpg',
+        url: 'https://photos.zillowstatic.com/fp/4b7ceb21cf1814ccba795ebf05967712-uncropped_scaled_within_1536_1152.webp',
         preview: true,
       },
       {
         spotId: 1,
-        url: 'https://ssl.cdn-redfin.com/photo/9/bigphoto/353/422657353_14_1.jpg',
+        url: 'https://photos.zillowstatic.com/fp/77c768ad1265aec9931fe61511aeb5a1-uncropped_scaled_within_1536_1152.webp',
         preview: true,
       },
       {
         spotId: 1,
-        url: 'https://ssl.cdn-redfin.com/photo/9/bigphoto/353/422657353_28_1.jpg',
+        url: 'https://photos.zillowstatic.com/fp/072d4d5edbefd526ec46df21cef98d11-uncropped_scaled_within_1536_1152.webp',
         preview: true,
       },
       {
         spotId: 2,
-        url: 'https://ssl.cdn-redfin.com/photo/8/bigphoto/369/ML81901369_3_G.jpg',
+        url: 'https://ssl.cdn-redfin.com/photo/9/bigphoto/477/423736477_0.webp',
         preview: true,
       },
       {
         spotId: 2,
-        url: 'https://ssl.cdn-redfin.com/photo/9/bigphoto/282/421535282_17_0.jpg',
+        url: 'https://ssl.cdn-redfin.com/photo/9/bigphoto/477/423736477_2_0.webp',
         preview: true,
       },
       {
         spotId: 2,
-        url: 'https://ssl.cdn-redfin.com/photo/9/bigphoto/282/421535282_7_0.jpg',
+        url: 'https://ssl.cdn-redfin.com/photo/9/bigphoto/477/423736477_32_0.webp',
         preview: true,
       },
       {
@@ -220,22 +220,22 @@ module.exports = {
       },
       {
         spotId: 11,
-        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/988/A11336988_1_5.jpg',
+        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/768/A11113768_19_1.webp',
         preview: true,
       },
       {
         spotId: 11,
-        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/988/A11336988_6.jpg',
+        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/768/A11113768_1_1.webp',
         preview: true,
       },
       {
         spotId: 11,
-        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/988/A11336988_8_6.jpg',
+        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/768/A11113768_38_1.webp',
         preview: true,
       },
       {
         spotId: 11,
-        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/988/A11336988_55_5.jpg',
+        url: 'https://ssl.cdn-redfin.com/photo/105/bigphoto/768/A11113768_12_1.webp',
         preview: true,
       },
       {
